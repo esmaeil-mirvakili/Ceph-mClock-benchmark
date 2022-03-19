@@ -21,13 +21,13 @@ cd "${HOME}/fio" || exit
 ./configure
 make
 
-sudo sed -i 's/Defaults    requiretty/#Defaults    requiretty/g' /etc/sudoers
-sudo setenforce 0
-( awk '!/SELINUX=/' /etc/selinux/config ; echo "SELINUX=disabled" ) > /tmp/x
-sudo mv /tmp/x /etc/selinux/config
+#sudo sed -i 's/Defaults    requiretty/#Defaults    requiretty/g' /etc/sudoers
+#sudo setenforce 0
+#( awk '!/SELINUX=/' /etc/selinux/config ; echo "SELINUX=disabled" ) > /tmp/x
+#sudo mv /tmp/x /etc/selinux/config
 #rpm -qa firewalld | grep firewalld
-sudo systemctl stop firewalld && sudo systemctl disable firewalld
-sudo systemctl stop irqbalance
-sudo systemctl disable irqbalance
-sudo systemctl start ntpd.service
-sudo systemctl enable ntpd.service
+#sudo systemctl stop firewalld && sudo systemctl disable firewalld
+#sudo systemctl stop irqbalance
+#sudo systemctl disable irqbalance
+#sudo systemctl start ntpd.service
+#sudo systemctl enable ntpd.service

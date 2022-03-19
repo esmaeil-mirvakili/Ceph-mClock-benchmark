@@ -25,7 +25,8 @@ sudo apt-get install -y ninja-build
 cd "${HOME}"
 git clone https://github.com/esmaeil-mirvakili/ceph.git
 cd ceph
-git checkout bluestore-codel
+git checkout bluestore-bufferbloat-mitigation
+
 export CEPH_HOME="$(pwd)"
 ./install-deps.sh
 ./do_cmake.sh -DWITH_MANPAGE=OFF -DWITH_BABELTRACE=OFF -DWITH_MGR_DASHBOARD_FRONTEND=OFF -DCMAKE_BUILD_TYPE=RelWithDebInfo

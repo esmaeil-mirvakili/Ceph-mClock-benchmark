@@ -134,3 +134,5 @@ dmypy.json
 # Benchmark Results and tmp directory
 results/
 tmp/
+
+.DS_Store
