@@ -14,6 +14,6 @@ cd "${HOME}" || exit
 git clone https://github.com/ceph/cbt.git
 mv ubuntu_cbt_setup.sh "${HOME}/cbt/"
 cd "${HOME}/cbt" || { echo "CBT clone failed (cbt directory not found)."; exit; }
-pip3 install -r requirements.txt
+pip3 install -r ../requirements.txt
 /bin/bash ubuntu_cbt_setup.sh
 printf 'export PATH="%s:$PATH"' "${HOME}/fio" >> .bashrc
