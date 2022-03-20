@@ -39,14 +39,13 @@ for node in $nodes; do
 
   echo "labeling partitions on $host_name..."
   scp -p mkpartition.sh "${node}":"$remote_home"
-  ssh "${node}" "/bin/bash mkpartition.sh $osd_devices"
+  ssh "${node}" "cd $remote_home; /bin/bash mkpartition.sh $osd_devices"
 
   echo "installing ceph on $host_name..."
   scp -p install_ceph.sh "${node}":"$remote_home"
-  ssh "${node}" "/bin/bash install_ceph.sh $remote_home"
+  ssh "${node}" "cd $remote_home; /bin/bash install_ceph.sh $remote_home"
 
-#  ssh "${node}" $'echo \'export PATH="~/ceph/build/bin:$PATH"\' >> .bashrc'
   scp -p register_ceph_commands.sh "${node}":"$remote_home"
-  ssh "${node}" "/bin/bash register_ceph_commands.sh $remote_home"
+  ssh "${node}" "cd $remote_home; /bin/bash register_ceph_commands.sh $remote_home"
   scp -p ../benchmark/jobs/ceph.conf "${node}":/etc/ceph/ceph.conf
 done
