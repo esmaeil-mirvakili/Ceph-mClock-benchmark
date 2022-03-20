@@ -43,7 +43,7 @@ for node in $nodes; do
 
   echo "installing ceph on $host_name..."
   scp -p install_ceph.sh "${node}":"$remote_home"
-  ssh "${node}" '/bin/bash install_ceph.sh'
+  ssh "${node}" "/bin/bash install_ceph.sh $remote_home"
 
 #  ssh "${node}" $'echo \'export PATH="~/ceph/build/bin:$PATH"\' >> .bashrc'
   scp -p register_ceph_commands.sh "${node}":"$remote_home"

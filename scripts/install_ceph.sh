@@ -10,6 +10,12 @@ sudo echo "Acquire::https::Verify-Host "false";" >> /etc/apt/apt.conf.d/20packag
 sudo echo "Acquire::https::Verify-Peer "false";" >> /etc/apt/apt.conf.d/20auto-upgrades
 sudo echo "Acquire::https::Verify-Host "false";" >> /etc/apt/apt.conf.d/20auto-upgrades
 
+if [ -z "$1" ]; then
+  home="${HOME}"
+else
+  home=$1
+fi
+
 sudo apt-get install -y build-essential libssl-dev
 cd /tmp
 wget https://github.com/Kitware/CMake/releases/download/v3.20.0/cmake-3.20.0.tar.gz
@@ -22,12 +28,12 @@ sudo apt-get update -y
 sudo apt-get install -y ninja-build
 
 # install ceph
-cd "${HOME}"
+cd "$home"
 git clone https://github.com/esmaeil-mirvakili/ceph.git
 cd ceph
 git checkout bluestore-bufferbloat-mitigation
 
-export CEPH_HOME="$(pwd)"
+export CEPH_HOME="$home/ceph"
 ./install-deps.sh
 ./do_cmake.sh -DWITH_MANPAGE=OFF -DWITH_BABELTRACE=OFF -DWITH_MGR_DASHBOARD_FRONTEND=OFF -DCMAKE_BUILD_TYPE=RelWithDebInfo
 cmake --build build
