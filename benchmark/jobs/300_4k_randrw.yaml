@@ -3,8 +3,10 @@ cluster:
   head: "client0"
   clients: ["client0"]
   osds: ["osd0", "osd1", "osd2", "osd3"]
-  mon: ["osd0"]
-  use_existing: False
+  mons:
+    osd0:
+      a: "10.10.1.1:6789"
+#  use_existing: False
   osds_per_node: 1
   iterations: 1
   conf_file: "/etc/ceph/ceph.conf"
@@ -40,7 +42,7 @@ benchmarks:
       direct: 1
       use_dir: True
       output-format: json
-      fio_cmd: '/usr/bin/fio'
+      fio_cmd: 'fio'
       pool_profile: 'rbd'
       poolname: 'test_client_pool'
       recov_pool_name: 'test_recovery_pool'

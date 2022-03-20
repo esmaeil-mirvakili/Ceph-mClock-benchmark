@@ -11,6 +11,7 @@ sudo apt-get install -y pdsh
 sudo apt-get install -y collectl
 sudo apt-get install -y iftop
 sudo apt-get install -y iperf
+sudo apt-get install -y targetcli-fb
 
 cd "${HOME}" || exit
 git clone https://github.com/axboe/fio.git

@@ -27,6 +27,7 @@ cp "${ssh_key}" ~/.ssh/id_rsa
 chmod 0600 ~/.ssh/id_rsa
 mkdir /etc/ceph
 cp ../benchmark/jobs/ceph.conf /etc/ceph/ceph.conf
+touch /tmp/cbt/ceph/monmap
 
 nodes=$(cat "$nodes_path")
 for node in $nodes; do
@@ -48,6 +49,6 @@ for node in $nodes; do
 
   scp -p register_ceph_commands.sh "${node}":"$remote_home"
   ssh "${node}" "cd $remote_home; /bin/bash register_ceph_commands.sh $remote_home"
-  ssh "${node}" "mkdir /etc/ceph"
+  ssh "${node}" "mkdir /tmp/cbt/ceph"
   scp -p ../benchmark/jobs/ceph.conf "${node}":/etc/ceph/ceph.conf
 done
