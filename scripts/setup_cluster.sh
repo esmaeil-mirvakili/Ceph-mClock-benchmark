@@ -31,21 +31,23 @@ cp ../benchmark/jobs/ceph.conf /etc/ceph/ceph.conf
 nodes=$(cat "$nodes_path")
 for node in $nodes; do
   echo "Node $node :"
-  host_name=$(ssh "${node}" 'hostname')
-  echo "setting up ssh keys on $host_name..."
+#  host_name=$(ssh "${node}" 'hostname')
+  ssh -oStrictHostKeyChecking=no "$node" 'hostname'
+  echo "setting up ssh keys on $node..."
   scp -p ~/.ssh/id_rsa "${node}":"$remote_home"/.ssh
   ssh "${node}" "chmod 0600 $remote_home/.ssh/id_rsa"
   scp -p ~/.ssh/known_hosts "${node}":"$remote_home"/.ssh
 
-  echo "labeling partitions on $host_name..."
+  echo "labeling partitions on $node..."
   scp -p mkpartition.sh "${node}":"$remote_home"
   ssh "${node}" "cd $remote_home; /bin/bash mkpartition.sh $osd_devices"
 
-  echo "installing ceph on $host_name..."
+  echo "installing ceph on $node..."
   scp -p install_ceph.sh "${node}":"$remote_home"
   ssh "${node}" "cd $remote_home; /bin/bash install_ceph.sh $remote_home"
 
   scp -p register_ceph_commands.sh "${node}":"$remote_home"
   ssh "${node}" "cd $remote_home; /bin/bash register_ceph_commands.sh $remote_home"
+  ssh "${node}" "mkdir /etc/ceph"
   scp -p ../benchmark/jobs/ceph.conf "${node}":/etc/ceph/ceph.conf
 done
