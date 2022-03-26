@@ -16,4 +16,5 @@ mv ubuntu_cbt_setup.sh "${HOME}/cbt/"
 cd "${HOME}/cbt" || { echo "CBT clone failed (cbt directory not found)."; exit; }
 pip3 install -r ../requirements.txt
 /bin/bash ubuntu_cbt_setup.sh
-printf 'export PATH="%s:$PATH"' "${HOME}/fio" >> .bashrc
+sudo ln -s "${HOME}/fio/*" "/usr/local/bin"
+#printf 'export PATH="%s:$PATH"' "${HOME}/fio" >> .bashrc

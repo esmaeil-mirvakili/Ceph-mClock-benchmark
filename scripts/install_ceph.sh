@@ -47,3 +47,5 @@ cd build
 # install useful packages
 sudo apt install -y cscope
 sudo pip3 install -U pyyaml
+
+sudo ln -s "$home/ceph/build/bin/*" "/usr/local/bin"

@@ -1,0 +1,80 @@
+cluster:
+  user: 'esmaeil'
+  head: "osd0"
+  clients: ["client0"]
+  osds: ["osd0", "osd1", "osd2", "osd3"]
+  mons:
+    osd0:
+      a: "127.0.0.1:6789"
+  mgrs:
+    osd0:
+      x: "127.0.0.1:1234"
+  mdss:
+    osd0:
+      a: ~
+  osds_per_node: 1
+  fs: 'xfs'
+  mkfs_opts: '-f -i size=2048'
+  mount_opts: '-o inode64,noatime,logbsize=256k'
+  conf_file: '/home/esmaeil/Ceph-mClock-benchmark/benchmark/jobs/ceph.conf'
+  iterations: 1
+  use_existing: False
+  clusterid: "ceph"
+  tmp_dir: "/tmp/cbt"
+  ceph-authtool_cmd: "/usr/local/bin/ceph-authtool"
+  ceph-osd_cmd: "env -i TCMALLOC_MAX_TOTAL_THREAD_CACHE_BYTES=134217728 /usr/local/bin/ceph-osd"
+  ceph-rgw_cmd: "env -i TCMALLOC_MAX_TOTAL_THREAD_CACHE_BYTES=134217728 /usr/local/bin/radosgw"
+  ceph-mon_cmd: "/usr/local/bin/ceph-mon"
+  ceph-run_cmd: "/usr/local/bin/ceph-run"
+  rados_cmd: "/usr/local/bin/rados"
+  ceph_cmd: "/usr/local/bin/ceph"
+  rbd_cmd: "/usr/local/bin/rbd"
+  rbd-nbd_cmd: "/usr/local/bin/rbd-nbd"
+  rbd-fuse_cmd: "/usr/local/bin/rbd-fuse"
+  ceph-mgr_cmd: "/usr/local/bin/ceph-mgr"
+  radosgw-admin_cmd: "/usr/local/bin/radosgw-admin"
+  ceph-fuse_cmd: "/usr/local/bin/ceph-fuse"
+  ceph-mds_cmd: "/usr/local/bin/ceph-mds"
+  mount_cmd: "/usr/local/sbin/mount.ceph"
+  pool_profiles:
+    rbdrecov:
+      recov_pool: True
+      pg_size: 64
+      pgp_size: 64
+      replication: 3
+      prefill_recov_time: 660
+      prefill_recov_objects: 100000
+      prefill_recov_object_size: 4194304
+    rbd:
+      pg_size: 64
+      pgp_size: 64
+      replication: 3
+      prefill_object_size: 4194304
+      prefill_objects: 5000
+      prefill_time: 10
+  recovery_test:
+    osds: [0]
+client_endpoints:
+  osd0:
+    driver: 'librbd'
+    pool_profile: 'rbd'
+    recov_pool_profile: 'rbdrecov'
+benchmarks:
+  fio:
+    time: 420
+    time_based: True
+    #rate_iops: 9000
+    ioengine: 'rbd'
+    direct: 1
+    prefill: True
+    size: 4096
+    #mode: ['read', 'write', 'randread', 'randwrite']
+    mode: ['randwrite']
+    op_size: [4096]
+    procs_per_volume: [1]
+    iodepth: [64]
+    osd_ra: [4096]
+    cmd_path: '/usr/local/bin/fio'
+    volumes_per_client: [1]
+    client_endpoints: 'client0'
+    recov_test_type: 'background'
