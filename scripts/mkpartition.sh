@@ -1,7 +1,7 @@
 #!/bin/bash
 
 arg=$1
-partitions=${arg//,/ }
+IFS=', ' read -r -a partitions <<< "$arg"
 
 i=0
 for part in "${partitions[@]}"
