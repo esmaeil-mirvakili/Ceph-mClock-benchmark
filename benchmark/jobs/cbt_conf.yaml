@@ -25,7 +25,7 @@ cluster:
   ceph-osd_cmd: "env -i TCMALLOC_MAX_TOTAL_THREAD_CACHE_BYTES=134217728 /users/esmaeil/ceph/build/bin/ceph-osd"
   ceph-rgw_cmd: "env -i TCMALLOC_MAX_TOTAL_THREAD_CACHE_BYTES=134217728 /users/esmaeil/ceph/build/bin/radosgw"
   ceph-mon_cmd: "/users/esmaeil/ceph/build/bin/ceph-mon"
-  ceph-run_cmd: "/users/esmaeil/ceph/build/bin/ceph-run"
+  ceph-run_cmd: "/users/esmaeil/ceph/src/ceph-run"
   rados_cmd: "/users/esmaeil/ceph/build/bin/rados"
   ceph_cmd: "/users/esmaeil/ceph/build/bin/ceph"
   rbd_cmd: "/users/esmaeil/ceph/build/bin/rbd"

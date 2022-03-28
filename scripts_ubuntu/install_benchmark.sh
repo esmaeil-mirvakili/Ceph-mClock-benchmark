@@ -18,3 +18,5 @@ pip3 install -r ../requirements.txt
 /bin/bash ubuntu_cbt_setup.sh
 sudo ln -s "${HOME}/fio/*" "/usr/local/bin"
 #printf 'export PATH="%s:$PATH"' "${HOME}/fio" >> .bashrc
+sudo mkdir -p /usr/local/lib/ceph/erasure-code
+sudo cp -r "${HOME}/ceph/build/lib/*" "/usr/local/lib/ceph/erasure-code"
