@@ -3,19 +3,23 @@
 sudo yum check-update
 sudo yum update -y
 sudo yum groupinstall -y "Development Tools"
-sudo dnf install -y libffi-devel
-sudo dnf install -y python36-devel
-sudo dnf install -y python3-pip
-sudo dnf install -y git
+sudo yum install -y libffi-devel
+sudo yum install -y python36-devel
+sudo yum install -y python3-pip
+sudo yum install -y git
 sudo yum install targetcli -y
-sudo dnf install -y librados2
-sudo dnf install -y librbd1
+sudo yum install -y librados2
+sudo yum install -y librbd1
 
 sudo rpm --import 'https://download.ceph.com/keys/release.asc' && \
 	ulimit -n 1024 && \
 	yum install -y python3-rbd python3-rados
 
+sudo groupadd esmaeil
+sudo usermod -a -G esmaeil esmaeil
+
 bash install_ceph.sh
+printf 'export PATH="%s:$PATH"' "${HOME}/ceph/build/bin" >> .bashrc
 cp cbt_setup.sh "${HOME}"
 cd "${HOME}" || exit
 mkdir logs

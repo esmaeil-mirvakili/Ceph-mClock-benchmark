@@ -1,15 +1,15 @@
 cluster:
   user: 'esmaeil'
-  head: "osd0"
-  clients: ["osd0"]
-  osds: ["osd0"]
+  head: "client0"
+  clients: ["client0"]
+  osds: ["osd0", "osd1", "osd2", "osd3"]
   mons:
     osd0:
-      a: "127.0.0.1:6789"
+      a: "10.10.1.1:6789"
   mgrs:
     osd0:
-      x: "127.0.0.1:1234"
-  osds_per_node: 4
+      x: "10.10.1.1:1234"
+  osds_per_node: 1
   fs: 'xfs'
   mkfs_opts: '-f -i size=2048'
   mount_opts: '-o inode64,noatime,logbsize=256k'

@@ -2,14 +2,8 @@
 
 sudo yum check-update
 sudo yum update -y
-sudo dnf install -y python3-routes
-sudo dnf --enablerepo=powertools install -y ninja-build
-
-sudo echo "Acquire::https::Verify-Peer "false";" >> /etc/apt/apt.conf.d/20packagekit
-sudo echo "Acquire::https::Verify-Host "false";" >> /etc/apt/apt.conf.d/20packagekit
-
-sudo echo "Acquire::https::Verify-Peer "false";" >> /etc/apt/apt.conf.d/20auto-upgrades
-sudo echo "Acquire::https::Verify-Host "false";" >> /etc/apt/apt.conf.d/20auto-upgrades
+sudo yum install -y python3-routes
+sudo yum --enablerepo=powertools install -y ninja-build
 
 if [ -z "$1" ]; then
   home="${HOME}"
@@ -35,5 +29,5 @@ ninja
 
 
 # install useful packages
-sudo dnf install -y cscope
+sudo yum install -y cscope
 sudo pip3 install -U pyyaml
