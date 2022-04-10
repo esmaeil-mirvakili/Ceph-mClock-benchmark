@@ -11,14 +11,17 @@ sudo yum install -y psmisc util-linux coreutils xfsprogs e2fsprogs findutils \
 
 MIRROR="http://mirror.math.princeton.edu/pub/fedora-archive/fedora/linux/releases/22/Everything/x86_64/os/Packages"
 
-wget ${MIRROR}/p/pdsh-2.31-3.fc22.x86_64.rpm
-wget ${MIRROR}/p/pdsh-2.31-3.fc22.x86_64.rpm
-wget ${MIRROR}/p/pdsh-rcmd-ssh-2.31-3.fc22.x86_64.rpm
+#wget ${MIRROR}/p/pdsh-2.31-3.fc22.x86_64.rpm
+#wget ${MIRROR}/p/pdsh-2.31-3.fc22.x86_64.rpm
+#wget ${MIRROR}/p/pdsh-rcmd-ssh-2.31-3.fc22.x86_64.rpm
 wget ${MIRROR}/c/collectl-4.0.0-1.fc22.noarch.rpm
 wget ${MIRROR}/i/iftop-1.0-0.9.pre4.fc22.x86_64.rpm
 wget ${MIRROR}/i/iperf3-3.0.10-1.fc22.x86_64.rpm
 
 sudo yum localinstall -y *.rpm
+
+sudo yum install -y pdsh
+sudo yum install -y pdsh-rcmd-ssh.x86_64
 
 cd ${HOME}
 
@@ -32,8 +35,8 @@ make
 
 # wget < Red Hat Ceph Storage ISO URL >
 # sudo mount -o loop Ceph-*-dvd.iso /mnt
-sudo yum localinstall -y /mnt/{MON,OSD}/*.rpm
-sudo yum localinstall -y /mnt/Installer/ceph-deploy-*.rpm
+#sudo yum localinstall -y /mnt/{MON,OSD}/*.rpm
+#sudo yum localinstall -y /mnt/Installer/ceph-deploy-*.rpm
 
 sudo sed -i 's/Defaults    requiretty/#Defaults    requiretty/g' /etc/sudoers
 sudo setenforce 0
@@ -42,5 +45,7 @@ sudo mv /tmp/x /etc/selinux/config
 rpm -qa firewalld | grep firewalld && sudo systemctl stop firewalld && sudo systemctl disable firewalld
 sudo systemctl stop irqbalance
 sudo systemctl disable irqbalance
-sudo systemctl start ntpd.service
-sudo systemctl enable ntpd.service
+#sudo systemctl start ntpd.service
+#sudo systemctl enable ntpd.service
+sudo systemctl start chronyd.service
+sudo systemctl enable chronyd.service

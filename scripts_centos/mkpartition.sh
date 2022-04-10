@@ -14,4 +14,4 @@ do
 done
 
 echo "partitions by labels:"
-ls -l /dev/disk/by-partlabel/
+sudo ls -l /dev/disk/by-partlabel/
