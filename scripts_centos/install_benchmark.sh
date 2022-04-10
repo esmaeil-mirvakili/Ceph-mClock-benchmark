@@ -13,7 +13,7 @@ sudo yum install -y librbd1
 
 sudo rpm --import 'https://download.ceph.com/keys/release.asc' && \
 	ulimit -n 1024 && \
-	yum install -y python3-rbd python3-rados
+	sudo yum install -y python3-rbd python3-rados
 
 sudo groupadd esmaeil
 sudo usermod -a -G esmaeil esmaeil

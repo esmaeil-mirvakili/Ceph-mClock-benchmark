@@ -3,7 +3,12 @@
 sudo yum check-update
 sudo yum update -y
 sudo yum install -y python3-routes
-sudo yum --enablerepo=powertools install -y ninja-build
+sudo yum install -y ninja-build
+sudo yum install epel-release -y
+sudo yum install dnf -y
+#wget https://download-ib01.fedoraproject.org/pub/fedora/linux/updates/34/Everything/x86_64/Packages/d/dnf-utils-4.0.24-1.fc34.noarch.rpm
+#sudo rpm -Uvh dnf-utils-4.0.24-1.fc34.noarch.rpm
+
 
 if [ -z "$1" ]; then
   home="${HOME}"
