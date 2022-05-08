@@ -19,7 +19,8 @@ sudo groupadd esmaeil
 sudo usermod -a -G esmaeil esmaeil
 
 bash install_ceph.sh
-printf 'export PATH="%s:$PATH"' "${HOME}/ceph/build/bin" >> .bashrc
+printf 'export PATH="%s:$PATH"\n' "${HOME}/ceph/build/bin" >> .bashrc
+printf 'export PATH="%s:$PATH"\n' "${HOME}/fio" >> .bashrc
 cp cbt_setup.sh "${HOME}"
 cd "${HOME}" || exit
 mkdir logs

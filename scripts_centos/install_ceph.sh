@@ -21,7 +21,7 @@ fi
 cd "$home"
 git clone https://github.com/esmaeil-mirvakili/ceph.git
 cd ceph
-git checkout bluestore-bufferbloat-mitigation
+git checkout bluestore-bufferbloat-mitigation-debug
 git submodule update --init
 
 CEPH_HOME="$home/ceph" bash install-deps.sh
@@ -29,8 +29,8 @@ CEPH_HOME="$home/ceph" bash do_cmake.sh
 cd build
 ninja
 
-../src/stop.sh && rm -rf out dev && MON=1 OSD=1 MGR=1 MDS=0 RGW=0 ../src/vstart.sh -n -x
-./bin/ceph osd pool create rados
+#../src/stop.sh && rm -rf out dev && MON=1 OSD=1 MGR=1 MDS=0 RGW=0 ../src/vstart.sh -n -x
+#./bin/ceph osd pool create rados
 
 
 # install useful packages

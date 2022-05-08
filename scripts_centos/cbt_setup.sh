@@ -30,8 +30,15 @@ git clone https://github.com/andikleen/pmu-tools.git
 git clone https://github.com/brendangregg/FlameGraph
 
 cd ${HOME}/fio
-./configure
-make
+#./configure
+#make
+export CEPH_HOME="${HOME}"/ceph
+export FIO_HOME="$(pwd)"
+LDFLAGS=-I"$CEPH_HOME"/src/include LIBRARY_PATH="$CEPH_HOME"/build/lib:$LIBRARY_PATH ./configure
+EXTFLAGS=-I"$CEPH_HOME"/src/include LIBRARY_PATH="$CEPH_HOME"/build/lib:$LIBRARY_PATH make -j `nproc`
+echo "FIO installed"
+
+printf 'export LD_LIBRARY_PATH="$CEPH_HOME"/build/lib:$LD_LIBRARY_PATH"\n' >> .bashrc
 
 # wget < Red Hat Ceph Storage ISO URL >
 # sudo mount -o loop Ceph-*-dvd.iso /mnt
