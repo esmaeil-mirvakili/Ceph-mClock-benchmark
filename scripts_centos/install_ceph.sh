@@ -11,21 +11,21 @@ sudo yum install dnf -y
 
 
 if [ -z "$1" ]; then
-  home="${HOME}"
+  HOME_LOC="${HOME}"
 else
-  home=$1
+  HOME_LOC=$1
 fi
 
 
 # install ceph
-cd "$home"
+cd "$HOME_LOC"
 git clone https://github.com/esmaeil-mirvakili/ceph.git
 cd ceph
 git checkout bluestore-bufferbloat-mitigation-debug
 git submodule update --init
 
-CEPH_HOME="$home/ceph" bash install-deps.sh
-CEPH_HOME="$home/ceph" bash do_cmake.sh
+CEPH_HOME="$HOME_LOC/ceph" bash install-deps.sh
+CEPH_HOME="$HOME_LOC/ceph" bash do_cmake.sh
 cd build
 ninja
 

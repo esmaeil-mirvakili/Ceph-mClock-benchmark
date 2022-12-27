@@ -23,16 +23,22 @@ sudo yum localinstall -y *.rpm
 sudo yum install -y pdsh
 sudo yum install -y pdsh-rcmd-ssh.x86_64
 
-cd ${HOME}
+if [ -z "$1" ]; then
+  HOME_LOC="${HOME}"
+else
+  HOME_LOC=$1
+fi
+
+cd ${HOME_LOC}
 
 git clone https://github.com/axboe/fio.git
 git clone https://github.com/andikleen/pmu-tools.git
 git clone https://github.com/brendangregg/FlameGraph
 
-cd ${HOME}/fio
+cd ${HOME_LOC}/fio
 #./configure
 #make
-export CEPH_HOME="${HOME}"/ceph
+export CEPH_HOME="${HOME_LOC}"/ceph
 export FIO_HOME="$(pwd)"
 LDFLAGS=-I"$CEPH_HOME"/src/include LIBRARY_PATH="$CEPH_HOME"/build/lib:$LIBRARY_PATH ./configure
 EXTFLAGS=-I"$CEPH_HOME"/src/include LIBRARY_PATH="$CEPH_HOME"/build/lib:$LIBRARY_PATH make -j `nproc`

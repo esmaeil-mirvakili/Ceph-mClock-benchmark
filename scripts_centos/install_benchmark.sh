@@ -18,15 +18,29 @@ sudo rpm --import 'https://download.ceph.com/keys/release.asc' && \
 sudo groupadd esmaeil
 sudo usermod -a -G esmaeil esmaeil
 
+if [ -z "$1" ]; then
+  HOME_LOC="${HOME}"
+else
+  HOME_LOC=$1
+fi
+
+if [ -z "$2" ]; then
+  PART="sdc"
+else
+  PART=$2
+fi
+
+bash mkpartition.sh "$PART"
 bash install_ceph.sh
-printf 'export PATH="%s:$PATH"\n' "${HOME}/ceph/build/bin" >> .bashrc
-printf 'export PATH="%s:$PATH"\n' "${HOME}/fio" >> .bashrc
-cp cbt_setup.sh "${HOME}"
-cd "${HOME}" || exit
+printf 'export PATH="%s:$PATH"\n' "${HOME_LOC}/ceph/build/bin" >> .bashrc
+printf 'export PATH="%s:$PATH"\n' "${HOME_LOC}/fio" >> .bashrc
+cp cbt_setup.sh "${HOME_LOC}"
+cp register_commands.sh "${HOME_LOC}"
+cd "${HOME_LOC}" || exit
 mkdir logs
 git clone https://github.com/ceph/cbt.git
 mv cbt_setup.sh cbt/
-cd "${HOME}/cbt" || { echo "CBT clone failed (cbt directory not found)."; exit; }
+cd "${HOME_LOC}/cbt" || { echo "CBT clone failed (cbt directory not found)."; exit; }
 pip3 install -r requirements.txt
 bash cbt_setup.sh
 
@@ -37,3 +51,6 @@ sudo ./cephadm install ceph-common
 sudo ./cephadm install python3-rados
 #sudo mkdir -p /usr/local/lib/ceph/erasure-code
 #sudo cp -r "${HOME}/ceph/build/lib/*" "/usr/local/lib/ceph/erasure-code"
+
+cd "${HOME_LOC}" || exit
+bash register_commands.sh "$HOME_LOC"
