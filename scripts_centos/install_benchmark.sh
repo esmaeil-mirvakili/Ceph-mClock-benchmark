@@ -24,13 +24,7 @@ else
   HOME_LOC=$1
 fi
 
-if [ -z "$2" ]; then
-  PART="sdc"
-else
-  PART=$2
-fi
-
-bash mkpartition.sh "$PART"
+bash mkpartition.sh sdb
 bash install_ceph.sh
 printf 'export PATH="%s:$PATH"\n' "${HOME_LOC}/ceph/build/bin" >> .bashrc
 printf 'export PATH="%s:$PATH"\n' "${HOME_LOC}/fio" >> .bashrc
