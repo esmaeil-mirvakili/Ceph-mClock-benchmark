@@ -16,7 +16,14 @@ for algorithm in ${algorithms[*]}; do
   for profile in ${profiles[*]}; do
     path="$HOME_LOC/benchmark/$queue/$algorithm/$profile"
     echo ">>> Experiment for $path ..."
+    echo ""
+    echo ""
     python3 "$HOME_LOC/cbt/cbt.py" --archive="$arch" --conf="$path/ceph_4osd.conf" "$path/cbt_conf_4osd.yaml"
+    echo ""
+    echo ""
+    echo ">>> Collecting results for $path ..."
+    echo ""
+    echo ""
     cp -r "$HOME_LOC/benchmark/$queue/$algorithm/$profile/*" "$arch"
     mv "$arch" "$HOME_LOC/result-$queue-$algorithm-$profile"
   done
