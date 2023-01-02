@@ -24,7 +24,8 @@ for algorithm in ${algorithms[*]}; do
     echo ">>> Collecting results for $path ..."
     echo ""
     echo ""
-    cp -r "$HOME_LOC/benchmark/$queue/$algorithm/$profile/*" "$arch"
+    cp "$HOME_LOC/benchmark/$queue/$algorithm/$profile/cbt_conf_4osd.yaml" "$arch"
+    cp "$HOME_LOC/benchmark/$queue/$algorithm/$profile/ceph_4osd.conf" "$arch"
     mv "$arch" "$HOME_LOC/result-$queue-$algorithm-$profile"
   done
 done
