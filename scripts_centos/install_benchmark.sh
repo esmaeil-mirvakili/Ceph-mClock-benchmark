@@ -25,11 +25,11 @@ else
 fi
 
 bash mkpartition.sh sdb
-bash preconditioning.sh "$HOME_LOC" "/dev/sdc"
 bash install_ceph.sh
 printf 'export PATH="%s:$PATH"\n' "${HOME_LOC}/ceph/build/bin" >> .bashrc
 printf 'export PATH="%s:$PATH"\n' "${HOME_LOC}/fio" >> .bashrc
 cp cbt_setup.sh "${HOME_LOC}"
+cp preconditioning.sh "${HOME_LOC}"
 cp run_benchmark.sh "${HOME_LOC}"
 cp -r ../benchmark "${HOME_LOC}"
 cp register_commands.sh "${HOME_LOC}"
@@ -51,3 +51,6 @@ sudo ./cephadm install python3-rados
 
 cd "${HOME_LOC}" || exit
 bash register_commands.sh "$HOME_LOC"
+bash preconditioning.sh "$HOME_LOC" "/dev/sdc"
+rm -f register_commands.sh
+rm -f preconditioning.sh
