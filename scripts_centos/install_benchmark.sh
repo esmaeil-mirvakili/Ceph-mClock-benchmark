@@ -25,6 +25,7 @@ else
 fi
 
 bash mkpartition.sh sdb
+bash preconditioning.sh "$HOME_LOC" "/dev/sdc"
 bash install_ceph.sh
 printf 'export PATH="%s:$PATH"\n' "${HOME_LOC}/ceph/build/bin" >> .bashrc
 printf 'export PATH="%s:$PATH"\n' "${HOME_LOC}/fio" >> .bashrc

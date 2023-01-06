@@ -9,11 +9,14 @@ cluster:
   mgrs:
     osd0:
       x: "10.10.1.1:1234"
+  mdss:
+    osd0:
+      a: ~
   osds_per_node: 1
   fs: 'xfs'
   mkfs_opts: '-f -i size=2048'
   mount_opts: '-o inode64,noatime,logbsize=256k'
-  conf_file: '/users/esmaeil/Ceph-mClock-benchmark/benchmark/jobs/ceph.conf'
+  conf_file: '/users/esmaeil/benchmark/mclock/codel/high_user/ceph_4osd.conf'
   iterations: 1
   use_existing: False
   clusterid: "ceph"
@@ -39,7 +42,7 @@ cluster:
       pg_size: 64
       pgp_size: 64
       replication: 3
-      prefill_recov_time: 60
+      prefill_recov_time: 660
       prefill_recov_objects: 100000
       prefill_recov_object_size: 4194304
     rbd:
@@ -50,20 +53,20 @@ cluster:
       prefill_objects: 5000
       prefill_time: 10
   recovery_test:
-    osds: [0]
-    pre_time: 200
+    osds: [1]
 client_endpoints:
-  osd0:
+  client0:
     driver: 'librbd'
     pool_profile: 'rbd'
     recov_pool_profile: 'rbdrecov'
+    endpoint_size: 40960
 benchmarks:
   fio:
     time: 300
     time_based: True
+    ioengine: 'rbd'
     direct: 1
     prefill: True
-    vol_size: 2048
     mode: [ 'randwrite' ]
     op_size: [ 4096 ]
     procs_per_volume: [ 1 ]
@@ -71,5 +74,5 @@ benchmarks:
     osd_ra: [ 4096 ]
     cmd_path: '/users/esmaeil/fio/fio'
     volumes_per_client: [ 1 ]
-    client_endpoints: 'osd0'
+    client_endpoints: 'client0'
     recov_test_type: 'background'
