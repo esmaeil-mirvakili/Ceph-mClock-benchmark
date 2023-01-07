@@ -37,7 +37,7 @@ cp -r ../benchmark "${HOME_LOC}"
 cp register_commands.sh "${HOME_LOC}"
 cd "${HOME_LOC}" || exit
 mkdir logs
-git clone https://github.com/ceph/cbt.git
+git clone https://github.com/esmaeil-mirvakili/cbt.git
 mv cbt_setup.sh cbt/
 cd "${HOME_LOC}/cbt" || { echo "CBT clone failed (cbt directory not found)."; exit; }
 pip3 install -r requirements.txt
