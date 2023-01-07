@@ -70,8 +70,8 @@ configs:
     file: cbt.yaml
     section: [benchmarks, fio]
     values:
-      iodepth: {0}
-      op_size: {1}
+      op_size: {0}
+      iodepth: {1}
   fio_burst:
     file: cbt.yaml
     section: [benchmarks, fio, extra_config]
