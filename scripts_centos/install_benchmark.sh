@@ -30,6 +30,8 @@ printf 'export PATH="%s:$PATH"\n' "${HOME_LOC}/ceph/build/bin" >> .bashrc
 printf 'export PATH="%s:$PATH"\n' "${HOME_LOC}/fio" >> .bashrc
 cp cbt_setup.sh "${HOME_LOC}"
 cp preconditioning.sh "${HOME_LOC}"
+cp discard_sectors.sh "${HOME_LOC}"
+cp prec.fio "${HOME_LOC}"
 cp run_benchmark.sh "${HOME_LOC}"
 cp -r ../benchmark "${HOME_LOC}"
 cp register_commands.sh "${HOME_LOC}"
@@ -54,3 +56,5 @@ bash register_commands.sh "$HOME_LOC"
 bash preconditioning.sh "$HOME_LOC" "/dev/sdc"
 rm -f register_commands.sh
 rm -f preconditioning.sh
+rm -f prec.fio
+rm -f discard_sectors.sh

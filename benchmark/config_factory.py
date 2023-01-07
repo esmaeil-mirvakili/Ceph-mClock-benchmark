@@ -20,6 +20,9 @@ class ConfigContent:
     def open(self):
         pass
 
+    def new_conf(self):
+        pass
+
     def convert(self, value, params):
         if isinstance(value, dict):
             value = params[int(list(value.keys())[0])]
@@ -30,6 +33,8 @@ class ConfigContent:
             sections = []
         conf = self.config
         for section in sections:
+            if section not in conf:
+                conf[section] = self.new_conf()
             conf = conf[section]
         conf[key] = self.convert(value, params)
 
@@ -49,6 +54,9 @@ class YamlConfigContent(ConfigContent):
     def open(self):
         self.config = read_yaml(self.path)
 
+    def new_conf(self):
+        return {}
+
     def write(self, file):
         with open(file, 'w') as fp:
             yaml.dump(self.config, fp)
@@ -58,6 +66,9 @@ class ConfConfigContent(ConfigContent):
     def open(self):
         self.config = configparser.ConfigParser()
         self.config.read(self.path)
+
+    def new_conf(self):
+        return configparser.ConfigParser()
 
     def convert(self, value, params):
         if isinstance(value, dict):
@@ -93,11 +104,7 @@ def read_benchmarks(config_path):
                         exit(1)
                     config_files[conf_ref['file']].open()
                 reference = config_files[conf_ref['file']]
-                sections = []
-                if 'section' in conf_ref:
-                    sections.append(conf_ref['section'])
-                if 'sub_section' in conf_ref:
-                    sections.append(conf_ref['sub_section'])
+                sections = conf_ref['section']
                 for key, value in conf_ref['values'].items():
                     reference.update(key, value, conf_params, sections=sections)
         benchmarks[bench_name] = config_files
