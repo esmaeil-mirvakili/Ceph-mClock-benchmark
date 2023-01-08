@@ -1,0 +1,749 @@
+configs:
+  codel_on:
+    file: ceph.conf
+    section: [global]
+    values:
+      bluestore codel: true
+      bluestore codel throughput latency tradeoff: {0}
+      bluestore codel initial target latency: 5
+      bluestore codel fast interval: 50
+      bluestore codel slow interval: 500
+      bluestore codel initial budget bytes: 256Ki
+      bluestore codel min budget bytes: {1}
+      bluestore codel max target latency: 1000
+      bluestore codel min target latency: 1
+      bluestore codel regression history size: 100
+      bluestore codel budget increment bytes: {2}
+  codel_off:
+    file: ceph.conf
+    section: [global]
+    values:
+      bluestore codel: false
+  mclock:
+    file: ceph.conf
+    section: [global]
+    values:
+      osd op queue: mclock_scheduler
+      osd mclock skip benchmark: true
+  wpq:
+    file: ceph.conf
+    section: [global]
+    values:
+      osd op queue: wpq
+  mclock_client_profile:
+    file: ceph.conf
+    section: [global]
+    values:
+      osd mclock scheduler client res: {0}
+      osd mclock scheduler client wgt: {1}
+      osd mclock scheduler client lim: {2}
+  mclock_recov_profile:
+    file: ceph.conf
+    section: [global]
+    values:
+      osd mclock scheduler background recovery res: {0}
+      osd mclock scheduler background recovery wgt: {1}
+      osd mclock scheduler background recovery lim: {2}
+  sharding_off:
+    file: ceph.conf
+    section: [global]
+    values:
+      osd op num shards: 1
+  sharding_on:
+    file: ceph.conf
+    section: [global]
+    values:
+      osd op num shards: {0}
+  throttle_off:
+    file: ceph.conf
+    section: [global]
+    values:
+      bluestore throttle bytes: 10240Mi
+      bluestore throttle deferred_bytes: 10240Mi
+  throttle_on:
+    file: ceph.conf
+    section: [global]
+    values:
+      bluestore throttle bytes: {0}
+      bluestore throttle deferred_bytes: {0}
+  fio:
+    file: cbt.yaml
+    section: [benchmarks, fio]
+    values:
+      iodepth: {0}
+      op_size: {1}
+  fio_burst:
+    file: cbt.yaml
+    section: [benchmarks, fio, extra_config]
+    values:
+      thinktime: {0}
+      thinktime_blocks: {1}
+      iodepth_low: 0
+      iodepth_batch_submit: 0
+      iodepth_batch_complete_min: 1
+      iodepth_batch_complete_max: {1}
+  recovery_off:
+    file: cbt.yaml
+    section: [cluster, recovery_test]
+    values:
+      osds: []
+
+benchmarks:
+  benchmarks:
+# vanilla 128K shard 1
+    - name: vanilla_128K_4k_64_shard_1
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_off
+          params: [ ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 128Ki ]
+        - name: fio
+          params: [ 4Ki, 64 ]
+        - name: fio_burst
+          params: [ 1000, 64 ]
+    - name: vanilla_128K_64k_64_shard_1
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_off
+          params: [ ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 128Ki ]
+        - name: fio
+          params: [ 64Ki, 64 ]
+        - name: fio_burst
+          params: [ 1000, 64 ]
+    - name: vanilla_128K_4k_1024_shard_1
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_off
+          params: [ ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 128Ki ]
+        - name: fio
+          params: [ 4Ki, 1024 ]
+        - name: fio_burst
+          params: [ 1000, 1024 ]
+    - name: vanilla_128K_64k_1024_shard_1
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_off
+          params: [ ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 128Ki ]
+        - name: fio
+          params: [ 64Ki, 1024 ]
+        - name: fio_burst
+          params: [ 1000, 1024 ]
+# vanilla 256Ki shard 1
+    - name: vanilla_256K_4k_64_shard_1
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_off
+          params: [ ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 256Ki ]
+        - name: fio
+          params: [ 4Ki, 64 ]
+        - name: fio_burst
+          params: [ 1000, 64 ]
+    - name: vanilla_256K_64k_64_shard_1
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_off
+          params: [ ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 256Ki ]
+        - name: fio
+          params: [ 64Ki, 64 ]
+        - name: fio_burst
+          params: [ 1000, 64 ]
+    - name: vanilla_256K_4k_1024_shard_1
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_off
+          params: [ ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 256Ki ]
+        - name: fio
+          params: [ 4Ki, 1024 ]
+        - name: fio_burst
+          params: [ 1000, 1024 ]
+    - name: vanilla_256K_64k_1024_shard_1
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_off
+          params: [ ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 256Ki ]
+        - name: fio
+          params: [ 64Ki, 1024 ]
+        - name: fio_burst
+          params: [ 1000, 1024 ]
+# vanilla 512Ki shard 1
+    - name: vanilla_512K_64k_64_shard_1
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_off
+          params: [ ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 512Ki ]
+        - name: fio
+          params: [ 64Ki, 64 ]
+        - name: fio_burst
+          params: [ 1000, 64 ]
+    - name: vanilla_512K_4k_64_shard_1
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_off
+          params: [ ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 512Ki ]
+        - name: fio
+          params: [ 4Ki, 64 ]
+        - name: fio_burst
+          params: [ 1000, 64 ]
+    - name: vanilla_512K_4k_1024_shard_1
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_off
+          params: [ ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 512Ki ]
+        - name: fio
+          params: [ 4Ki, 1024 ]
+        - name: fio_burst
+          params: [ 1000, 1024 ]
+    - name: vanilla_512K_64k_1024_shard_1
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_off
+          params: [ ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 512Ki ]
+        - name: fio
+          params: [ 64Ki, 1024 ]
+        - name: fio_burst
+          params: [ 1000, 1024 ]
+# vanilla 128K shard 2
+    - name: vanilla_128K_4k_64_shard_2
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_on
+          params: [ 2 ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 128Ki ]
+        - name: fio
+          params: [ 4Ki, 64 ]
+        - name: fio_burst
+          params: [ 1000, 64 ]
+    - name: vanilla_128K_64k_64_shard_2
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_on
+          params: [ 2 ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 128Ki ]
+        - name: fio
+          params: [ 64Ki, 64 ]
+        - name: fio_burst
+          params: [ 1000, 64 ]
+    - name: vanilla_128K_4k_1024_shard_2
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_on
+          params: [ 2 ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 128Ki ]
+        - name: fio
+          params: [ 4Ki, 1024 ]
+        - name: fio_burst
+          params: [ 1000, 1024 ]
+    - name: vanilla_128K_64k_1024_shard_2
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_on
+          params: [ 2 ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 128Ki ]
+        - name: fio
+          params: [ 64Ki, 1024 ]
+        - name: fio_burst
+          params: [ 1000, 1024 ]
+# vanilla 256Ki shard 2
+    - name: vanilla_256K_4k_64_shard_2
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_on
+          params: [ 2 ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 256Ki ]
+        - name: fio
+          params: [ 4Ki, 64 ]
+        - name: fio_burst
+          params: [ 1000, 64 ]
+    - name: vanilla_256K_64k_64_shard_2
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_on
+          params: [ 2 ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 256Ki ]
+        - name: fio
+          params: [ 64Ki, 64 ]
+        - name: fio_burst
+          params: [ 1000, 64 ]
+    - name: vanilla_256K_4k_1024_shard_2
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_on
+          params: [ 2 ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 256Ki ]
+        - name: fio
+          params: [ 4Ki, 1024 ]
+        - name: fio_burst
+          params: [ 1000, 1024 ]
+    - name: vanilla_256K_64k_1024_shard_2
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_on
+          params: [ 2 ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 256Ki ]
+        - name: fio
+          params: [ 64Ki, 1024 ]
+        - name: fio_burst
+          params: [ 1000, 1024 ]
+# vanilla 512Ki shard 2
+    - name: vanilla_512K_64k_64_shard_2
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_on
+          params: [ 2 ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 512Ki ]
+        - name: fio
+          params: [ 64Ki, 64 ]
+        - name: fio_burst
+          params: [ 1000, 64 ]
+    - name: vanilla_512K_4k_64_shard_2
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_on
+          params: [ 2 ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 512Ki ]
+        - name: fio
+          params: [ 4Ki, 64 ]
+        - name: fio_burst
+          params: [ 1000, 64 ]
+    - name: vanilla_512K_4k_1024_shard_2
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_on
+          params: [ 2 ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 512Ki ]
+        - name: fio
+          params: [ 4Ki, 1024 ]
+        - name: fio_burst
+          params: [ 1000, 1024 ]
+    - name: vanilla_512K_64k_1024_shard_2
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_on
+          params: [ 2 ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 512Ki ]
+        - name: fio
+          params: [ 64Ki, 1024 ]
+        - name: fio_burst
+          params: [ 1000, 1024 ]
+# vanilla 128K shard 5
+    - name: vanilla_128K_4k_64_shard_5
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_on
+          params: [ 5 ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 128Ki ]
+        - name: fio
+          params: [ 4Ki, 64 ]
+        - name: fio_burst
+          params: [ 1000, 64 ]
+    - name: vanilla_128K_64k_64_shard_5
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_on
+          params: [ 5 ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 128Ki ]
+        - name: fio
+          params: [ 64Ki, 64 ]
+        - name: fio_burst
+          params: [ 1000, 64 ]
+    - name: vanilla_128K_4k_1024_shard_5
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_on
+          params: [ 5 ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 128Ki ]
+        - name: fio
+          params: [ 4Ki, 1024 ]
+        - name: fio_burst
+          params: [ 1000, 1024 ]
+    - name: vanilla_128K_64k_1024_shard_5
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_on
+          params: [ 5 ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 128Ki ]
+        - name: fio
+          params: [ 64Ki, 1024 ]
+        - name: fio_burst
+          params: [ 1000, 1024 ]
+# vanilla 256Ki shard 5
+    - name: vanilla_256K_4k_64_shard_5
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_on
+          params: [ 5 ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 256Ki ]
+        - name: fio
+          params: [ 4Ki, 64 ]
+        - name: fio_burst
+          params: [ 1000, 64 ]
+    - name: vanilla_256K_64k_64_shard_5
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_on
+          params: [ 5 ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 256Ki ]
+        - name: fio
+          params: [ 64Ki, 64 ]
+        - name: fio_burst
+          params: [ 1000, 64 ]
+    - name: vanilla_256K_4k_1024_shard_5
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_on
+          params: [ 5 ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 256Ki ]
+        - name: fio
+          params: [ 4Ki, 1024 ]
+        - name: fio_burst
+          params: [ 1000, 1024 ]
+    - name: vanilla_256K_64k_1024_shard_5
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_on
+          params: [ 5 ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 256Ki ]
+        - name: fio
+          params: [ 64Ki, 1024 ]
+        - name: fio_burst
+          params: [ 1000, 1024 ]
+# vanilla 512Ki shard 5
+    - name: vanilla_512K_64k_64_shard_5
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_on
+          params: [ 5 ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 512Ki ]
+        - name: fio
+          params: [ 64Ki, 64 ]
+        - name: fio_burst
+          params: [ 1000, 64 ]
+    - name: vanilla_512K_4k_64_shard_5
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_on
+          params: [ 5 ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 512Ki ]
+        - name: fio
+          params: [ 4Ki, 64 ]
+        - name: fio_burst
+          params: [ 1000, 64 ]
+    - name: vanilla_512K_4k_1024_shard_5
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_on
+          params: [ 5 ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 512Ki ]
+        - name: fio
+          params: [ 4Ki, 1024 ]
+        - name: fio_burst
+          params: [ 1000, 1024 ]
+    - name: vanilla_512K_64k_1024_shard_5
+      configs:
+        - name: codel_off
+          params: [ ]
+        - name: mclock
+          params: [ ]
+        - name: sharding_on
+          params: [ 5 ]
+        - name: mclock_client_profile
+          params: [ 9000,2,1000000 ]
+        - name: mclock_recov_profile
+          params: [ 100,1,1000000 ]
+        - name: throttle_on
+          params: [ 512Ki ]
+        - name: fio
+          params: [ 64Ki, 1024 ]
+        - name: fio_burst
+          params: [ 1000, 1024 ]

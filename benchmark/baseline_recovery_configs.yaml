@@ -90,7 +90,7 @@ configs:
 
 benchmarks:
 # baseline shard 1
-  - name: baseline_4k_64_shard_1
+  - name: baseline_4k_64_shard_1_recovery
     configs:
       - name: codel_off
         params: []
@@ -108,7 +108,9 @@ benchmarks:
         params: [4Ki, 64]
       - name: fio_burst
         params: [ 1000, 64 ]
-  - name: baseline_64k_64_shard_1
+      - name: recovery_on
+        params: []
+  - name: baseline_64k_64_shard_1_recovery
     configs:
       - name: codel_off
         params: []
@@ -126,7 +128,9 @@ benchmarks:
         params: [64Ki, 64]
       - name: fio_burst
         params: [ 1000, 64 ]
-  - name: baseline_4k_1024_shard_1
+      - name: recovery_on
+        params: []
+  - name: baseline_4k_1024_shard_1_recovery
     configs:
       - name: codel_off
         params: []
@@ -144,7 +148,9 @@ benchmarks:
         params: [4Ki, 1024]
       - name: fio_burst
         params: [ 1000, 1024 ]
-  - name: baseline_64k_1024_shard_1
+      - name: recovery_on
+        params: []
+  - name: baseline_64k_1024_shard_1_recovery
     configs:
       - name: codel_off
         params: []
@@ -162,8 +168,10 @@ benchmarks:
         params: [64Ki, 1024]
       - name: fio_burst
         params: [ 1000, 1024 ]
+      - name: recovery_on
+        params: []
 # baseline shard 2
-  - name: baseline_4k_64_shard_2
+  - name: baseline_4k_64_shard_2_recovery
     configs:
       - name: codel_off
         params: []
@@ -181,7 +189,9 @@ benchmarks:
         params: [4Ki, 64]
       - name: fio_burst
         params: [ 1000, 64 ]
-  - name: baseline_64k_64_shard_2
+      - name: recovery_on
+        params: []
+  - name: baseline_64k_64_shard_2_recovery
     configs:
       - name: codel_off
         params: []
@@ -199,7 +209,9 @@ benchmarks:
         params: [64Ki, 64]
       - name: fio_burst
         params: [ 1000, 64 ]
-  - name: baseline_4k_1024_shard_2
+      - name: recovery_on
+        params: []
+  - name: baseline_4k_1024_shard_2_recovery
     configs:
       - name: codel_off
         params: []
@@ -217,7 +229,9 @@ benchmarks:
         params: [4Ki, 1024]
       - name: fio_burst
         params: [ 1000, 1024 ]
-  - name: baseline_64k_1024_shard_2
+      - name: recovery_on
+        params: []
+  - name: baseline_64k_1024_shard_2_recovery
     configs:
       - name: codel_off
         params: []
@@ -235,8 +249,10 @@ benchmarks:
         params: [64Ki, 1024]
       - name: fio_burst
         params: [ 1000, 1024 ]
+      - name: recovery_on
+        params: []
 # baseline shard 5
-  - name: baseline_4k_64_shard_5
+  - name: baseline_4k_64_shard_5_recovery
     configs:
       - name: codel_off
         params: []
@@ -254,7 +270,9 @@ benchmarks:
         params: [4Ki, 64]
       - name: fio_burst
         params: [ 1000, 64 ]
-  - name: baseline_64k_64_shard_5
+      - name: recovery_on
+        params: []
+  - name: baseline_64k_64_shard_5_recovery
     configs:
       - name: codel_off
         params: []
@@ -272,7 +290,9 @@ benchmarks:
         params: [64Ki, 64]
       - name: fio_burst
         params: [ 1000, 64 ]
-  - name: baseline_4k_1024_shard_5
+      - name: recovery_on
+        params: []
+  - name: baseline_4k_1024_shard_5_recovery
     configs:
       - name: codel_off
         params: []
@@ -290,7 +310,9 @@ benchmarks:
         params: [4Ki, 1024]
       - name: fio_burst
         params: [ 1000, 1024 ]
-  - name: baseline_64k_1024_shard_5
+      - name: recovery_on
+        params: []
+  - name: baseline_64k_1024_shard_5_recovery
     configs:
       - name: codel_off
         params: []
@@ -308,3 +330,5 @@ benchmarks:
         params: [64Ki, 1024]
       - name: fio_burst
         params: [ 1000, 1024 ]
+      - name: recovery_on
+        params: []
