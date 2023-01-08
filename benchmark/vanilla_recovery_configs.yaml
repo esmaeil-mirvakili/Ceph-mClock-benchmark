@@ -70,8 +70,8 @@ configs:
     file: cbt.yaml
     section: [ benchmarks, fio ]
     values:
-      iodepth: { 0 }
-      op_size: { 1 }
+      op_size: {0}
+      iodepth: {1}
   fio_burst:
     file: cbt.yaml
     section: [ benchmarks, fio, extra_config ]
@@ -82,11 +82,11 @@ configs:
       iodepth_batch_submit: 0
       iodepth_batch_complete_min: 1
       iodepth_batch_complete_max: { 1 }
-  recovery_off:
+  recovery_on:
     file: cbt.yaml
-    section: [ cluster, recovery_test ]
+    section: [cluster, recovery_test]
     values:
-      osds: [ ]
+      osds: [1]
 
 benchmarks:
   # vanilla 128K shard 1
