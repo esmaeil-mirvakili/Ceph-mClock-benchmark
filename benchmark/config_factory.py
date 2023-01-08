@@ -1,5 +1,7 @@
 import configparser
 import argparse
+import os.path
+
 import yaml
 from pathlib import Path
 
@@ -114,9 +116,12 @@ def read_benchmarks(config_path):
 def main(args):
     benchmarks = read_benchmarks(args.config)
     benchmarks_folder = Path.home().joinpath('benchmarks')
-    Path.mkdir(benchmarks_folder)
+    if not os.path.exists(benchmarks_folder):
+        Path.mkdir(benchmarks_folder)
     for bench_name, bench_configs in benchmarks.items():
         bench_folder = benchmarks_folder.joinpath(bench_name)
+        if os.path.exists(bench_folder):
+            os.removedirs(bench_folder)
         Path.mkdir(bench_folder)
         for conf_file, config in bench_configs.items():
             file = bench_folder.joinpath(conf_file)
