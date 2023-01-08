@@ -82,10 +82,20 @@ class ConfConfigContent(ConfigContent):
             self.config.write(fp)
 
 
+def evaluate_vars(param_list, variables):
+    for i in range(len(param_list)):
+        if isinstance(param_list[i], str) and param_list[i].startswith('$'):
+            if param_list[i][1:] in variables:
+                param_list[i] = variables[param_list[i][1:]]
+            else:
+                raise Exception(f'Variable "{param_list[i][1:]}" not defined.')
+
+
 def read_benchmarks(config_path):
     benchmarks_conf = read_yaml(config_path)
     configs = benchmarks_conf['configs']
     benchmark_list = benchmarks_conf['benchmarks']
+    variables = benchmarks_conf['variables']
     benchmarks = {}
     for benchmark in benchmark_list:
         bench_configs = benchmark['configs']
@@ -93,7 +103,7 @@ def read_benchmarks(config_path):
         config_files = {}
         for bench_conf in bench_configs:
             conf_name = bench_conf['name']
-            conf_params = bench_conf['params']
+            conf_params = evaluate_vars(bench_conf['params'], variables)
             if conf_name in configs:
                 conf_ref = configs[conf_name]
                 if conf_ref['file'] not in config_files:

@@ -1,3 +1,15 @@
+variables:
+  client_4k_64_iops: 6500
+  client_4k_1024_iops: 13000
+  client_64k_64_iops: 3700
+  client_64k_1024_iops: 6000
+  recovery_iops: 1
+  client_wgt: 2
+  recovery_wgt: 1
+  client_limit: 1000000
+  recovery_limit: 1000000
+  burst_time: 1000
+
 configs:
   codel_on:
     file: ceph.conf
@@ -88,9 +100,9 @@ configs:
     values:
       osds: [1]
 
+# vanilla 128K shard 1
 benchmarks:
-  # vanilla 128K shard 1
-  - name: vanilla_128K_4k_64_shard_1_recovery
+  - name: vanilla_128K_4k_64_shard_1
     configs:
       - name: codel_off
         params: [ ]
@@ -99,18 +111,18 @@ benchmarks:
       - name: sharding_off
         params: [ ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_4k_64_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 128Ki ]
       - name: fio
         params: [ 4Ki, 64 ]
       - name: fio_burst
-        params: [ 1000, 64 ]
+        params: [ $burst_time, 64]
       - name: recovery_on
         params: [ ]
-  - name: vanilla_128K_64k_64_shard_1_recovery
+  - name: vanilla_128K_64k_64_shard_1
     configs:
       - name: codel_off
         params: [ ]
@@ -119,18 +131,18 @@ benchmarks:
       - name: sharding_off
         params: [ ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_64k_64_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 128Ki ]
       - name: fio
         params: [ 64Ki, 64 ]
       - name: fio_burst
-        params: [ 1000, 64 ]
+        params: [ $burst_time, 64]
       - name: recovery_on
         params: [ ]
-  - name: vanilla_128K_4k_1024_shard_1_recovery
+  - name: vanilla_128K_4k_1024_shard_1
     configs:
       - name: codel_off
         params: [ ]
@@ -139,18 +151,18 @@ benchmarks:
       - name: sharding_off
         params: [ ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_4k_1024_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 128Ki ]
       - name: fio
         params: [ 4Ki, 1024 ]
       - name: fio_burst
-        params: [ 1000, 1024 ]
+        params: [ $burst_time, 1024]
       - name: recovery_on
         params: [ ]
-  - name: vanilla_128K_64k_1024_shard_1_recovery
+  - name: vanilla_128K_64k_1024_shard_1
     configs:
       - name: codel_off
         params: [ ]
@@ -159,19 +171,19 @@ benchmarks:
       - name: sharding_off
         params: [ ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_64k_1024_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 128Ki ]
       - name: fio
         params: [ 64Ki, 1024 ]
       - name: fio_burst
-        params: [ 1000, 1024 ]
+        params: [ $burst_time, 1024]
       - name: recovery_on
         params: [ ]
-  # vanilla 256Ki shard 1
-  - name: vanilla_256K_4k_64_shard_1_recovery
+# vanilla 256Ki shard 1
+  - name: vanilla_256K_4k_64_shard_1
     configs:
       - name: codel_off
         params: [ ]
@@ -180,18 +192,18 @@ benchmarks:
       - name: sharding_off
         params: [ ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_4k_64_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 256Ki ]
       - name: fio
         params: [ 4Ki, 64 ]
       - name: fio_burst
-        params: [ 1000, 64 ]
+        params: [ $burst_time, 64]
       - name: recovery_on
         params: [ ]
-  - name: vanilla_256K_64k_64_shard_1_recovery
+  - name: vanilla_256K_64k_64_shard_1
     configs:
       - name: codel_off
         params: [ ]
@@ -200,18 +212,18 @@ benchmarks:
       - name: sharding_off
         params: [ ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_64k_64_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 256Ki ]
       - name: fio
         params: [ 64Ki, 64 ]
       - name: fio_burst
-        params: [ 1000, 64 ]
+        params: [ $burst_time, 64]
       - name: recovery_on
         params: [ ]
-  - name: vanilla_256K_4k_1024_shard_1_recovery
+  - name: vanilla_256K_4k_1024_shard_1
     configs:
       - name: codel_off
         params: [ ]
@@ -220,18 +232,18 @@ benchmarks:
       - name: sharding_off
         params: [ ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_4k_1024_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 256Ki ]
       - name: fio
         params: [ 4Ki, 1024 ]
       - name: fio_burst
-        params: [ 1000, 1024 ]
+        params: [ $burst_time, 1024]
       - name: recovery_on
         params: [ ]
-  - name: vanilla_256K_64k_1024_shard_1_recovery
+  - name: vanilla_256K_64k_1024_shard_1
     configs:
       - name: codel_off
         params: [ ]
@@ -240,19 +252,19 @@ benchmarks:
       - name: sharding_off
         params: [ ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_64k_1024_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 256Ki ]
       - name: fio
         params: [ 64Ki, 1024 ]
       - name: fio_burst
-        params: [ 1000, 1024 ]
+        params: [ $burst_time, 1024]
       - name: recovery_on
         params: [ ]
-  # vanilla 512Ki shard 1
-  - name: vanilla_512K_64k_64_shard_1_recovery
+# vanilla 512Ki shard 1
+  - name: vanilla_512K_64k_64_shard_1
     configs:
       - name: codel_off
         params: [ ]
@@ -261,18 +273,18 @@ benchmarks:
       - name: sharding_off
         params: [ ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_64k_64_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 512Ki ]
       - name: fio
         params: [ 64Ki, 64 ]
       - name: fio_burst
-        params: [ 1000, 64 ]
+        params: [ $burst_time, 64]
       - name: recovery_on
         params: [ ]
-  - name: vanilla_512K_4k_64_shard_1_recovery
+  - name: vanilla_512K_4k_64_shard_1
     configs:
       - name: codel_off
         params: [ ]
@@ -281,18 +293,18 @@ benchmarks:
       - name: sharding_off
         params: [ ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_4k_64_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 512Ki ]
       - name: fio
         params: [ 4Ki, 64 ]
       - name: fio_burst
-        params: [ 1000, 64 ]
+        params: [ $burst_time, 64]
       - name: recovery_on
         params: [ ]
-  - name: vanilla_512K_4k_1024_shard_1_recovery
+  - name: vanilla_512K_4k_1024_shard_1
     configs:
       - name: codel_off
         params: [ ]
@@ -301,18 +313,18 @@ benchmarks:
       - name: sharding_off
         params: [ ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_4k_1024_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 512Ki ]
       - name: fio
         params: [ 4Ki, 1024 ]
       - name: fio_burst
-        params: [ 1000, 1024 ]
+        params: [ $burst_time, 1024]
       - name: recovery_on
         params: [ ]
-  - name: vanilla_512K_64k_1024_shard_1_recovery
+  - name: vanilla_512K_64k_1024_shard_1
     configs:
       - name: codel_off
         params: [ ]
@@ -321,19 +333,19 @@ benchmarks:
       - name: sharding_off
         params: [ ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_64k_1024_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 512Ki ]
       - name: fio
         params: [ 64Ki, 1024 ]
       - name: fio_burst
-        params: [ 1000, 1024 ]
+        params: [ $burst_time, 1024]
       - name: recovery_on
         params: [ ]
-  # vanilla 128K shard 2
-  - name: vanilla_128K_4k_64_shard_2_recovery
+# vanilla 128K shard 2
+  - name: vanilla_128K_4k_64_shard_2
     configs:
       - name: codel_off
         params: [ ]
@@ -342,18 +354,18 @@ benchmarks:
       - name: sharding_on
         params: [ 2 ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_4k_64_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 128Ki ]
       - name: fio
         params: [ 4Ki, 64 ]
       - name: fio_burst
-        params: [ 1000, 64 ]
+        params: [ $burst_time, 64]
       - name: recovery_on
         params: [ ]
-  - name: vanilla_128K_64k_64_shard_2_recovery
+  - name: vanilla_128K_64k_64_shard_2
     configs:
       - name: codel_off
         params: [ ]
@@ -362,18 +374,18 @@ benchmarks:
       - name: sharding_on
         params: [ 2 ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_64k_64_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 128Ki ]
       - name: fio
         params: [ 64Ki, 64 ]
       - name: fio_burst
-        params: [ 1000, 64 ]
+        params: [ $burst_time, 64]
       - name: recovery_on
         params: [ ]
-  - name: vanilla_128K_4k_1024_shard_2_recovery
+  - name: vanilla_128K_4k_1024_shard_2
     configs:
       - name: codel_off
         params: [ ]
@@ -382,18 +394,18 @@ benchmarks:
       - name: sharding_on
         params: [ 2 ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_4k_1024_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 128Ki ]
       - name: fio
         params: [ 4Ki, 1024 ]
       - name: fio_burst
-        params: [ 1000, 1024 ]
+        params: [ $burst_time, 1024]
       - name: recovery_on
         params: [ ]
-  - name: vanilla_128K_64k_1024_shard_2_recovery
+  - name: vanilla_128K_64k_1024_shard_2
     configs:
       - name: codel_off
         params: [ ]
@@ -402,19 +414,19 @@ benchmarks:
       - name: sharding_on
         params: [ 2 ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_64k_1024_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 128Ki ]
       - name: fio
         params: [ 64Ki, 1024 ]
       - name: fio_burst
-        params: [ 1000, 1024 ]
+        params: [ $burst_time, 1024]
       - name: recovery_on
         params: [ ]
-  # vanilla 256Ki shard 2
-  - name: vanilla_256K_4k_64_shard_2_recovery
+# vanilla 256Ki shard 2
+  - name: vanilla_256K_4k_64_shard_2
     configs:
       - name: codel_off
         params: [ ]
@@ -423,18 +435,18 @@ benchmarks:
       - name: sharding_on
         params: [ 2 ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_4k_64_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 256Ki ]
       - name: fio
         params: [ 4Ki, 64 ]
       - name: fio_burst
-        params: [ 1000, 64 ]
+        params: [ $burst_time, 64]
       - name: recovery_on
         params: [ ]
-  - name: vanilla_256K_64k_64_shard_2_recovery
+  - name: vanilla_256K_64k_64_shard_2
     configs:
       - name: codel_off
         params: [ ]
@@ -443,18 +455,18 @@ benchmarks:
       - name: sharding_on
         params: [ 2 ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_64k_64_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 256Ki ]
       - name: fio
         params: [ 64Ki, 64 ]
       - name: fio_burst
-        params: [ 1000, 64 ]
+        params: [ $burst_time, 64]
       - name: recovery_on
         params: [ ]
-  - name: vanilla_256K_4k_1024_shard_2_recovery
+  - name: vanilla_256K_4k_1024_shard_2
     configs:
       - name: codel_off
         params: [ ]
@@ -463,18 +475,18 @@ benchmarks:
       - name: sharding_on
         params: [ 2 ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_4k_1024_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 256Ki ]
       - name: fio
         params: [ 4Ki, 1024 ]
       - name: fio_burst
-        params: [ 1000, 1024 ]
+        params: [ $burst_time, 1024]
       - name: recovery_on
         params: [ ]
-  - name: vanilla_256K_64k_1024_shard_2_recovery
+  - name: vanilla_256K_64k_1024_shard_2
     configs:
       - name: codel_off
         params: [ ]
@@ -483,19 +495,19 @@ benchmarks:
       - name: sharding_on
         params: [ 2 ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_64k_1024_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 256Ki ]
       - name: fio
         params: [ 64Ki, 1024 ]
       - name: fio_burst
-        params: [ 1000, 1024 ]
+        params: [ $burst_time, 1024]
       - name: recovery_on
         params: [ ]
-  # vanilla 512Ki shard 2
-  - name: vanilla_512K_64k_64_shard_2_recovery
+# vanilla 512Ki shard 2
+  - name: vanilla_512K_64k_64_shard_2
     configs:
       - name: codel_off
         params: [ ]
@@ -504,18 +516,18 @@ benchmarks:
       - name: sharding_on
         params: [ 2 ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_64k_64_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 512Ki ]
       - name: fio
         params: [ 64Ki, 64 ]
       - name: fio_burst
-        params: [ 1000, 64 ]
+        params: [ $burst_time, 64]
       - name: recovery_on
         params: [ ]
-  - name: vanilla_512K_4k_64_shard_2_recovery
+  - name: vanilla_512K_4k_64_shard_2
     configs:
       - name: codel_off
         params: [ ]
@@ -524,18 +536,18 @@ benchmarks:
       - name: sharding_on
         params: [ 2 ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_4k_64_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 512Ki ]
       - name: fio
         params: [ 4Ki, 64 ]
       - name: fio_burst
-        params: [ 1000, 64 ]
+        params: [ $burst_time, 64]
       - name: recovery_on
         params: [ ]
-  - name: vanilla_512K_4k_1024_shard_2_recovery
+  - name: vanilla_512K_4k_1024_shard_2
     configs:
       - name: codel_off
         params: [ ]
@@ -544,18 +556,18 @@ benchmarks:
       - name: sharding_on
         params: [ 2 ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_4k_1024_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 512Ki ]
       - name: fio
         params: [ 4Ki, 1024 ]
       - name: fio_burst
-        params: [ 1000, 1024 ]
+        params: [ $burst_time, 1024]
       - name: recovery_on
         params: [ ]
-  - name: vanilla_512K_64k_1024_shard_2_recovery
+  - name: vanilla_512K_64k_1024_shard_2
     configs:
       - name: codel_off
         params: [ ]
@@ -564,19 +576,19 @@ benchmarks:
       - name: sharding_on
         params: [ 2 ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_64k_1024_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 512Ki ]
       - name: fio
         params: [ 64Ki, 1024 ]
       - name: fio_burst
-        params: [ 1000, 1024 ]
+        params: [ $burst_time, 1024]
       - name: recovery_on
         params: [ ]
-  # vanilla 128K shard 5
-  - name: vanilla_128K_4k_64_shard_5_recovery
+# vanilla 128K shard 5
+  - name: vanilla_128K_4k_64_shard_5
     configs:
       - name: codel_off
         params: [ ]
@@ -585,18 +597,18 @@ benchmarks:
       - name: sharding_on
         params: [ 5 ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_4k_64_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 128Ki ]
       - name: fio
         params: [ 4Ki, 64 ]
       - name: fio_burst
-        params: [ 1000, 64 ]
+        params: [ $burst_time, 64]
       - name: recovery_on
         params: [ ]
-  - name: vanilla_128K_64k_64_shard_5_recovery
+  - name: vanilla_128K_64k_64_shard_5
     configs:
       - name: codel_off
         params: [ ]
@@ -605,18 +617,18 @@ benchmarks:
       - name: sharding_on
         params: [ 5 ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_64k_64_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 128Ki ]
       - name: fio
         params: [ 64Ki, 64 ]
       - name: fio_burst
-        params: [ 1000, 64 ]
+        params: [ $burst_time, 64]
       - name: recovery_on
         params: [ ]
-  - name: vanilla_128K_4k_1024_shard_5_recovery
+  - name: vanilla_128K_4k_1024_shard_5
     configs:
       - name: codel_off
         params: [ ]
@@ -625,18 +637,18 @@ benchmarks:
       - name: sharding_on
         params: [ 5 ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_4k_1024_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 128Ki ]
       - name: fio
         params: [ 4Ki, 1024 ]
       - name: fio_burst
-        params: [ 1000, 1024 ]
+        params: [ $burst_time, 1024]
       - name: recovery_on
         params: [ ]
-  - name: vanilla_128K_64k_1024_shard_5_recovery
+  - name: vanilla_128K_64k_1024_shard_5
     configs:
       - name: codel_off
         params: [ ]
@@ -645,19 +657,19 @@ benchmarks:
       - name: sharding_on
         params: [ 5 ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_64k_1024_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 128Ki ]
       - name: fio
         params: [ 64Ki, 1024 ]
       - name: fio_burst
-        params: [ 1000, 1024 ]
+        params: [ $burst_time, 1024]
       - name: recovery_on
         params: [ ]
-  # vanilla 256Ki shard 5
-  - name: vanilla_256K_4k_64_shard_5_recovery
+# vanilla 256Ki shard 5
+  - name: vanilla_256K_4k_64_shard_5
     configs:
       - name: codel_off
         params: [ ]
@@ -666,18 +678,18 @@ benchmarks:
       - name: sharding_on
         params: [ 5 ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_4k_64_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 256Ki ]
       - name: fio
         params: [ 4Ki, 64 ]
       - name: fio_burst
-        params: [ 1000, 64 ]
+        params: [ $burst_time, 64]
       - name: recovery_on
         params: [ ]
-  - name: vanilla_256K_64k_64_shard_5_recovery
+  - name: vanilla_256K_64k_64_shard_5
     configs:
       - name: codel_off
         params: [ ]
@@ -686,18 +698,18 @@ benchmarks:
       - name: sharding_on
         params: [ 5 ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_64k_64_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 256Ki ]
       - name: fio
         params: [ 64Ki, 64 ]
       - name: fio_burst
-        params: [ 1000, 64 ]
+        params: [ $burst_time, 64]
       - name: recovery_on
         params: [ ]
-  - name: vanilla_256K_4k_1024_shard_5_recovery
+  - name: vanilla_256K_4k_1024_shard_5
     configs:
       - name: codel_off
         params: [ ]
@@ -706,18 +718,18 @@ benchmarks:
       - name: sharding_on
         params: [ 5 ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_4k_1024_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 256Ki ]
       - name: fio
         params: [ 4Ki, 1024 ]
       - name: fio_burst
-        params: [ 1000, 1024 ]
+        params: [ $burst_time, 1024]
       - name: recovery_on
         params: [ ]
-  - name: vanilla_256K_64k_1024_shard_5_recovery
+  - name: vanilla_256K_64k_1024_shard_5
     configs:
       - name: codel_off
         params: [ ]
@@ -726,19 +738,19 @@ benchmarks:
       - name: sharding_on
         params: [ 5 ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_64k_1024_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 256Ki ]
       - name: fio
         params: [ 64Ki, 1024 ]
       - name: fio_burst
-        params: [ 1000, 1024 ]
+        params: [ $burst_time, 1024]
       - name: recovery_on
         params: [ ]
-  # vanilla 512Ki shard 5
-  - name: vanilla_512K_64k_64_shard_5_recovery
+# vanilla 512Ki shard 5
+  - name: vanilla_512K_64k_64_shard_5
     configs:
       - name: codel_off
         params: [ ]
@@ -747,18 +759,18 @@ benchmarks:
       - name: sharding_on
         params: [ 5 ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_64k_64_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 512Ki ]
       - name: fio
         params: [ 64Ki, 64 ]
       - name: fio_burst
-        params: [ 1000, 64 ]
+        params: [ $burst_time, 64]
       - name: recovery_on
         params: [ ]
-  - name: vanilla_512K_4k_64_shard_5_recovery
+  - name: vanilla_512K_4k_64_shard_5
     configs:
       - name: codel_off
         params: [ ]
@@ -767,18 +779,18 @@ benchmarks:
       - name: sharding_on
         params: [ 5 ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_4k_64_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 512Ki ]
       - name: fio
         params: [ 4Ki, 64 ]
       - name: fio_burst
-        params: [ 1000, 64 ]
+        params: [ $burst_time, 64]
       - name: recovery_on
         params: [ ]
-  - name: vanilla_512K_4k_1024_shard_5_recovery
+  - name: vanilla_512K_4k_1024_shard_5
     configs:
       - name: codel_off
         params: [ ]
@@ -787,18 +799,18 @@ benchmarks:
       - name: sharding_on
         params: [ 5 ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_4k_1024_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 512Ki ]
       - name: fio
         params: [ 4Ki, 1024 ]
       - name: fio_burst
-        params: [ 1000, 1024 ]
+        params: [ $burst_time, 1024]
       - name: recovery_on
         params: [ ]
-  - name: vanilla_512K_64k_1024_shard_5_recovery
+  - name: vanilla_512K_64k_1024_shard_5
     configs:
       - name: codel_off
         params: [ ]
@@ -807,14 +819,14 @@ benchmarks:
       - name: sharding_on
         params: [ 5 ]
       - name: mclock_client_profile
-        params: [ 9000,2,1000000 ]
+        params: [ $client_64k_1024_iops, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 100,1,1000000 ]
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 512Ki ]
       - name: fio
         params: [ 64Ki, 1024 ]
       - name: fio_burst
-        params: [ 1000, 1024 ]
+        params: [ $burst_time, 1024]
       - name: recovery_on
         params: [ ]
