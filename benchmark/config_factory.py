@@ -25,9 +25,12 @@ class ConfigContent:
     def new_conf(self):
         pass
 
-    def convert(self, value, params):
+    def format(self, value, params):
         if isinstance(value, dict):
             value = params[int(list(value.keys())[0])]
+        return value
+
+    def convert(self, value):
         return value
 
     def update(self, key, value, params, sections=None):
@@ -38,7 +41,7 @@ class ConfigContent:
             if section not in conf:
                 conf[section] = self.new_conf()
             conf = conf[section]
-        conf[key] = self.convert(value, params)
+        conf[key] = self.format(self.convert(value), params)
 
     def get(self, key, sections=None):
         if sections is None:
@@ -72,7 +75,12 @@ class ConfConfigContent(ConfigContent):
     def new_conf(self):
         return configparser.ConfigParser()
 
-    def convert(self, value, params):
+    def convert(self, value):
+        if isinstance(value, bool):
+            return 1 if value else 0
+        return value
+
+    def format(self, value, params):
         if isinstance(value, dict):
             value = params[int(list(value.keys())[0])]
         return str(value)
