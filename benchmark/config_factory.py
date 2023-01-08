@@ -89,6 +89,7 @@ def evaluate_vars(param_list, variables):
                 param_list[i] = variables[param_list[i][1:]]
             else:
                 raise Exception(f'Variable "{param_list[i][1:]}" not defined.')
+    return param_list
 
 
 def read_benchmarks(config_path):
