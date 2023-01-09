@@ -18,13 +18,13 @@ find "$BENCH_PATH" -maxdepth 1 -mindepth 1 -type d | while read bench; do
   echo ">>> Experiment for $bench ..."
   echo ""
   echo ""
-  python3 "$HOME_LOC/cbt/cbt.py" --archive="$arch" --conf="$bench/ceph.conf" "$bench/cbt.yaml"
+  python3 "$HOME_LOC/cbt/cbt.py" --archive="$arch" --conf="$bench/ceph.conf" "$bench/cbt.yaml" 2>&1 | tee  "$bench/cbt.log"
   echo ""
   echo ""
   echo ">>> Collecting results for $bench ..."
   echo ""
   echo ""
-  cp -r "$arch/results" "$bench"
+  cp -r "$arch" "$bench"
   rm -rf "$arch"
 done
 
