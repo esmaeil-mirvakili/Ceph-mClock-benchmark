@@ -14,4 +14,4 @@ else
 fi
 
 sudo ./discard_sectors.sh "$PART"
-sudo LD_LIBRARY_PATH="$HOME_LOC/ceph/build/lib:$LD_LIBRARY_PATH" "$HOME_LOC/fio/fio prec.fio"
+sudo LD_LIBRARY_PATH="$HOME_LOC/ceph/build/lib:$LD_LIBRARY_PATH" "$HOME_LOC/fio/fio" prec.fio
