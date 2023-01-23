@@ -156,21 +156,21 @@ benchmarks:
 #        params: [4Ki, 1024]
 #      - name: fio_burst
 #        params: [ $burst_time, 1024]
-  - name: codel_64k_1024_shard_1
-    configs:
-      - name: codel_on
-        params: [ 1, 128Ki, 2Ki ]
-      - name: mclock
-        params: []
-      - name: sharding_off
-        params: []
-      - name: mclock_client_profile
-        params: [ $client_64k_1024_iops, $client_wgt, $client_limit ]
-      - name: mclock_recov_profile
-        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
-      - name: throttle_off
-        params: []
-      - name: fio
-        params: [64Ki, 1024]
-      - name: fio_burst
-        params: [ $burst_time, 1024]
+#  - name: codel_64k_1024_shard_1
+#    configs:
+#      - name: codel_on
+#        params: [ 1, 128Ki, 2Ki ]
+#      - name: mclock
+#        params: []
+#      - name: sharding_off
+#        params: []
+#      - name: mclock_client_profile
+#        params: [ $client_64k_1024_iops, $client_wgt, $client_limit ]
+#      - name: mclock_recov_profile
+#        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+#      - name: throttle_off
+#        params: []
+#      - name: fio
+#        params: [64Ki, 1024]
+#      - name: fio_burst
+#        params: [ $burst_time, 1024]
