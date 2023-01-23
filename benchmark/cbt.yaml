@@ -44,7 +44,7 @@ cluster:
       replication: 3
       prefill_recov_time: 660
       prefill_recov_objects: 1000000
-      prefill_recov_object_size: 4096
+      prefill_recov_object_size: 40960
     rbd:
       pg_size: 64
       pgp_size: 64

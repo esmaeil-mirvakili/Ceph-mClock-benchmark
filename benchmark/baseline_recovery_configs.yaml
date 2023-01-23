@@ -8,7 +8,7 @@ variables:
   recovery_wgt: 1
   client_limit: 1000000
   recovery_limit: 1000000
-  burst_time: 1000
+  burst_time: 1s
   
 configs:
   codel_on:
@@ -20,11 +20,11 @@ configs:
       bluestore codel initial target latency: 5
       bluestore codel fast interval: 50
       bluestore codel slow interval: 500
-      bluestore codel initial budget bytes: 256Ki
+      bluestore codel initial budget bytes: {1}
       bluestore codel min budget bytes: {1}
       bluestore codel max target latency: 1000
       bluestore codel min target latency: 1
-      bluestore codel regression history size: 100
+      bluestore codel regression history size: 20
       bluestore codel budget increment bytes: {2}
   codel_off:
     file: ceph.conf
