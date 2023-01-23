@@ -102,24 +102,24 @@ configs:
 
 benchmarks:
 # baseline shard 1
-  - name: baseline_4k_64_shard_1
-    configs:
-      - name: codel_off
-        params: []
-      - name: mclock
-        params: []
-      - name: sharding_off
-        params: []
-      - name: mclock_client_profile
-        params: [ $client_4k_64_iops, $client_wgt, $client_limit ]
-      - name: mclock_recov_profile
-        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
-      - name: throttle_off
-        params: []
-      - name: fio
-        params: [4Ki, 64]
-      - name: fio_burst
-        params: [ $burst_time, 64]
+#  - name: baseline_4k_64_shard_1
+#    configs:
+#      - name: codel_off
+#        params: []
+#      - name: mclock
+#        params: []
+#      - name: sharding_off
+#        params: []
+#      - name: mclock_client_profile
+#        params: [ $client_4k_64_iops, $client_wgt, $client_limit ]
+#      - name: mclock_recov_profile
+#        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+#      - name: throttle_off
+#        params: []
+#      - name: fio
+#        params: [4Ki, 64]
+#      - name: fio_burst
+#        params: [ $burst_time, 64]
   - name: baseline_64k_64_shard_1
     configs:
       - name: codel_off
@@ -138,24 +138,24 @@ benchmarks:
         params: [64Ki, 64]
       - name: fio_burst
         params: [ $burst_time, 64]
-  - name: baseline_4k_1024_shard_1
-    configs:
-      - name: codel_off
-        params: []
-      - name: mclock
-        params: []
-      - name: sharding_off
-        params: []
-      - name: mclock_client_profile
-        params: [ $client_4k_1024_iops, $client_wgt, $client_limit ]
-      - name: mclock_recov_profile
-        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
-      - name: throttle_off
-        params: []
-      - name: fio
-        params: [4Ki, 1024]
-      - name: fio_burst
-        params: [ $burst_time, 1024]
+#  - name: baseline_4k_1024_shard_1
+#    configs:
+#      - name: codel_off
+#        params: []
+#      - name: mclock
+#        params: []
+#      - name: sharding_off
+#        params: []
+#      - name: mclock_client_profile
+#        params: [ $client_4k_1024_iops, $client_wgt, $client_limit ]
+#      - name: mclock_recov_profile
+#        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+#      - name: throttle_off
+#        params: []
+#      - name: fio
+#        params: [4Ki, 1024]
+#      - name: fio_burst
+#        params: [ $burst_time, 1024]
   - name: baseline_64k_1024_shard_1
     configs:
       - name: codel_off
