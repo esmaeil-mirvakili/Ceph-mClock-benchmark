@@ -91,6 +91,8 @@ class ConfConfigContent(ConfigContent):
 
 
 def evaluate_vars_str(param: str, variables):
+    if not variables:
+        return param
     if param.startswith("$"):
         if param[1:] in variables:
             return variables[param[1:]]
@@ -106,6 +108,8 @@ def evaluate_vars_str(param: str, variables):
 
 
 def evaluate_vars(param_list: list, variables):
+    if not variables:
+        return param_list
     for i in range(len(param_list)):
         if isinstance(param_list[i], str):
             param_list[i] = evaluate_vars_str(param_list[i], variables)
