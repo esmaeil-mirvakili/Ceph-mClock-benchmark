@@ -125,10 +125,10 @@ def read_benchmarks(config_path, configs=None, variables=None):
         configs = {}
     benchmarks_conf = read_yaml(config_path)
     if 'configs' in benchmarks_conf:
-        configs = configs.update(benchmarks_conf['configs'])
+        configs.update(benchmarks_conf['configs'])
     benchmark_list = benchmarks_conf['benchmarks']
     if 'variables' in benchmarks_conf:
-        variables = variables.update(benchmarks_conf['variables'])
+        variables.update(benchmarks_conf['variables'])
     benchmarks = {}
     for benchmark in benchmark_list:
         bench_configs = benchmark['configs']
