@@ -1,9 +1,9 @@
 benchmarks:
   # why dynamic throttle
-  - name: codel_4k_64
+  - name: no_control_4k_64
     configs:
-      - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+      - name: codel_off
+        params: []
       - name: mclock
         params: []
       - name: sharding_off
@@ -16,10 +16,10 @@ benchmarks:
         params: []
       - name: fio
         params: [4Ki, 64]
-  - name: codel_32k_64
+  - name: no_control_32k_64
     configs:
-      - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+      - name: codel_off
+        params: []
       - name: mclock
         params: []
       - name: sharding_off
@@ -32,10 +32,10 @@ benchmarks:
         params: []
       - name: fio
         params: [32Ki, 64]
-  - name: codel_64k_64
+  - name: no_control_64k_64
     configs:
-      - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+      - name: codel_off
+        params: []
       - name: mclock
         params: []
       - name: sharding_off
@@ -48,10 +48,10 @@ benchmarks:
         params: []
       - name: fio
         params: [64Ki, 64]
-  - name: codel_4k_1024
+  - name: no_control_4k_1024
     configs:
-      - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+      - name: codel_off
+        params: []
       - name: mclock
         params: []
       - name: sharding_off
@@ -64,10 +64,10 @@ benchmarks:
         params: []
       - name: fio
         params: [4Ki, 1024]
-  - name: codel_32k_1024
+  - name: no_control_32k_1024
     configs:
-      - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+      - name: codel_off
+        params: []
       - name: mclock
         params: []
       - name: sharding_off
@@ -80,10 +80,10 @@ benchmarks:
         params: []
       - name: fio
         params: [32Ki, 1024]
-  - name: codel_64k_1024
+  - name: no_control_64k_1024
     configs:
-      - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+      - name: codel_off
+        params: []
       - name: mclock
         params: []
       - name: sharding_off
@@ -97,10 +97,10 @@ benchmarks:
       - name: fio
         params: [64Ki, 1024]
   # why throttle no recovery
-  - name: codel_4k_64_burst
+  - name: no_control_4k_64_burst
     configs:
-      - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+      - name: codel_off
+        params: []
       - name: mclock
         params: []
       - name: sharding_off
@@ -115,10 +115,10 @@ benchmarks:
         params: [4Ki, 64]
       - name: fio_burst
         params: [ $burst_time, 64]
-  - name: codel_32k_64_burst
+  - name: no_control_32k_64_burst
     configs:
-      - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+      - name: codel_off
+        params: []
       - name: mclock
         params: []
       - name: sharding_off
@@ -133,10 +133,10 @@ benchmarks:
         params: [32Ki, 64]
       - name: fio_burst
         params: [ $burst_time, 64]
-  - name: codel_4k_1024_burst
+  - name: no_control_4k_1024_burst
     configs:
-      - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+      - name: codel_off
+        params: []
       - name: mclock
         params: []
       - name: sharding_off
@@ -151,10 +151,10 @@ benchmarks:
         params: [4Ki, 1024]
       - name: fio_burst
         params: [ $burst_time, 1024]
-  - name: codel_32k_1024_burst
+  - name: no_control_32k_1024_burst
     configs:
-      - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+      - name: codel_off
+        params: []
       - name: mclock
         params: []
       - name: sharding_off
@@ -170,10 +170,10 @@ benchmarks:
       - name: fio_burst
         params: [ $burst_time, 1024]
   # why throttle recovery 10k
-  - name: codel_4k_64_burst_recov_10k
+  - name: no_control_4k_64_burst_recov_10k
     configs:
-      - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+      - name: codel_off
+        params: []
       - name: mclock
         params: []
       - name: sharding_off
@@ -192,10 +192,10 @@ benchmarks:
         params: []
       - name: recovery_size
         params: [ 10240 ]
-  - name: codel_32k_64_burst_recov_10k
+  - name: no_control_32k_64_burst_recov_10k
     configs:
-      - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+      - name: codel_off
+        params: []
       - name: mclock
         params: []
       - name: sharding_off
@@ -214,10 +214,10 @@ benchmarks:
         params: []
       - name: recovery_size
         params: [ 10240 ]
-  - name: codel_4k_1024_burst_recov_10k
+  - name: no_control_4k_1024_burst_recov_10k
     configs:
-      - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+      - name: codel_off
+        params: []
       - name: mclock
         params: []
       - name: sharding_off
@@ -236,10 +236,10 @@ benchmarks:
         params: []
       - name: recovery_size
         params: [ 10240 ]
-  - name: codel_32k_1024_burst_recov_10k
+  - name: no_control_32k_1024_burst_recov_10k
     configs:
-      - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+      - name: codel_off
+        params: []
       - name: mclock
         params: []
       - name: sharding_off
@@ -259,10 +259,10 @@ benchmarks:
       - name: recovery_size
         params: [ 10240 ]
   # why throttle recovery 40k
-  - name: codel_4k_64_burst_recov_40k
+  - name: no_control_4k_64_burst_recov_40k
     configs:
-      - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+      - name: codel_off
+        params: []
       - name: mclock
         params: []
       - name: sharding_off
@@ -281,10 +281,10 @@ benchmarks:
         params: []
       - name: recovery_size
         params: [ 40960 ]
-  - name: codel_32k_64_burst_recov_40k
+  - name: no_control_32k_64_burst_recov_40k
     configs:
-      - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+      - name: codel_off
+        params: []
       - name: mclock
         params: []
       - name: sharding_off
@@ -303,10 +303,10 @@ benchmarks:
         params: []
       - name: recovery_size
         params: [ 40960 ]
-  - name: codel_4k_1024_burst_recov_40k
+  - name: no_control_4k_1024_burst_recov_40k
     configs:
-      - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+      - name: codel_off
+        params: []
       - name: mclock
         params: []
       - name: sharding_off
@@ -325,10 +325,10 @@ benchmarks:
         params: []
       - name: recovery_size
         params: [ 40960 ]
-  - name: codel_32k_1024_burst_recov_40k
+  - name: no_control_32k_1024_burst_recov_40k
     configs:
-      - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+      - name: codel_off
+        params: []
       - name: mclock
         params: []
       - name: sharding_off
@@ -348,10 +348,10 @@ benchmarks:
       - name: recovery_size
         params: [ 40960 ]
   # why throttle recovery 4m
-  - name: codel_4k_64_burst_recov_4m
+  - name: no_control_4k_64_burst_recov_4m
     configs:
-      - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+      - name: codel_off
+        params: []
       - name: mclock
         params: []
       - name: sharding_off
@@ -370,10 +370,10 @@ benchmarks:
         params: []
       - name: recovery_size
         params: [ 4194304 ]
-  - name: codel_32k_64_burst_recov_4m
+  - name: no_control_32k_64_burst_recov_4m
     configs:
-      - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+      - name: codel_off
+        params: []
       - name: mclock
         params: []
       - name: sharding_off
@@ -392,10 +392,10 @@ benchmarks:
         params: []
       - name: recovery_size
         params: [ 4194304 ]
-  - name: codel_4k_1024_burst_recov_4m
+  - name: no_control_4k_1024_burst_recov_4m
     configs:
-      - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+      - name: codel_off
+        params: []
       - name: mclock
         params: []
       - name: sharding_off
@@ -414,10 +414,10 @@ benchmarks:
         params: []
       - name: recovery_size
         params: [ 4194304 ]
-  - name: codel_32k_1024_burst_recov_4m
+  - name: no_control_32k_1024_burst_recov_4m
     configs:
-      - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+      - name: codel_off
+        params: []
       - name: mclock
         params: []
       - name: sharding_off
