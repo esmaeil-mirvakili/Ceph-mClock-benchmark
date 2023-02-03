@@ -21,7 +21,7 @@ configs:
       bluestore codel min budget bytes: {1}
       bluestore codel max target latency: 1000
       bluestore codel min target latency: 1
-      bluestore codel regression history size: 20
+      bluestore codel regression history size: 100
       bluestore codel budget increment bytes: {2}
   codel_off:
     file: ceph.conf

@@ -33,7 +33,6 @@ cp preconditioning.sh "${HOME_LOC}"
 cp discard_sectors.sh "${HOME_LOC}"
 cp prec.fio "${HOME_LOC}"
 cp run_benchmark.sh "${HOME_LOC}"
-cp -r ../benchmark "${HOME_LOC}"
 cp register_commands.sh "${HOME_LOC}"
 cd "${HOME_LOC}" || exit
 mkdir logs
