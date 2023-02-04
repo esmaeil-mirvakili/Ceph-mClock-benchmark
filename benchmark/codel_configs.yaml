@@ -3,7 +3,7 @@ benchmarks:
 #  - name: codel_4k_64
 #    configs:
 #      - name: codel_on
-#        params: [ 1, 256Ki, 2Ki ]
+#        params: [ 1, 256Ki, 10Ki ]
 #      - name: mclock
 #        params: []
 #      - name: sharding_off
@@ -19,7 +19,7 @@ benchmarks:
 #  - name: codel_32k_64
 #    configs:
 #      - name: codel_on
-#        params: [ 1, 256Ki, 2Ki ]
+#        params: [ 1, 256Ki, 10Ki ]
 #      - name: mclock
 #        params: []
 #      - name: sharding_off
@@ -35,7 +35,7 @@ benchmarks:
 #  - name: codel_64k_64
 #    configs:
 #      - name: codel_on
-#        params: [ 1, 256Ki, 2Ki ]
+#        params: [ 1, 256Ki, 10Ki ]
 #      - name: mclock
 #        params: []
 #      - name: sharding_off
@@ -51,7 +51,7 @@ benchmarks:
 #  - name: codel_4k_1024
 #    configs:
 #      - name: codel_on
-#        params: [ 1, 256Ki, 2Ki ]
+#        params: [ 1, 256Ki, 10Ki ]
 #      - name: mclock
 #        params: []
 #      - name: sharding_off
@@ -67,7 +67,7 @@ benchmarks:
 #  - name: codel_32k_1024
 #    configs:
 #      - name: codel_on
-#        params: [ 1, 256Ki, 2Ki ]
+#        params: [ 1, 256Ki, 10Ki ]
 #      - name: mclock
 #        params: []
 #      - name: sharding_off
@@ -83,7 +83,7 @@ benchmarks:
 #  - name: codel_64k_1024
 #    configs:
 #      - name: codel_on
-#        params: [ 1, 256Ki, 2Ki ]
+#        params: [ 1, 256Ki, 10Ki ]
 #      - name: mclock
 #        params: []
 #      - name: sharding_off
@@ -100,7 +100,7 @@ benchmarks:
 #  - name: codel_4k_64_burst
 #    configs:
 #      - name: codel_on
-#        params: [ 1, 256Ki, 2Ki ]
+#        params: [ 1, 256Ki, 10Ki ]
 #      - name: mclock
 #        params: []
 #      - name: sharding_off
@@ -118,7 +118,7 @@ benchmarks:
 #  - name: codel_32k_64_burst
 #    configs:
 #      - name: codel_on
-#        params: [ 1, 256Ki, 2Ki ]
+#        params: [ 1, 256Ki, 10Ki ]
 #      - name: mclock
 #        params: []
 #      - name: sharding_off
@@ -136,7 +136,7 @@ benchmarks:
 #  - name: codel_4k_1024_burst
 #    configs:
 #      - name: codel_on
-#        params: [ 1, 256Ki, 2Ki ]
+#        params: [ 1, 256Ki, 10Ki ]
 #      - name: mclock
 #        params: []
 #      - name: sharding_off
@@ -154,7 +154,7 @@ benchmarks:
 #  - name: codel_32k_1024_burst
 #    configs:
 #      - name: codel_on
-#        params: [ 1, 256Ki, 2Ki ]
+#        params: [ 1, 256Ki, 10Ki ]
 #      - name: mclock
 #        params: []
 #      - name: sharding_off
@@ -173,7 +173,7 @@ benchmarks:
   - name: codel_4k_64_burst_recov_100k
     configs:
       - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+        params: [ 1, 256Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -195,7 +195,7 @@ benchmarks:
   - name: codel_32k_64_burst_recov_100k
     configs:
       - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+        params: [ 1, 256Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -217,7 +217,7 @@ benchmarks:
   - name: codel_4k_1024_burst_recov_100k
     configs:
       - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+        params: [ 1, 256Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -239,7 +239,7 @@ benchmarks:
   - name: codel_32k_1024_burst_recov_100k
     configs:
       - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+        params: [ 1, 256Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -262,7 +262,7 @@ benchmarks:
   - name: codel_4k_64_burst_recov_200k
     configs:
       - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+        params: [ 1, 256Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -284,7 +284,7 @@ benchmarks:
   - name: codel_32k_64_burst_recov_200k
     configs:
       - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+        params: [ 1, 256Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -306,7 +306,7 @@ benchmarks:
   - name: codel_4k_1024_burst_recov_200k
     configs:
       - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+        params: [ 1, 256Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -328,7 +328,7 @@ benchmarks:
   - name: codel_32k_1024_burst_recov_200k
     configs:
       - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+        params: [ 1, 256Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -351,7 +351,7 @@ benchmarks:
   - name: codel_4k_64_burst_recov_300k
     configs:
       - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+        params: [ 1, 256Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -373,7 +373,7 @@ benchmarks:
   - name: codel_32k_64_burst_recov_300k
     configs:
       - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+        params: [ 1, 256Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -395,7 +395,7 @@ benchmarks:
   - name: codel_4k_1024_burst_recov_300k
     configs:
       - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+        params: [ 1, 256Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -417,7 +417,7 @@ benchmarks:
   - name: codel_32k_1024_burst_recov_300k
     configs:
       - name: codel_on
-        params: [ 1, 256Ki, 2Ki ]
+        params: [ 1, 256Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -442,7 +442,7 @@ benchmarks:
 #  - name: codel_4k_64_burst_recov_10k
 #    configs:
 #      - name: codel_on
-#        params: [ 1, 256Ki, 2Ki ]
+#        params: [ 1, 256Ki, 10Ki ]
 #      - name: mclock
 #        params: []
 #      - name: sharding_off
@@ -464,7 +464,7 @@ benchmarks:
 #  - name: codel_32k_64_burst_recov_10k
 #    configs:
 #      - name: codel_on
-#        params: [ 1, 256Ki, 2Ki ]
+#        params: [ 1, 256Ki, 10Ki ]
 #      - name: mclock
 #        params: []
 #      - name: sharding_off
@@ -486,7 +486,7 @@ benchmarks:
 #  - name: codel_4k_1024_burst_recov_10k
 #    configs:
 #      - name: codel_on
-#        params: [ 1, 256Ki, 2Ki ]
+#        params: [ 1, 256Ki, 10Ki ]
 #      - name: mclock
 #        params: []
 #      - name: sharding_off
@@ -508,7 +508,7 @@ benchmarks:
 #  - name: codel_32k_1024_burst_recov_10k
 #    configs:
 #      - name: codel_on
-#        params: [ 1, 256Ki, 2Ki ]
+#        params: [ 1, 256Ki, 10Ki ]
 #      - name: mclock
 #        params: []
 #      - name: sharding_off
@@ -531,7 +531,7 @@ benchmarks:
 #  - name: codel_4k_64_burst_recov_40k
 #    configs:
 #      - name: codel_on
-#        params: [ 1, 256Ki, 2Ki ]
+#        params: [ 1, 256Ki, 10Ki ]
 #      - name: mclock
 #        params: []
 #      - name: sharding_off
@@ -553,7 +553,7 @@ benchmarks:
 #  - name: codel_32k_64_burst_recov_40k
 #    configs:
 #      - name: codel_on
-#        params: [ 1, 256Ki, 2Ki ]
+#        params: [ 1, 256Ki, 10Ki ]
 #      - name: mclock
 #        params: []
 #      - name: sharding_off
@@ -575,7 +575,7 @@ benchmarks:
 #  - name: codel_4k_1024_burst_recov_40k
 #    configs:
 #      - name: codel_on
-#        params: [ 1, 256Ki, 2Ki ]
+#        params: [ 1, 256Ki, 10Ki ]
 #      - name: mclock
 #        params: []
 #      - name: sharding_off
@@ -597,7 +597,7 @@ benchmarks:
 #  - name: codel_32k_1024_burst_recov_40k
 #    configs:
 #      - name: codel_on
-#        params: [ 1, 256Ki, 2Ki ]
+#        params: [ 1, 256Ki, 10Ki ]
 #      - name: mclock
 #        params: []
 #      - name: sharding_off
@@ -620,7 +620,7 @@ benchmarks:
 #  - name: codel_4k_64_burst_recov_4m
 #    configs:
 #      - name: codel_on
-#        params: [ 1, 256Ki, 2Ki ]
+#        params: [ 1, 256Ki, 10Ki ]
 #      - name: mclock
 #        params: []
 #      - name: sharding_off
@@ -642,7 +642,7 @@ benchmarks:
 #  - name: codel_32k_64_burst_recov_4m
 #    configs:
 #      - name: codel_on
-#        params: [ 1, 256Ki, 2Ki ]
+#        params: [ 1, 256Ki, 10Ki ]
 #      - name: mclock
 #        params: []
 #      - name: sharding_off
@@ -664,7 +664,7 @@ benchmarks:
 #  - name: codel_4k_1024_burst_recov_4m
 #    configs:
 #      - name: codel_on
-#        params: [ 1, 256Ki, 2Ki ]
+#        params: [ 1, 256Ki, 10Ki ]
 #      - name: mclock
 #        params: []
 #      - name: sharding_off
@@ -686,7 +686,7 @@ benchmarks:
 #  - name: codel_32k_1024_burst_recov_4m
 #    configs:
 #      - name: codel_on
-#        params: [ 1, 256Ki, 2Ki ]
+#        params: [ 1, 256Ki, 10Ki ]
 #      - name: mclock
 #        params: []
 #      - name: sharding_off
