@@ -191,7 +191,7 @@ benchmarks:
       - name: recovery_on
         params: []
       - name: recovery_size
-        params: [ 102400 ]
+        params: [ 100Ki ]
   - name: no_control_32k_64_burst_recov_100k
     configs:
       - name: codel_off
@@ -213,7 +213,7 @@ benchmarks:
       - name: recovery_on
         params: []
       - name: recovery_size
-        params: [ 102400 ]
+        params: [ 100Ki ]
   - name: no_control_4k_1024_burst_recov_100k
     configs:
       - name: codel_off
@@ -235,7 +235,7 @@ benchmarks:
       - name: recovery_on
         params: []
       - name: recovery_size
-        params: [ 102400 ]
+        params: [ 100Ki ]
   - name: no_control_32k_1024_burst_recov_100k
     configs:
       - name: codel_off
@@ -257,7 +257,7 @@ benchmarks:
       - name: recovery_on
         params: []
       - name: recovery_size
-        params: [ 102400 ]
+        params: [ 100Ki ]
   # why throttle recovery 200k
   - name: no_control_4k_64_burst_recov_200k
     configs:
@@ -280,7 +280,7 @@ benchmarks:
       - name: recovery_on
         params: []
       - name: recovery_size
-        params: [ 204800 ]
+        params: [ 200Ki ]
   - name: no_control_32k_64_burst_recov_200k
     configs:
       - name: codel_off
@@ -302,7 +302,7 @@ benchmarks:
       - name: recovery_on
         params: []
       - name: recovery_size
-        params: [ 204800 ]
+        params: [ 200Ki ]
   - name: no_control_4k_1024_burst_recov_200k
     configs:
       - name: codel_off
@@ -324,7 +324,7 @@ benchmarks:
       - name: recovery_on
         params: []
       - name: recovery_size
-        params: [ 204800 ]
+        params: [ 200Ki ]
   - name: no_control_32k_1024_burst_recov_200k
     configs:
       - name: codel_off
@@ -346,7 +346,7 @@ benchmarks:
       - name: recovery_on
         params: []
       - name: recovery_size
-        params: [ 204800 ]
+        params: [ 200Ki ]
   # why throttle recovery 300k
   - name: no_control_4k_64_burst_recov_300k
     configs:
@@ -369,7 +369,7 @@ benchmarks:
       - name: recovery_on
         params: []
       - name: recovery_size
-        params: [ 307200 ]
+        params: [ 300Ki ]
   - name: no_control_32k_64_burst_recov_300k
     configs:
       - name: codel_off
@@ -391,7 +391,7 @@ benchmarks:
       - name: recovery_on
         params: []
       - name: recovery_size
-        params: [ 307200 ]
+        params: [ 300Ki ]
   - name: no_control_4k_1024_burst_recov_300k
     configs:
       - name: codel_off
@@ -413,7 +413,7 @@ benchmarks:
       - name: recovery_on
         params: []
       - name: recovery_size
-        params: [ 307200 ]
+        params: [ 300Ki ]
   - name: no_control_32k_1024_burst_recov_300k
     configs:
       - name: codel_off
@@ -435,7 +435,7 @@ benchmarks:
       - name: recovery_on
         params: []
       - name: recovery_size
-        params: [ 307200 ]
+        params: [ 300Ki ]
 
   # why throttle recovery 10k
 #  - name: no_control_4k_64_burst_recov_10k

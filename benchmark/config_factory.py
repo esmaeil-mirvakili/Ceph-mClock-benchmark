@@ -2,6 +2,7 @@ import configparser
 import argparse
 import os.path
 import re
+import shutil
 import yaml
 from pathlib import Path
 
@@ -130,31 +131,39 @@ def read_benchmarks(config_path, configs=None, variables=None):
     if 'variables' in benchmarks_conf:
         variables.update(benchmarks_conf['variables'])
     benchmarks = {}
+    dependencies = {}
     for benchmark in benchmark_list:
         bench_configs = benchmark['configs']
         bench_name = benchmark['name']
+        dependencies[bench_name] = []
         config_files = {}
         for bench_conf in bench_configs:
             conf_name = bench_conf['name']
             conf_params = evaluate_vars(bench_conf['params'], variables)
             if conf_name in configs:
                 conf_ref = configs[conf_name]
-                if conf_ref['file'] not in config_files:
+                if 'dependencies' in conf_ref:
+                    if isinstance(conf_ref['dependencies'], list):
+                        dependencies[bench_name] += conf_ref['dependencies']
+                    elif isinstance(conf_ref['dependencies'], str):
+                        dependencies[bench_name].append(conf_ref['dependencies'])
+                out = conf_ref['out'] if 'out' in conf_ref else conf_ref['file']
+                if out not in config_files:
                     if conf_ref['file'].endswith('.conf'):
-                        config_files[conf_ref['file']] = ConfConfigContent(conf_ref['file'])
+                        config_files[out] = ConfConfigContent(conf_ref['file'])
                     elif conf_ref['file'].endswith('.yaml'):
-                        config_files[conf_ref['file']] = YamlConfigContent(conf_ref['file'])
+                        config_files[out] = YamlConfigContent(conf_ref['file'])
                     else:
                         print('Error: config file %s not supported' % conf_ref['file'])
                         exit(1)
-                    config_files[conf_ref['file']].open()
-                reference = config_files[conf_ref['file']]
+                    config_files[out].open()
+                reference = config_files[out]
                 sections = conf_ref['section']
                 for key, value in conf_ref['values'].items():
                     reference.update(key, value, conf_params, sections=sections)
         bench_name = evaluate_vars_str(bench_name, variables)
         benchmarks[bench_name] = config_files
-    return benchmarks
+    return benchmarks, dependencies
 
 
 def extract(path):
@@ -170,7 +179,7 @@ def extract(path):
 
 def main(args):
     configs, variables = extract(args.global_config)
-    benchmarks = read_benchmarks(args.config, configs=configs, variables=variables)
+    benchmarks, dependencies = read_benchmarks(args.config, configs=configs, variables=variables)
     benchmarks_folder = Path.home().joinpath('benchmarks')
     if not os.path.exists(benchmarks_folder):
         Path.mkdir(benchmarks_folder)
@@ -182,6 +191,10 @@ def main(args):
         for conf_file, config in bench_configs.items():
             file = bench_folder.joinpath(conf_file)
             config.write(file)
+        for dependency in dependencies[bench_name]:
+            if os.path.exists(dependency):
+                dst = bench_folder.joinpath(dependency)
+                shutil.copyfile(dependency, dst)
 
 
 if __name__ == '__main__':

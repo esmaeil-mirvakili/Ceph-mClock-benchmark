@@ -9,6 +9,7 @@ variables:
 
 configs:
   codel_on:
+    dependencies: []
     file: ceph.conf
     section: [global]
     values:
@@ -24,22 +25,26 @@ configs:
       bluestore codel regression history size: 100
       bluestore codel budget increment bytes: {2}
   codel_off:
+    dependencies: []
     file: ceph.conf
     section: [global]
     values:
       bluestore codel: false
   mclock:
+    dependencies: []
     file: ceph.conf
     section: [global]
     values:
       osd op queue: mclock_scheduler
       osd mclock skip benchmark: true
   wpq:
+    dependencies: []
     file: ceph.conf
     section: [global]
     values:
       osd op queue: wpq
   mclock_client_profile:
+    dependencies: []
     file: ceph.conf
     section: [global]
     values:
@@ -47,6 +52,7 @@ configs:
       osd mclock scheduler client wgt: {1}
       osd mclock scheduler client lim: {2}
   mclock_recov_profile:
+    dependencies: []
     file: ceph.conf
     section: [global]
     values:
@@ -54,34 +60,40 @@ configs:
       osd mclock scheduler background recovery wgt: {1}
       osd mclock scheduler background recovery lim: {2}
   sharding_off:
+    dependencies: []
     file: ceph.conf
     section: [global]
     values:
       osd op num shards: 1
   sharding_on:
+    dependencies: []
     file: ceph.conf
     section: [global]
     values:
       osd op num shards: {0}
   throttle_off:
+    dependencies: []
     file: ceph.conf
     section: [global]
     values:
       bluestore throttle bytes: 10240Mi
       bluestore throttle deferred_bytes: 10240Mi
   throttle_on:
+    dependencies: []
     file: ceph.conf
     section: [global]
     values:
       bluestore throttle bytes: {0}
       bluestore throttle deferred_bytes: {0}
   fio:
+    dependencies: []
     file: cbt.yaml
     section: [benchmarks, fio]
     values:
       op_size: {0}
       iodepth: {1}
   fio_burst:
+    dependencies: []
     file: cbt.yaml
     section: [benchmarks, fio, extra_config]
     values:
@@ -92,12 +104,28 @@ configs:
       iodepth_batch_complete_min: 1
       iodepth_batch_complete_max: {1}
   recovery_on:
+    dependencies: []
     file: cbt.yaml
     section: [cluster, recovery_test]
     values:
       osds: [1]
   recovery_size:
-    file: cbt.yaml
-    section: [ cluster, pool_profiles, rbdrecov ]
+    dependencies: [ ]
+    file: ceph.conf
+    section: [ global ]
     values:
-      prefill_recov_object_size: {0}
+      osd recovery max chunk: { 0 }
+  fio_dynamic_bs:
+    dependencies: [dynamic_bs.fio]
+    file: cbt_dynamic.yaml
+    out: cbt.yaml
+    section: [benchmarks, fio]
+    values:
+      fio_conf: dynamic_bs.fio
+  fio_dynamic_iodepth:
+    dependencies: [dynamic_iodepth.fio]
+    file: cbt_dynamic.yaml
+    out: cbt.yaml
+    section: [ benchmarks, fio ]
+    values:
+      fio_conf: dynamic_iodepth.fio

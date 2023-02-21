@@ -61,15 +61,10 @@ client_endpoints:
     endpoint_size: 40960
 benchmarks:
   fio:
-    time: 300
-    time_based: True
+    fio_conf: 'dynamic_bs.fio'
     ioengine: 'rbd'
     direct: 1
     prefill: True
-    mode: 'randwrite'
-    op_size: 4096
-    procs_per_volume: 1
-    iodepth: 1024
     osd_ra: 4096
     cmd_path: '/users/esmaeil/fio/fio'
     volumes_per_client: 1

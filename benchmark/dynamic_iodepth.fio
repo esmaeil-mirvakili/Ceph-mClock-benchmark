@@ -1,0 +1,14 @@
+[global]
+ioengine=rbd
+rw=randwrite
+time_based=1
+runtime=600
+direct = 1
+bs=4k
+
+[job1]
+iodepth=64
+
+[job2]
+startdelay=300
+iodepth=1024
