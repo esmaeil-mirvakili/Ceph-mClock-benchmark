@@ -439,7 +439,39 @@ benchmarks:
         params: []
       - name: recovery_size
         params: [ 300Ki ]
-
+  # dynamic workload
+  - name: static_throttle_512k_dynamic_bs
+    configs:
+      - name: codel_off
+        params: []
+      - name: mclock
+        params: []
+      - name: sharding_off
+        params: []
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_on
+        params: [ $throttle_bytes ]
+      - name: fio_dynamic_bs
+        params: [ ]
+  - name: static_throttle_512k_dynamic_iodepth
+    configs:
+      - name: codel_off
+        params: []
+      - name: mclock
+        params: []
+      - name: sharding_off
+        params: []
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_on
+        params: [ $throttle_bytes ]
+      - name: fio_dynamic_iodepth
+        params: [ ]
 # why throttle recovery 10k
 #  - name: static_throttle_512k_4k_64_burst_recov_10k
 #    configs:
