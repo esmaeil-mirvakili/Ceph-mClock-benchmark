@@ -32,6 +32,22 @@ benchmarks:
         params: []
       - name: fio
         params: [32Ki, 64]
+  - name: codel_64k_64_tradeoff_0_1
+    configs:
+      - name: codel_on
+        params: [ 0.1, 256Ki, 10Ki ]
+      - name: mclock
+        params: []
+      - name: sharding_off
+        params: []
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_off
+        params: []
+      - name: fio
+        params: [64Ki, 64]
   - name: codel_4k_1024_tradeoff_0_1
     configs:
       - name: codel_on
@@ -64,6 +80,22 @@ benchmarks:
         params: []
       - name: fio
         params: [32Ki, 1024]
+  - name: codel_64k_1024_tradeoff_0_1
+    configs:
+      - name: codel_on
+        params: [ 0.1, 256Ki, 10Ki ]
+      - name: mclock
+        params: []
+      - name: sharding_off
+        params: []
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_off
+        params: []
+      - name: fio
+        params: [64Ki, 1024]
 # tradeoff: 0.5
   - name: codel_4k_64_tradeoff_0_5
     configs:
@@ -97,6 +129,22 @@ benchmarks:
         params: []
       - name: fio
         params: [32Ki, 64]
+  - name: codel_64k_64_tradeoff_0_5
+    configs:
+      - name: codel_on
+        params: [ 0.5, 256Ki, 10Ki ]
+      - name: mclock
+        params: []
+      - name: sharding_off
+        params: []
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_off
+        params: []
+      - name: fio
+        params: [64Ki, 64]
   - name: codel_4k_1024_tradeoff_0_5
     configs:
       - name: codel_on
@@ -129,6 +177,119 @@ benchmarks:
         params: []
       - name: fio
         params: [32Ki, 1024]
+  - name: codel_64k_1024_tradeoff_0_5
+    configs:
+      - name: codel_on
+        params: [ 0.5, 256Ki, 10Ki ]
+      - name: mclock
+        params: []
+      - name: sharding_off
+        params: []
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_off
+        params: []
+      - name: fio
+        params: [64Ki, 1024]
+# tradeoff: 1
+  - name: codel_4k_64_tradeoff_1
+    configs:
+      - name: codel_on
+        params: [ 1, 256Ki, 10Ki ]
+      - name: mclock
+        params: []
+      - name: sharding_off
+        params: []
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_off
+        params: []
+      - name: fio
+        params: [4Ki, 64]
+  - name: codel_32k_64_tradeoff_1
+    configs:
+      - name: codel_on
+        params: [ 1, 256Ki, 10Ki ]
+      - name: mclock
+        params: []
+      - name: sharding_off
+        params: []
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_off
+        params: []
+      - name: fio
+        params: [32Ki, 64]
+  - name: codel_64k_64_tradeoff_1
+    configs:
+      - name: codel_on
+        params: [ 1, 256Ki, 10Ki ]
+      - name: mclock
+        params: []
+      - name: sharding_off
+        params: []
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_off
+        params: []
+      - name: fio
+        params: [64Ki, 64]
+  - name: codel_4k_1024_tradeoff_1
+    configs:
+      - name: codel_on
+        params: [ 1, 256Ki, 10Ki ]
+      - name: mclock
+        params: []
+      - name: sharding_off
+        params: []
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_off
+        params: []
+      - name: fio
+        params: [4Ki, 1024]
+  - name: codel_32k_1024_tradeoff_1
+    configs:
+      - name: codel_on
+        params: [ 1, 256Ki, 10Ki ]
+      - name: mclock
+        params: []
+      - name: sharding_off
+        params: []
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_off
+        params: []
+      - name: fio
+        params: [32Ki, 1024]
+  - name: codel_64k_1024_tradeoff_1
+    configs:
+      - name: codel_on
+        params: [ 1, 256Ki, 10Ki ]
+      - name: mclock
+        params: []
+      - name: sharding_off
+        params: []
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_off
+        params: []
+      - name: fio
+        params: [64Ki, 1024]
 # tradeoff: 2
   - name: codel_4k_64_tradeoff_2
     configs:
@@ -162,6 +323,22 @@ benchmarks:
         params: []
       - name: fio
         params: [32Ki, 64]
+  - name: codel_64k_64_tradeoff_2
+    configs:
+      - name: codel_on
+        params: [ 2, 256Ki, 10Ki ]
+      - name: mclock
+        params: []
+      - name: sharding_off
+        params: []
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_off
+        params: []
+      - name: fio
+        params: [64Ki, 64]
   - name: codel_4k_1024_tradeoff_2
     configs:
       - name: codel_on
@@ -194,6 +371,22 @@ benchmarks:
         params: []
       - name: fio
         params: [32Ki, 1024]
+  - name: codel_64k_1024_tradeoff_2
+    configs:
+      - name: codel_on
+        params: [ 2, 256Ki, 10Ki ]
+      - name: mclock
+        params: []
+      - name: sharding_off
+        params: []
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_off
+        params: []
+      - name: fio
+        params: [64Ki, 1024]
 # tradeoff: 5
   - name: codel_4k_64_tradeoff_5
     configs:
@@ -227,6 +420,22 @@ benchmarks:
         params: []
       - name: fio
         params: [32Ki, 64]
+  - name: codel_64k_64_tradeoff_5
+    configs:
+      - name: codel_on
+        params: [ 5, 256Ki, 10Ki ]
+      - name: mclock
+        params: []
+      - name: sharding_off
+        params: []
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_off
+        params: []
+      - name: fio
+        params: [64Ki, 64]
   - name: codel_4k_1024_tradeoff_5
     configs:
       - name: codel_on
@@ -259,3 +468,19 @@ benchmarks:
         params: []
       - name: fio
         params: [32Ki, 1024]
+  - name: codel_64k_1024_tradeoff_5
+    configs:
+      - name: codel_on
+        params: [ 5, 256Ki, 10Ki ]
+      - name: mclock
+        params: []
+      - name: sharding_off
+        params: []
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_off
+        params: []
+      - name: fio
+        params: [64Ki, 1024]
