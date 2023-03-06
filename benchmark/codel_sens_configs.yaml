@@ -3,7 +3,7 @@ benchmarks:
   - name: codel_4k_64_tradeoff_0_1
     configs:
       - name: codel_on
-        params: [ 0.1, 256Ki, 10Ki ]
+        params: [ 0.1, 128Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -19,7 +19,7 @@ benchmarks:
   - name: codel_32k_64_tradeoff_0_1
     configs:
       - name: codel_on
-        params: [ 0.1, 256Ki, 10Ki ]
+        params: [ 0.1, 128Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -35,7 +35,7 @@ benchmarks:
   - name: codel_64k_64_tradeoff_0_1
     configs:
       - name: codel_on
-        params: [ 0.1, 256Ki, 10Ki ]
+        params: [ 0.1, 128Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -51,7 +51,7 @@ benchmarks:
   - name: codel_4k_1024_tradeoff_0_1
     configs:
       - name: codel_on
-        params: [ 0.1, 256Ki, 10Ki ]
+        params: [ 0.1, 128Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -67,7 +67,7 @@ benchmarks:
   - name: codel_32k_1024_tradeoff_0_1
     configs:
       - name: codel_on
-        params: [ 0.1, 256Ki, 10Ki ]
+        params: [ 0.1, 128Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -83,7 +83,7 @@ benchmarks:
   - name: codel_64k_1024_tradeoff_0_1
     configs:
       - name: codel_on
-        params: [ 0.1, 256Ki, 10Ki ]
+        params: [ 0.1, 128Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -100,7 +100,7 @@ benchmarks:
   - name: codel_4k_64_tradeoff_0_5
     configs:
       - name: codel_on
-        params: [ 0.5, 256Ki, 10Ki ]
+        params: [ 0.5, 128Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -116,7 +116,7 @@ benchmarks:
   - name: codel_32k_64_tradeoff_0_5
     configs:
       - name: codel_on
-        params: [ 0.5, 256Ki, 10Ki ]
+        params: [ 0.5, 128Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -132,7 +132,7 @@ benchmarks:
   - name: codel_64k_64_tradeoff_0_5
     configs:
       - name: codel_on
-        params: [ 0.5, 256Ki, 10Ki ]
+        params: [ 0.5, 128Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -148,7 +148,7 @@ benchmarks:
   - name: codel_4k_1024_tradeoff_0_5
     configs:
       - name: codel_on
-        params: [ 0.5, 256Ki, 10Ki ]
+        params: [ 0.5, 128Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -164,7 +164,7 @@ benchmarks:
   - name: codel_32k_1024_tradeoff_0_5
     configs:
       - name: codel_on
-        params: [ 0.5, 256Ki, 10Ki ]
+        params: [ 0.5, 128Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -180,7 +180,7 @@ benchmarks:
   - name: codel_64k_1024_tradeoff_0_5
     configs:
       - name: codel_on
-        params: [ 0.5, 256Ki, 10Ki ]
+        params: [ 0.5, 128Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -197,7 +197,7 @@ benchmarks:
   - name: codel_4k_64_tradeoff_1
     configs:
       - name: codel_on
-        params: [ 1, 256Ki, 10Ki ]
+        params: [ 1, 128Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -213,7 +213,7 @@ benchmarks:
   - name: codel_32k_64_tradeoff_1
     configs:
       - name: codel_on
-        params: [ 1, 256Ki, 10Ki ]
+        params: [ 1, 128Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -229,7 +229,7 @@ benchmarks:
   - name: codel_64k_64_tradeoff_1
     configs:
       - name: codel_on
-        params: [ 1, 256Ki, 10Ki ]
+        params: [ 1, 128Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -245,7 +245,7 @@ benchmarks:
   - name: codel_4k_1024_tradeoff_1
     configs:
       - name: codel_on
-        params: [ 1, 256Ki, 10Ki ]
+        params: [ 1, 128Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -261,7 +261,7 @@ benchmarks:
   - name: codel_32k_1024_tradeoff_1
     configs:
       - name: codel_on
-        params: [ 1, 256Ki, 10Ki ]
+        params: [ 1, 128Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -277,7 +277,7 @@ benchmarks:
   - name: codel_64k_1024_tradeoff_1
     configs:
       - name: codel_on
-        params: [ 1, 256Ki, 10Ki ]
+        params: [ 1, 128Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -294,7 +294,7 @@ benchmarks:
   - name: codel_4k_64_tradeoff_2
     configs:
       - name: codel_on
-        params: [ 2, 256Ki, 10Ki ]
+        params: [ 2, 128Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -310,7 +310,7 @@ benchmarks:
   - name: codel_32k_64_tradeoff_2
     configs:
       - name: codel_on
-        params: [ 2, 256Ki, 10Ki ]
+        params: [ 2, 128Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -326,7 +326,7 @@ benchmarks:
   - name: codel_64k_64_tradeoff_2
     configs:
       - name: codel_on
-        params: [ 2, 256Ki, 10Ki ]
+        params: [ 2, 128Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -342,7 +342,7 @@ benchmarks:
   - name: codel_4k_1024_tradeoff_2
     configs:
       - name: codel_on
-        params: [ 2, 256Ki, 10Ki ]
+        params: [ 2, 128Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -358,7 +358,7 @@ benchmarks:
   - name: codel_32k_1024_tradeoff_2
     configs:
       - name: codel_on
-        params: [ 2, 256Ki, 10Ki ]
+        params: [ 2, 128Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -374,7 +374,7 @@ benchmarks:
   - name: codel_64k_1024_tradeoff_2
     configs:
       - name: codel_on
-        params: [ 2, 256Ki, 10Ki ]
+        params: [ 2, 128Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -391,7 +391,7 @@ benchmarks:
   - name: codel_4k_64_tradeoff_5
     configs:
       - name: codel_on
-        params: [ 5, 256Ki, 10Ki ]
+        params: [ 5, 128Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -407,7 +407,7 @@ benchmarks:
   - name: codel_32k_64_tradeoff_5
     configs:
       - name: codel_on
-        params: [ 5, 256Ki, 10Ki ]
+        params: [ 5, 128Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -423,7 +423,7 @@ benchmarks:
   - name: codel_64k_64_tradeoff_5
     configs:
       - name: codel_on
-        params: [ 5, 256Ki, 10Ki ]
+        params: [ 5, 128Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -439,7 +439,7 @@ benchmarks:
   - name: codel_4k_1024_tradeoff_5
     configs:
       - name: codel_on
-        params: [ 5, 256Ki, 10Ki ]
+        params: [ 5, 128Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -455,7 +455,7 @@ benchmarks:
   - name: codel_32k_1024_tradeoff_5
     configs:
       - name: codel_on
-        params: [ 5, 256Ki, 10Ki ]
+        params: [ 5, 128Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
@@ -471,7 +471,7 @@ benchmarks:
   - name: codel_64k_1024_tradeoff_5
     configs:
       - name: codel_on
-        params: [ 5, 256Ki, 10Ki ]
+        params: [ 5, 128Ki, 10Ki ]
       - name: mclock
         params: []
       - name: sharding_off
