@@ -15,7 +15,7 @@ configs:
     values:
       bluestore codel: true
       bluestore codel throughput latency tradeoff: {0}
-      bluestore codel initial target latency: 5
+      bluestore codel initial target latency: {3}
       bluestore codel fast interval: 50
       bluestore codel slow interval: 500
       bluestore codel initial budget bytes: {1}
