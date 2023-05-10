@@ -1,0 +1,77 @@
+cluster:
+  user: 'esmaeil'
+  head: "client0"
+  clients: ["client0"]
+  osds: ["osd0", "osd1", "osd2", "osd3"]
+  mons:
+    osd0:
+      a: "10.10.1.1:6789"
+  mgrs:
+    osd0:
+      x: "10.10.1.1:1234"
+  mdss:
+    osd0:
+      a: ~
+  osds_per_node: 1
+  fs: 'xfs'
+  mkfs_opts: '-f -i size=2048'
+  mount_opts: '-o inode64,noatime,logbsize=256k'
+  conf_file: '/users/esmaeil/ceph.conf'
+  iterations: 1
+  use_existing: False
+  clusterid: "ceph"
+  tmp_dir: "/tmp/cbt"
+  ceph-authtool_cmd: "/users/esmaeil/ceph/build/bin/ceph-authtool"
+  ceph-osd_cmd: "env -i TCMALLOC_MAX_TOTAL_THREAD_CACHE_BYTES=134217728 /users/esmaeil/ceph/build/bin/ceph-osd"
+  ceph-rgw_cmd: "env -i TCMALLOC_MAX_TOTAL_THREAD_CACHE_BYTES=134217728 /users/esmaeil/ceph/build/bin/radosgw"
+  ceph-mon_cmd: "/users/esmaeil/ceph/build/bin/ceph-mon"
+  ceph-run_cmd: "/users/esmaeil/ceph/src/ceph-run"
+  rados_cmd: "/users/esmaeil/ceph/build/bin/rados"
+  ceph_cmd: "/users/esmaeil/ceph/build/bin/ceph"
+  rbd_cmd: "/users/esmaeil/ceph/build/bin/rbd"
+  rbd-nbd_cmd: "/users/esmaeil/ceph/build/bin/rbd-nbd"
+  rbd-fuse_cmd: "/users/esmaeil/ceph/build/bin/rbd-fuse"
+  ceph-mgr_cmd: "/users/esmaeil/ceph/build/bin/ceph-mgr"
+  radosgw-admin_cmd: "/users/esmaeil/ceph/build/bin/radosgw-admin"
+  ceph-fuse_cmd: "/users/esmaeil/ceph/build/bin/ceph-fuse"
+  ceph-mds_cmd: "/users/esmaeil/ceph/build/bin/ceph-mds"
+  mount_cmd: "/users/esmaeil/ceph/build/sbin/mount.ceph"
+  pool_profiles:
+    rbdrecov:
+      recov_pool: True
+      pg_size: 64
+      pgp_size: 64
+      replication: 3
+      prefill_recov_time: 660
+      prefill_recov_objects: 1000000
+      prefill_recov_object_size: 4194304
+    rbd:
+      pg_size: 64
+      pgp_size: 64
+      replication: 3
+      prefill_object_size: 4194304
+      prefill_objects: 5000
+      prefill_time: 10
+
+client_endpoints:
+  client0:
+    driver: 'librbd'
+    pool_profile: 'rbd'
+    recov_pool_profile: 'rbdrecov'
+    endpoint_size: 40960
+benchmarks:
+  fio:
+    time: 300
+    time_based: True
+    ioengine: 'rbd'
+    direct: 1
+    prefill: True
+    mode: 'randwrite'
+    bssplit: 4k/50:16k/50
+    procs_per_volume: 1
+    iodepth: 1024
+    osd_ra: 4096
+    cmd_path: '/users/esmaeil/fio/fio'
+    volumes_per_client: 1
+    client_endpoints: 'client0'
+    recov_test_type: 'background'

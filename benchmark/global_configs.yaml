@@ -6,6 +6,10 @@ variables:
   client_limit: 1000000
   recovery_limit: 1000000
   burst_time: 1s
+  codel_param: 1,
+  codel_budget: 256Ki
+  codel_inc: 10Ki
+
 
 configs:
   codel_on:
@@ -129,3 +133,29 @@ configs:
     section: [ benchmarks, fio ]
     values:
       fio_conf: dynamic_iodepth.fio
+  fio_rw:
+    dependencies: [ ]
+      file: cbt_dynamic.yaml
+      out: cbt.yaml
+      section: [ benchmarks, fio ]
+      values:
+        mode: randrw
+        op_size: { 0 }
+        iodepth: { 1 }
+        rwmixread: { 2 }
+  fio_mixed_write:
+    dependencies: [ ]
+      file: cbt_dynamic.yaml
+      out: cbt.yaml
+      section: [ benchmarks, fio ]
+      values:
+        bssplit: { 0 }
+        iodepth: { 1 }
+  fio_read:
+    dependencies: [ ]
+      file: cbt.yaml
+      section: [ benchmarks, fio ]
+      values:
+        mode: randread
+        op_size: { 0 }
+        iodepth: { 1 }
