@@ -11,8 +11,8 @@ def read_yaml(file):
     with open(file, "r") as stream:
         try:
             return yaml.safe_load(stream)
-        except yaml.YAMLError:
-            return {}
+        except yaml.YAMLError as e:
+            raise e
 
 
 class ConfigContent:
