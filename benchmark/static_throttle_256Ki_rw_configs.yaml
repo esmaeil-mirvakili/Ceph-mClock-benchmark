@@ -3,7 +3,7 @@ variables:
 
 benchmarks:
   # 100% writes
-  - name: static_throttle_256k_w_4k_64
+  - name: static_throttle_256k_w100r0_4k_64
     configs:
       - name: codel_off
         params: [ ]
@@ -19,7 +19,7 @@ benchmarks:
         params: [ $throttle_bytes ]
       - name: fio
         params: [ 4Ki, 64 ]
-  - name: static_throttle_256k_w_4k_1024
+  - name: static_throttle_256k_w100r0_4k_1024
     configs:
       - name: codel_off
         params: [ ]
@@ -35,7 +35,7 @@ benchmarks:
         params: [ $throttle_bytes ]
       - name: fio
         params: [ 4Ki, 1024 ]
-  - name: static_throttle_256k_w_32k_64
+  - name: static_throttle_256k_w100r0_32k_64
     configs:
       - name: codel_off
         params: [ ]
@@ -51,7 +51,7 @@ benchmarks:
         params: [ $throttle_bytes ]
       - name: fio
         params: [ 32Ki, 64 ]
-  - name: static_throttle_256k_w_32k_1024
+  - name: static_throttle_256k_w100r0_32k_1024
     configs:
       - name: codel_off
         params: [ ]

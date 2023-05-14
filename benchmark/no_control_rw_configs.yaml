@@ -1,6 +1,6 @@
 benchmarks:
   # 100% writes
-  - name: no_control_w_4k_64
+  - name: no_control_w100r0_4k_64
     configs:
       - name: codel_off
         params: [ ]
@@ -16,7 +16,7 @@ benchmarks:
         params: [ ]
       - name: fio
         params: [ 4Ki, 64 ]
-  - name: no_control_w_4k_1024
+  - name: no_control_w100r0_4k_1024
     configs:
       - name: codel_off
         params: [ ]
@@ -32,7 +32,7 @@ benchmarks:
         params: [ ]
       - name: fio
         params: [ 4Ki, 1024 ]
-  - name: no_control_w_32k_64
+  - name: no_control_w100r0_32k_64
     configs:
       - name: codel_off
         params: [ ]
@@ -48,7 +48,7 @@ benchmarks:
         params: [ ]
       - name: fio
         params: [ 32Ki, 64 ]
-  - name: no_control_w_32k_1024
+  - name: no_control_w100r0_32k_1024
     configs:
       - name: codel_off
         params: [ ]
