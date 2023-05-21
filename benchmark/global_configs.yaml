@@ -6,7 +6,7 @@ variables:
   client_limit: 1000000
   recovery_limit: 1000000
   burst_time: 1s
-  codel_param: 1,
+  codel_param: 0.1,
   codel_budget: 256Ki
   codel_inc: 10Ki
 
