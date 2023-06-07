@@ -3,7 +3,7 @@ variables:
 
 benchmarks:
   # 4k 64 burst write
-  - name: no_ac_4k_64_burst_recov
+  - name: static_256k_4k_64_burst_recov
     configs:
       - name: codel_off
         params: [ ]
@@ -26,7 +26,7 @@ benchmarks:
       - name: recovery_size
         params: [ 300Ki ]
   # 32k 64 burst write
-  - name: no_ac_32k_64_burst_recov
+  - name: static_256k_32k_64_burst_recov
     configs:
       - name: codel_off
         params: [ ]
@@ -49,7 +49,7 @@ benchmarks:
       - name: recovery_size
         params: [ 300Ki ]
   # 4k 64 regular write
-  - name: no_ac_4k_64_reg_recov
+  - name: static_256k_4k_64_reg_recov
     configs:
       - name: codel_off
         params: [ ]
@@ -70,7 +70,7 @@ benchmarks:
       - name: recovery_size
         params: [ 300Ki ]
   # 32k 64 regular write
-  - name: no_ac_32k_64_reg_recov
+  - name: static_256k_32k_64_reg_recov
     configs:
       - name: codel_off
         params: [ ]
@@ -91,7 +91,7 @@ benchmarks:
       - name: recovery_size
         params: [ 300Ki ]
   # 4k 64 regular read
-  - name: no_ac_4k_64_read_recov
+  - name: static_256k_4k_64_read_recov
     configs:
       - name: codel_off
         params: [ ]
@@ -112,7 +112,7 @@ benchmarks:
       - name: recovery_size
         params: [ 300Ki ]
   # 32k 64 regular read
-  - name: no_ac_32k_64_read_recov
+  - name: static_256k_32k_64_read_recov
     configs:
       - name: codel_off
         params: [ ]
@@ -133,7 +133,7 @@ benchmarks:
       - name: recovery_size
         params: [ 300Ki ]
   # 4k 64 25% write
-  - name: no_ac_4k_64_25_write_recov
+  - name: static_256k_4k_64_25_write_recov
     configs:
       - name: codel_off
         params: [ ]
@@ -154,7 +154,7 @@ benchmarks:
       - name: recovery_size
         params: [ 300Ki ]
   # 32k 64 25% write
-  - name: no_ac_32k_64_25_write_recov
+  - name: static_256k_32k_64_25_write_recov
     configs:
       - name: codel_off
         params: [ ]
@@ -175,7 +175,7 @@ benchmarks:
       - name: recovery_size
         params: [ 300Ki ]
   # 4k 64 50% write
-  - name: no_ac_4k_64_50_write_recov
+  - name: static_256k_4k_64_50_write_recov
     configs:
       - name: codel_off
         params: [ ]
@@ -196,7 +196,7 @@ benchmarks:
       - name: recovery_size
         params: [ 300Ki ]
   # 32k 64 50% write
-  - name: no_ac_32k_64_50_write_recov
+  - name: static_256k_32k_64_50_write_recov
     configs:
       - name: codel_off
         params: [ ]
@@ -217,7 +217,7 @@ benchmarks:
       - name: recovery_size
         params: [ 300Ki ]
   # 4k 64 75% write
-  - name: no_ac_4k_64_75_write_recov
+  - name: static_256k_4k_64_75_write_recov
     configs:
       - name: codel_off
         params: [ ]
@@ -238,7 +238,7 @@ benchmarks:
       - name: recovery_size
         params: [ 300Ki ]
   # 32k 64 75% write
-  - name: no_ac_32k_64_75_write_recov
+  - name: static_256k_32k_64_75_write_recov
     configs:
       - name: codel_off
         params: [ ]
