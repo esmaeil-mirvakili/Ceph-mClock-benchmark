@@ -210,7 +210,7 @@ if __name__ == '__main__':
                         default='global_configs.yaml',
                         help='Experiments\' global config file')
     parser.add_argument('-r', '--reps', metavar='repeat',
-                        required=False, dest='repeat',
+                        required=False, dest='repeat', type=int,
                         default=1,
                         help='Experiments\' repeat')
     main(parser.parse_args())
