@@ -178,23 +178,26 @@ def extract(path):
 
 
 def main(args):
+    repeat = args.repeat
     configs, variables = extract(args.global_config)
     benchmarks, dependencies = read_benchmarks(args.config, configs=configs, variables=variables)
     benchmarks_folder = Path.home().joinpath('benchmarks')
     if not os.path.exists(benchmarks_folder):
         Path.mkdir(benchmarks_folder)
-    for bench_name, bench_configs in benchmarks.items():
-        bench_folder = benchmarks_folder.joinpath(bench_name)
-        if os.path.exists(bench_folder):
-            os.removedirs(bench_folder)
-        Path.mkdir(bench_folder)
-        for conf_file, config in bench_configs.items():
-            file = bench_folder.joinpath(conf_file)
-            config.write(file)
-        for dependency in dependencies[bench_name]:
-            if os.path.exists(dependency):
-                dst = bench_folder.joinpath(dependency)
-                shutil.copyfile(dependency, dst)
+    for rep in range(repeat):
+        for bench_name, bench_configs in benchmarks.items():
+            bench_post = f'_{rep}' if repeat > 1 else ''
+            bench_folder = benchmarks_folder.joinpath(bench_name+bench_post)
+            if os.path.exists(bench_folder):
+                os.removedirs(bench_folder)
+            Path.mkdir(bench_folder)
+            for conf_file, config in bench_configs.items():
+                file = bench_folder.joinpath(conf_file)
+                config.write(file)
+            for dependency in dependencies[bench_name]:
+                if os.path.exists(dependency):
+                    dst = bench_folder.joinpath(dependency)
+                    shutil.copyfile(dependency, dst)
 
 
 if __name__ == '__main__':
@@ -206,6 +209,10 @@ if __name__ == '__main__':
                         required=False, dest='global_config',
                         default='global_configs.yaml',
                         help='Experiments\' global config file')
+    parser.add_argument('-r', '--reps', metavar='repeat',
+                        required=False, dest='repeat',
+                        default=1,
+                        help='Experiments\' repeat')
     main(parser.parse_args())
 
 # config = configparser.ConfigParser()
