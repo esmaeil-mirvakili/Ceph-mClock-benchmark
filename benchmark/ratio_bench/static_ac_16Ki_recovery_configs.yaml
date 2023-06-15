@@ -1,9 +1,9 @@
 variables:
-  throttle_bytes: 1Mi
+  throttle_bytes: 16Ki
 
 benchmarks:
   # 4k 64 regular write
-  - name: static_1m_4k_64_reg_recov
+  - name: static_16k_4k_64_reg_recov
     configs:
       - name: codel_off
         params: [ ]
@@ -24,7 +24,7 @@ benchmarks:
       - name: recovery_size
         params: [ $recover_size ]
   # 32k 64 regular write
-  - name: static_1m_32k_64_reg_recov
+  - name: static_16k_32k_64_reg_recov
     configs:
       - name: codel_off
         params: [ ]
@@ -45,7 +45,7 @@ benchmarks:
       - name: recovery_size
         params: [ $recover_size ]
   # 4k 1024 regular write
-  - name: static_1m_4k_1024_reg_recov
+  - name: static_16k_4k_1024_reg_recov
     configs:
       - name: codel_off
         params: [ ]
@@ -66,7 +66,7 @@ benchmarks:
       - name: recovery_size
         params: [ $recover_size ]
   # 32k 1024 regular write
-  - name: static_1m_32k_1024_reg_recov
+  - name: static_16k_32k_1024_reg_recov
     configs:
       - name: codel_off
         params: [ ]
@@ -87,7 +87,7 @@ benchmarks:
       - name: recovery_size
         params: [ $recover_size ]
   # 4k 64 regular write recov 32k
-  - name: static_1m_4k_64_reg_recov_32k
+  - name: static_16k_4k_64_reg_recov_32k
     configs:
       - name: codel_off
         params: [ ]
@@ -108,7 +108,7 @@ benchmarks:
       - name: recovery_size
         params: [ 32Ki ]
   # 32k 64 regular write recov 32k
-  - name: static_1m_32k_64_reg_recov_32k
+  - name: static_16k_32k_64_reg_recov_32k
     configs:
       - name: codel_off
         params: [ ]

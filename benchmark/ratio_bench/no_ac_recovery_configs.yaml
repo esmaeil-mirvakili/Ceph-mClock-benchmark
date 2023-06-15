@@ -1,50 +1,4 @@
 benchmarks:
-  # 4k 64 burst write
-  - name: no_ac_4k_64_burst_recov
-    configs:
-      - name: codel_off
-        params: [ ]
-      - name: mclock
-        params: [ ]
-      - name: sharding_off
-        params: [ ]
-      - name: mclock_client_profile
-        params: [ $client_iops, $client_wgt, $client_limit ]
-      - name: mclock_recov_profile
-        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
-      - name: throttle_off
-        params: [ ]
-      - name: fio
-        params: [ 4Ki, 64 ]
-      - name: fio_burst
-        params: [ $burst_time, 64 ]
-      - name: recovery_on
-        params: [ ]
-      - name: recovery_size
-        params: [ 300Ki ]
-  # 32k 64 burst write
-  - name: no_ac_32k_64_burst_recov
-    configs:
-      - name: codel_off
-        params: [ ]
-      - name: mclock
-        params: [ ]
-      - name: sharding_off
-        params: [ ]
-      - name: mclock_client_profile
-        params: [ $client_iops, $client_wgt, $client_limit ]
-      - name: mclock_recov_profile
-        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
-      - name: throttle_off
-        params: [ ]
-      - name: fio
-        params: [ 32Ki, 64 ]
-      - name: fio_burst
-        params: [ $burst_time, 64 ]
-      - name: recovery_on
-        params: [ ]
-      - name: recovery_size
-        params: [ 300Ki ]
   # 4k 64 regular write
   - name: no_ac_4k_64_reg_recov
     configs:
@@ -65,7 +19,7 @@ benchmarks:
       - name: recovery_on
         params: [ ]
       - name: recovery_size
-        params: [ 300Ki ]
+        params: [ $recover_size ]
   # 32k 64 regular write
   - name: no_ac_32k_64_reg_recov
     configs:
@@ -86,9 +40,9 @@ benchmarks:
       - name: recovery_on
         params: [ ]
       - name: recovery_size
-        params: [ 300Ki ]
-  # 4k 64 regular read
-  - name: no_ac_4k_64_read_recov
+        params: [ $recover_size ]
+  # 4k 1024 regular write
+  - name: no_ac_4k_1024_reg_recov
     configs:
       - name: codel_off
         params: [ ]
@@ -102,14 +56,56 @@ benchmarks:
         params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_off
         params: [ ]
-      - name: fio_read
+      - name: fio
+        params: [ 4Ki, 1024 ]
+      - name: recovery_on
+        params: [ ]
+      - name: recovery_size
+        params: [ $recover_size ]
+  # 32k 1024 regular write
+  - name: no_ac_32k_1024_reg_recov
+    configs:
+      - name: codel_off
+        params: [ ]
+      - name: mclock
+        params: [ ]
+      - name: sharding_off
+        params: [ ]
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_off
+        params: [ ]
+      - name: fio
+        params: [ 32Ki, 1024 ]
+      - name: recovery_on
+        params: [ ]
+      - name: recovery_size
+        params: [ $recover_size ]
+  # 4k 64 regular write recov 32k
+  - name: no_ac_4k_64_reg_recov_32k
+    configs:
+      - name: codel_off
+        params: [ ]
+      - name: mclock
+        params: [ ]
+      - name: sharding_off
+        params: [ ]
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_off
+        params: [ ]
+      - name: fio
         params: [ 4Ki, 64 ]
       - name: recovery_on
         params: [ ]
       - name: recovery_size
-        params: [ 300Ki ]
-  # 32k 64 regular read
-  - name: no_ac_32k_64_read_recov
+        params: [ 32Ki ]
+  # 32k 64 regular write recov 32k
+  - name: no_ac_32k_64_reg_recov_32k
     configs:
       - name: codel_off
         params: [ ]
@@ -123,135 +119,177 @@ benchmarks:
         params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
       - name: throttle_off
         params: [ ]
-      - name: fio_read
+      - name: fio
         params: [ 32Ki, 64 ]
       - name: recovery_on
         params: [ ]
       - name: recovery_size
-        params: [ 300Ki ]
-  # 4k 64 25% write
-  - name: no_ac_4k_64_25_write_recov
-    configs:
-      - name: codel_off
-        params: [ ]
-      - name: mclock
-        params: [ ]
-      - name: sharding_off
-        params: [ ]
-      - name: mclock_client_profile
-        params: [ $client_iops, $client_wgt, $client_limit ]
-      - name: mclock_recov_profile
-        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
-      - name: throttle_off
-        params: [ ]
-      - name: fio_rw
-        params: [ 4Ki, 64, 75 ]
-      - name: recovery_on
-        params: [ ]
-      - name: recovery_size
-        params: [ 300Ki ]
-  # 32k 64 25% write
-  - name: no_ac_32k_64_25_write_recov
-    configs:
-      - name: codel_off
-        params: [ ]
-      - name: mclock
-        params: [ ]
-      - name: sharding_off
-        params: [ ]
-      - name: mclock_client_profile
-        params: [ $client_iops, $client_wgt, $client_limit ]
-      - name: mclock_recov_profile
-        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
-      - name: throttle_off
-        params: [ ]
-      - name: fio_rw
-        params: [ 32Ki, 64, 75 ]
-      - name: recovery_on
-        params: [ ]
-      - name: recovery_size
-        params: [ 300Ki ]
-  # 4k 64 50% write
-  - name: no_ac_4k_64_50_write_recov
-    configs:
-      - name: codel_off
-        params: [ ]
-      - name: mclock
-        params: [ ]
-      - name: sharding_off
-        params: [ ]
-      - name: mclock_client_profile
-        params: [ $client_iops, $client_wgt, $client_limit ]
-      - name: mclock_recov_profile
-        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
-      - name: throttle_off
-        params: [ ]
-      - name: fio_rw
-        params: [ 4Ki, 64, 50 ]
-      - name: recovery_on
-        params: [ ]
-      - name: recovery_size
-        params: [ 300Ki ]
-  # 32k 64 50% write
-  - name: no_ac_32k_64_50_write_recov
-    configs:
-      - name: codel_off
-        params: [ ]
-      - name: mclock
-        params: [ ]
-      - name: sharding_off
-        params: [ ]
-      - name: mclock_client_profile
-        params: [ $client_iops, $client_wgt, $client_limit ]
-      - name: mclock_recov_profile
-        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
-      - name: throttle_off
-        params: [ ]
-      - name: fio_rw
-        params: [ 32Ki, 64, 50 ]
-      - name: recovery_on
-        params: [ ]
-      - name: recovery_size
-        params: [ 300Ki ]
-  # 4k 64 75% write
-  - name: no_ac_4k_64_75_write_recov
-    configs:
-      - name: codel_off
-        params: [ ]
-      - name: mclock
-        params: [ ]
-      - name: sharding_off
-        params: [ ]
-      - name: mclock_client_profile
-        params: [ $client_iops, $client_wgt, $client_limit ]
-      - name: mclock_recov_profile
-        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
-      - name: throttle_off
-        params: [ ]
-      - name: fio_rw
-        params: [ 4Ki, 64, 25 ]
-      - name: recovery_on
-        params: [ ]
-      - name: recovery_size
-        params: [ 300Ki ]
-  # 32k 64 75% write
-  - name: no_ac_32k_64_75_write_recov
-    configs:
-      - name: codel_off
-        params: [ ]
-      - name: mclock
-        params: [ ]
-      - name: sharding_off
-        params: [ ]
-      - name: mclock_client_profile
-        params: [ $client_iops, $client_wgt, $client_limit ]
-      - name: mclock_recov_profile
-        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
-      - name: throttle_off
-        params: [ ]
-      - name: fio_rw
-        params: [ 32Ki, 64, 25 ]
-      - name: recovery_on
-        params: [ ]
-      - name: recovery_size
-        params: [ 300Ki ]
+        params: [ 32Ki ]
+#  # 4k 64 regular read
+#  - name: no_ac_4k_64_read_recov
+#    configs:
+#      - name: codel_off
+#        params: [ ]
+#      - name: mclock
+#        params: [ ]
+#      - name: sharding_off
+#        params: [ ]
+#      - name: mclock_client_profile
+#        params: [ $client_iops, $client_wgt, $client_limit ]
+#      - name: mclock_recov_profile
+#        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+#      - name: throttle_off
+#        params: [ ]
+#      - name: fio_read
+#        params: [ 4Ki, 64 ]
+#      - name: recovery_on
+#        params: [ ]
+#      - name: recovery_size
+#        params: [ 300Ki ]
+#  # 32k 64 regular read
+#  - name: no_ac_32k_64_read_recov
+#    configs:
+#      - name: codel_off
+#        params: [ ]
+#      - name: mclock
+#        params: [ ]
+#      - name: sharding_off
+#        params: [ ]
+#      - name: mclock_client_profile
+#        params: [ $client_iops, $client_wgt, $client_limit ]
+#      - name: mclock_recov_profile
+#        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+#      - name: throttle_off
+#        params: [ ]
+#      - name: fio_read
+#        params: [ 32Ki, 64 ]
+#      - name: recovery_on
+#        params: [ ]
+#      - name: recovery_size
+#        params: [ 300Ki ]
+#  # 4k 64 25% write
+#  - name: no_ac_4k_64_25_write_recov
+#    configs:
+#      - name: codel_off
+#        params: [ ]
+#      - name: mclock
+#        params: [ ]
+#      - name: sharding_off
+#        params: [ ]
+#      - name: mclock_client_profile
+#        params: [ $client_iops, $client_wgt, $client_limit ]
+#      - name: mclock_recov_profile
+#        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+#      - name: throttle_off
+#        params: [ ]
+#      - name: fio_rw
+#        params: [ 4Ki, 64, 75 ]
+#      - name: recovery_on
+#        params: [ ]
+#      - name: recovery_size
+#        params: [ 300Ki ]
+#  # 32k 64 25% write
+#  - name: no_ac_32k_64_25_write_recov
+#    configs:
+#      - name: codel_off
+#        params: [ ]
+#      - name: mclock
+#        params: [ ]
+#      - name: sharding_off
+#        params: [ ]
+#      - name: mclock_client_profile
+#        params: [ $client_iops, $client_wgt, $client_limit ]
+#      - name: mclock_recov_profile
+#        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+#      - name: throttle_off
+#        params: [ ]
+#      - name: fio_rw
+#        params: [ 32Ki, 64, 75 ]
+#      - name: recovery_on
+#        params: [ ]
+#      - name: recovery_size
+#        params: [ 300Ki ]
+#  # 4k 64 50% write
+#  - name: no_ac_4k_64_50_write_recov
+#    configs:
+#      - name: codel_off
+#        params: [ ]
+#      - name: mclock
+#        params: [ ]
+#      - name: sharding_off
+#        params: [ ]
+#      - name: mclock_client_profile
+#        params: [ $client_iops, $client_wgt, $client_limit ]
+#      - name: mclock_recov_profile
+#        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+#      - name: throttle_off
+#        params: [ ]
+#      - name: fio_rw
+#        params: [ 4Ki, 64, 50 ]
+#      - name: recovery_on
+#        params: [ ]
+#      - name: recovery_size
+#        params: [ 300Ki ]
+#  # 32k 64 50% write
+#  - name: no_ac_32k_64_50_write_recov
+#    configs:
+#      - name: codel_off
+#        params: [ ]
+#      - name: mclock
+#        params: [ ]
+#      - name: sharding_off
+#        params: [ ]
+#      - name: mclock_client_profile
+#        params: [ $client_iops, $client_wgt, $client_limit ]
+#      - name: mclock_recov_profile
+#        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+#      - name: throttle_off
+#        params: [ ]
+#      - name: fio_rw
+#        params: [ 32Ki, 64, 50 ]
+#      - name: recovery_on
+#        params: [ ]
+#      - name: recovery_size
+#        params: [ 300Ki ]
+#  # 4k 64 75% write
+#  - name: no_ac_4k_64_75_write_recov
+#    configs:
+#      - name: codel_off
+#        params: [ ]
+#      - name: mclock
+#        params: [ ]
+#      - name: sharding_off
+#        params: [ ]
+#      - name: mclock_client_profile
+#        params: [ $client_iops, $client_wgt, $client_limit ]
+#      - name: mclock_recov_profile
+#        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+#      - name: throttle_off
+#        params: [ ]
+#      - name: fio_rw
+#        params: [ 4Ki, 64, 25 ]
+#      - name: recovery_on
+#        params: [ ]
+#      - name: recovery_size
+#        params: [ 300Ki ]
+#  # 32k 64 75% write
+#  - name: no_ac_32k_64_75_write_recov
+#    configs:
+#      - name: codel_off
+#        params: [ ]
+#      - name: mclock
+#        params: [ ]
+#      - name: sharding_off
+#        params: [ ]
+#      - name: mclock_client_profile
+#        params: [ $client_iops, $client_wgt, $client_limit ]
+#      - name: mclock_recov_profile
+#        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+#      - name: throttle_off
+#        params: [ ]
+#      - name: fio_rw
+#        params: [ 32Ki, 64, 25 ]
+#      - name: recovery_on
+#        params: [ ]
+#      - name: recovery_size
+#        params: [ 300Ki ]

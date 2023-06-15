@@ -9,6 +9,7 @@ variables:
   codel_param: 0.1,
   codel_budget: 512Ki
   codel_inc: 10Ki
+  recover_size: 300Ki
 
 
 configs:
