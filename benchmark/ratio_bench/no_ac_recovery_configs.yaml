@@ -84,7 +84,7 @@ benchmarks:
       - name: recovery_size
         params: [ $recover_size ]
   # 4k 64 regular write recov 32k
-  - name: no_ac_4k_64_reg_recov_32k
+  - name: no_ac_4k_64_reg_recov_16k
     configs:
       - name: codel_off
         params: [ ]
@@ -103,9 +103,9 @@ benchmarks:
       - name: recovery_on
         params: [ ]
       - name: recovery_size
-        params: [ 32Ki ]
+        params: [ 16Ki ]
   # 32k 64 regular write recov 32k
-  - name: no_ac_32k_64_reg_recov_32k
+  - name: no_ac_32k_64_reg_recov_16k
     configs:
       - name: codel_off
         params: [ ]
@@ -124,7 +124,7 @@ benchmarks:
       - name: recovery_on
         params: [ ]
       - name: recovery_size
-        params: [ 32Ki ]
+        params: [ 16Ki ]
 #  # 4k 64 regular read
 #  - name: no_ac_4k_64_read_recov
 #    configs:

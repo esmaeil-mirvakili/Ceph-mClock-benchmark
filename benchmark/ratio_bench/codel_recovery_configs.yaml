@@ -83,8 +83,8 @@ benchmarks:
         params: []
       - name: recovery_size
         params: [ $recover_size ]
-  # 4k 64 regular write recov 32k
-  - name: codel_4k_64_reg_recov_32k
+  # 4k 64 regular write recov 16k
+  - name: codel_4k_64_reg_recov_16k
     configs:
       - name: codel_on
         params: [ $codel_param, $codel_budget, $codel_inc ]
@@ -103,9 +103,9 @@ benchmarks:
       - name: recovery_on
         params: []
       - name: recovery_size
-        params: [ 32Ki ]
-  # 32k 64 regular write recov 32k
-  - name: codel_32k_64_reg_recov_32k
+        params: [ 16Ki ]
+  # 32k 64 regular write recov 16k
+  - name: codel_32k_64_reg_recov_16k
     configs:
       - name: codel_on
         params: [ $codel_param, $codel_budget, $codel_inc ]
@@ -124,7 +124,7 @@ benchmarks:
       - name: recovery_on
         params: []
       - name: recovery_size
-        params: [ 32Ki ]
+        params: [ 16Ki ]
 #  # 4k 64 25% write
 #  - name: codel_4k_64_25_write_recov
 #    configs:
