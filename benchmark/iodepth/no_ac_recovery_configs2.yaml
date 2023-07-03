@@ -1,0 +1,45 @@
+benchmarks:
+  # 4k recov 16k
+  - name: no_ac_4k_${var}_reg_recov_16k
+    vars: <![1,4,16,32]+list(range(50,3451,50))!>
+    configs:
+      - name: codel_off
+        params: [ ]
+      - name: mclock
+        params: [ ]
+      - name: sharding_off
+        params: [ ]
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_off
+        params: [ ]
+      - name: fio
+        params: [ 4Ki, $var ]
+      - name: recovery_on
+        params: [ ]
+      - name: recovery_size
+        params: [ $recover_size2 ]
+  # 32k recov 16k
+  - name: no_ac_32k_${var}_reg_recov_16k
+    vars: <![1,4,16,32]+list(range(50,3451,50))!>
+    configs:
+      - name: codel_off
+        params: [ ]
+      - name: mclock
+        params: [ ]
+      - name: sharding_off
+        params: [ ]
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_off
+        params: [ ]
+      - name: fio
+        params: [ 32Ki, $var ]
+      - name: recovery_on
+        params: [ ]
+      - name: recovery_size
+        params: [ $recover_size2 ]

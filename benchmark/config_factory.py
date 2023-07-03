@@ -134,35 +134,42 @@ def read_benchmarks(config_path, configs=None, variables=None):
     dependencies = {}
     for benchmark in benchmark_list:
         bench_configs = benchmark['configs']
-        bench_name = benchmark['name']
-        dependencies[bench_name] = []
-        config_files = {}
-        for bench_conf in bench_configs:
-            conf_name = bench_conf['name']
-            conf_params = evaluate_vars(bench_conf['params'], variables)
-            if conf_name in configs:
-                conf_ref = configs[conf_name]
-                if 'dependencies' in conf_ref:
-                    if isinstance(conf_ref['dependencies'], list):
-                        dependencies[bench_name] += conf_ref['dependencies']
-                    elif isinstance(conf_ref['dependencies'], str):
-                        dependencies[bench_name].append(conf_ref['dependencies'])
-                out = conf_ref['out'] if 'out' in conf_ref else conf_ref['file']
-                if out not in config_files:
-                    if conf_ref['file'].endswith('.conf'):
-                        config_files[out] = ConfConfigContent(conf_ref['file'])
-                    elif conf_ref['file'].endswith('.yaml'):
-                        config_files[out] = YamlConfigContent(conf_ref['file'])
-                    else:
-                        print('Error: config file %s not supported' % conf_ref['file'])
-                        exit(1)
-                    config_files[out].open()
-                reference = config_files[out]
-                sections = conf_ref['section']
-                for key, value in conf_ref['values'].items():
-                    reference.update(key, value, conf_params, sections=sections)
-        bench_name = evaluate_vars_str(bench_name, variables)
-        benchmarks[bench_name] = config_files
+        var_list = [0]
+        if'vars' in benchmark:
+            var_list = benchmark['vars']
+        if isinstance(var_list, str) and var_list.startswith('<!') and var_list.endswith('!>'):
+            var_list = eval(var_list[2:-2])
+        for var in var_list:
+            variables['var'] = var
+            bench_name = benchmark['name']
+            bench_name = evaluate_vars_str(bench_name, variables)
+            dependencies[bench_name] = []
+            config_files = {}
+            for bench_conf in bench_configs:
+                conf_name = bench_conf['name']
+                conf_params = evaluate_vars(bench_conf['params'], variables)
+                if conf_name in configs:
+                    conf_ref = configs[conf_name]
+                    if 'dependencies' in conf_ref:
+                        if isinstance(conf_ref['dependencies'], list):
+                            dependencies[bench_name] += conf_ref['dependencies']
+                        elif isinstance(conf_ref['dependencies'], str):
+                            dependencies[bench_name].append(conf_ref['dependencies'])
+                    out = conf_ref['out'] if 'out' in conf_ref else conf_ref['file']
+                    if out not in config_files:
+                        if conf_ref['file'].endswith('.conf'):
+                            config_files[out] = ConfConfigContent(conf_ref['file'])
+                        elif conf_ref['file'].endswith('.yaml'):
+                            config_files[out] = YamlConfigContent(conf_ref['file'])
+                        else:
+                            print('Error: config file %s not supported' % conf_ref['file'])
+                            exit(1)
+                        config_files[out].open()
+                    reference = config_files[out]
+                    sections = conf_ref['section']
+                    for key, value in conf_ref['values'].items():
+                        reference.update(key, value, conf_params, sections=sections)
+            benchmarks[bench_name] = config_files
     return benchmarks, dependencies
 
 
