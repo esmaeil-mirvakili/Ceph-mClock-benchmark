@@ -1,7 +1,7 @@
 benchmarks:
   # 4k recov 16k
   - name: no_ac_4k_${var}_reg_recov_16k
-    vars: <![1,4,16,32]+list(range(50,3451,50))!>
+    vars: <![1,4,16,32, 64, 128]+list(range(256, 2049, 128))!>
     configs:
       - name: codel_off
         params: [ ]
@@ -23,7 +23,7 @@ benchmarks:
         params: [ $recover_size2 ]
   # 32k recov 16k
   - name: no_ac_32k_${var}_reg_recov_16k
-    vars: <![1,4,16,32]+list(range(50,3451,50))!>
+    vars: <![1,4,16,32, 64, 128]+list(range(256, 2049, 128))!>
     configs:
       - name: codel_off
         params: [ ]

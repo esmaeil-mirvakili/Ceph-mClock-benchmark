@@ -111,12 +111,15 @@ def evaluate_vars_str(param: str, variables):
 def evaluate_vars(param_list: list, variables):
     if not variables:
         return param_list
+    res = [0] * len(param_list)
     for i in range(len(param_list)):
         if isinstance(param_list[i], str):
-            param_list[i] = evaluate_vars_str(param_list[i], variables)
+            res[i] = evaluate_vars_str(param_list[i], variables)
         elif isinstance(param_list[i], list):
-            param_list[i] = evaluate_vars(param_list[i], variables)
-    return param_list
+            res[i] = evaluate_vars(param_list[i], variables)
+        else:
+            res[i] = param_list[i]
+    return res
 
 
 def read_benchmarks(config_path, configs=None, variables=None):
