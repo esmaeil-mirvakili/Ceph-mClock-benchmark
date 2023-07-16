@@ -1,4 +1,27 @@
 benchmarks:
+  - name: static_ac_${var}_32k_64_burst_recov_300k
+    vars: <!list(range(64, 2049, 64))!>
+    configs:
+      - name: codel_off
+        params: [ ]
+      - name: mclock
+        params: [ ]
+      - name: sharding_off
+        params: [ ]
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_on
+        params: [ $var ]
+      - name: fio
+        params: [ 32Ki, 64 ]
+      - name: fio_burst
+        params: [ $burst_time, 64 ]
+      - name: recovery_on
+        params: [ ]
+      - name: recovery_size
+        params: [ 300Ki ]
   - name: codel_001_${var}_64_burst_recov_300k
     vars: <!['4Ki', '16Ki', '32Ki', '64Ki']!>
     configs:
