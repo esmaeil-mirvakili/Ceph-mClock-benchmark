@@ -1,5 +1,5 @@
 benchmarks:
-  - name: static_ac_128Ki_4k_64_burst_recov_300k_99
+  - name: static_ac_128Ki_4k_64_burst_recov
     configs:
       - name: codel_off
         params: [ ]
@@ -8,9 +8,9 @@ benchmarks:
       - name: sharding_off
         params: [ ]
       - name: mclock_client_profile
-        params: [ 0.99, $client_wgt, $client_limit ]
+        params: [ 0.9, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 0.01, $recovery_wgt, $recovery_limit ]
+        params: [ 0.1, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
         params: [ 128Ki ]
       - name: fio
@@ -19,9 +19,7 @@ benchmarks:
         params: [ $burst_time, 64]
       - name: recovery_on
         params: [ ]
-      - name: recovery_size
-        params: [ 300Ki ]
-  - name: static_ac_128Ki_4k_64_burst_recov_300k_1
+  - name: static_ac_256Ki_4k_64_burst_recov
     configs:
       - name: codel_off
         params: [ ]
@@ -30,20 +28,18 @@ benchmarks:
       - name: sharding_off
         params: [ ]
       - name: mclock_client_profile
-        params: [ 1, $client_wgt, $client_limit ]
+        params: [ 0.9, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 0, $recovery_wgt, $recovery_limit ]
+        params: [ 0.1, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
-        params: [ 128Ki ]
+        params: [ 256Ki ]
       - name: fio
         params: [ 4Ki, 64 ]
       - name: fio_burst
         params: [ $burst_time, 64]
       - name: recovery_on
         params: [ ]
-      - name: recovery_size
-        params: [ 300Ki ]
-  - name: static_ac_128Ki_4k_64_burst_recov_300k_0
+  - name: static_ac_512Ki_4k_64_burst_recov
     configs:
       - name: codel_off
         params: [ ]
@@ -52,20 +48,18 @@ benchmarks:
       - name: sharding_off
         params: [ ]
       - name: mclock_client_profile
-        params: [ 0, $client_wgt, $client_limit ]
+        params: [ 0.9, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 1, $recovery_wgt, $recovery_limit ]
+        params: [ 0.1, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
-        params: [ 128Ki ]
+        params: [ 512Ki ]
       - name: fio
         params: [ 4Ki, 64 ]
       - name: fio_burst
         params: [ $burst_time, 64]
       - name: recovery_on
         params: [ ]
-      - name: recovery_size
-        params: [ 300Ki ]
-  - name: static_ac_128Ki_4k_64_burst_recov_300k_00
+  - name: static_ac_1024Ki_4k_64_burst_recov
     configs:
       - name: codel_off
         params: [ ]
@@ -74,60 +68,14 @@ benchmarks:
       - name: sharding_off
         params: [ ]
       - name: mclock_client_profile
-        params: [ 10, $client_wgt, $client_limit ]
+        params: [ 0.9, $client_wgt, $client_limit ]
       - name: mclock_recov_profile
-        params: [ 1, $recovery_wgt, $recovery_limit ]
+        params: [ 0.1, $recovery_wgt, $recovery_limit ]
       - name: throttle_on
-        params: [ 128Ki ]
+        params: [ 1024Ki ]
       - name: fio
         params: [ 4Ki, 64 ]
       - name: fio_burst
         params: [ $burst_time, 64]
       - name: recovery_on
         params: [ ]
-      - name: recovery_size
-        params: [ 300Ki ]
-  - name: static_ac_128Ki_4k_64_burst_recov_300k_50
-    configs:
-      - name: codel_off
-        params: [ ]
-      - name: mclock
-        params: [ ]
-      - name: sharding_off
-        params: [ ]
-      - name: mclock_client_profile
-        params: [ 0.5, $client_wgt, $client_limit ]
-      - name: mclock_recov_profile
-        params: [ 0.5, $recovery_wgt, $recovery_limit ]
-      - name: throttle_on
-        params: [ 128Ki ]
-      - name: fio
-        params: [ 4Ki, 64 ]
-      - name: fio_burst
-        params: [ $burst_time, 64]
-      - name: recovery_on
-        params: [ ]
-      - name: recovery_size
-        params: [ 300Ki ]
-  - name: static_ac_128Ki_4k_64_burst_recov_300k_10
-    configs:
-      - name: codel_off
-        params: [ ]
-      - name: mclock
-        params: [ ]
-      - name: sharding_off
-        params: [ ]
-      - name: mclock_client_profile
-        params: [ 0.1, $client_wgt, $client_limit ]
-      - name: mclock_recov_profile
-        params: [ 0.9, $recovery_wgt, $recovery_limit ]
-      - name: throttle_on
-        params: [ 128Ki ]
-      - name: fio
-        params: [ 4Ki, 64 ]
-      - name: fio_burst
-        params: [ $burst_time, 64]
-      - name: recovery_on
-        params: [ ]
-      - name: recovery_size
-        params: [ 300Ki ]
