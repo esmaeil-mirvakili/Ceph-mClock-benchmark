@@ -7,7 +7,7 @@ variables:
   recovery_limit: 0
   burst_time: 1s
   codel_param: 0.1,
-  codel_budget: 128Ki
+  codel_budget: 256Ki
   codel_inc: 10Ki
   recover_size1: 300Ki
   recover_size2: 16Ki
