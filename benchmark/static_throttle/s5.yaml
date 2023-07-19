@@ -22,11 +22,11 @@ benchmarks:
         params: [ ]
       - name: recovery_size
         params: [ 300Ki ]
-  - name: codel_01_64k_64_burst_recov_300k_${var}
+  - name: codel_5_64k_64_burst_recov_300k_${var}
     vars: <!['0', '1', '2']!>
     configs:
       - name: codel_on
-        params: [ 0.1, $codel_budget, $codel_inc ]
+        params: [ 5, $codel_budget, $codel_inc ]
       - name: mclock
         params: [ ]
       - name: sharding_off
@@ -45,11 +45,11 @@ benchmarks:
         params: [ ]
       - name: recovery_size
         params: [ 300Ki ]
-  - name: codel_05_4k_64_burst_recov_300k_${var}
+  - name: codel_7_4k_64_burst_recov_300k_${var}
     vars: <!['0', '1', '2']!>
     configs:
       - name: codel_on
-        params: [ 0.5, $codel_budget, $codel_inc ]
+        params: [ 7, $codel_budget, $codel_inc ]
       - name: mclock
         params: [ ]
       - name: sharding_off
@@ -68,11 +68,11 @@ benchmarks:
         params: [ ]
       - name: recovery_size
         params: [ 300Ki ]
-  - name: codel_05_32k_64_burst_recov_300k_${var}
+  - name: codel_7_32k_64_burst_recov_300k_${var}
     vars: <!['0', '1', '2']!>
     configs:
       - name: codel_on
-        params: [ 0.5, $codel_budget, $codel_inc ]
+        params: [ 7, $codel_budget, $codel_inc ]
       - name: mclock
         params: [ ]
       - name: sharding_off
@@ -91,11 +91,11 @@ benchmarks:
         params: [ ]
       - name: recovery_size
         params: [ 300Ki ]
-  - name: codel_05_64k_64_burst_recov_300k_${var}
+  - name: codel_7_64k_64_burst_recov_300k_${var}
     vars: <!['0', '1', '2']!>
     configs:
       - name: codel_on
-        params: [ 0.5, $codel_budget, $codel_inc ]
+        params: [ 7, $codel_budget, $codel_inc ]
       - name: mclock
         params: [ ]
       - name: sharding_off
@@ -114,11 +114,11 @@ benchmarks:
         params: [ ]
       - name: recovery_size
         params: [ 300Ki ]
-  - name: codel_1_4k_64_burst_recov_300k_${var}
+  - name: codel_10_4k_64_burst_recov_300k_${var}
     vars: <!['0', '1', '2']!>
     configs:
       - name: codel_on
-        params: [ 1, $codel_budget, $codel_inc ]
+        params: [ 10, $codel_budget, $codel_inc ]
       - name: mclock
         params: [ ]
       - name: sharding_off
@@ -137,11 +137,11 @@ benchmarks:
         params: [ ]
       - name: recovery_size
         params: [ 300Ki ]
-  - name: codel_1_32k_64_burst_recov_300k_${var}
+  - name: codel_10_32k_64_burst_recov_300k_${var}
     vars: <!['0', '1', '2']!>
     configs:
       - name: codel_on
-        params: [ 1, $codel_budget, $codel_inc ]
+        params: [ 10, $codel_budget, $codel_inc ]
       - name: mclock
         params: [ ]
       - name: sharding_off
@@ -160,11 +160,11 @@ benchmarks:
         params: [ ]
       - name: recovery_size
         params: [ 300Ki ]
-  - name: codel_1_64k_64_burst_recov_300k_${var}
+  - name: codel_10_64k_64_burst_recov_300k_${var}
     vars: <!['0', '1', '2']!>
     configs:
       - name: codel_on
-        params: [ 1, $codel_budget, $codel_inc ]
+        params: [ 10, $codel_budget, $codel_inc ]
       - name: mclock
         params: [ ]
       - name: sharding_off
@@ -187,7 +187,7 @@ benchmarks:
     vars: <!['0', '1', '2']!>
     configs:
       - name: codel_on
-        params: [ 1.5, $codel_budget, $codel_inc ]
+        params: [ 15, $codel_budget, $codel_inc ]
       - name: mclock
         params: [ ]
       - name: sharding_off
@@ -210,7 +210,7 @@ benchmarks:
     vars: <!['0', '1', '2']!>
     configs:
       - name: codel_on
-        params: [ 1.5, $codel_budget, $codel_inc ]
+        params: [ 15, $codel_budget, $codel_inc ]
       - name: mclock
         params: [ ]
       - name: sharding_off
@@ -233,7 +233,7 @@ benchmarks:
     vars: <!['0', '1', '2']!>
     configs:
       - name: codel_on
-        params: [ 1.5, $codel_budget, $codel_inc ]
+        params: [ 15, $codel_budget, $codel_inc ]
       - name: mclock
         params: [ ]
       - name: sharding_off
@@ -252,11 +252,11 @@ benchmarks:
         params: [ ]
       - name: recovery_size
         params: [ 300Ki ]
-  - name: codel_2_4k_64_burst_recov_300k_${var}
+  - name: codel_20_4k_64_burst_recov_300k_${var}
     vars: <!['0', '1', '2']!>
     configs:
       - name: codel_on
-        params: [ 2, $codel_budget, $codel_inc ]
+        params: [ 20, $codel_budget, $codel_inc ]
       - name: mclock
         params: [ ]
       - name: sharding_off
@@ -275,11 +275,11 @@ benchmarks:
         params: [ ]
       - name: recovery_size
         params: [ 300Ki ]
-  - name: codel_2_32k_64_burst_recov_300k_${var}
+  - name: codel_20_32k_64_burst_recov_300k_${var}
     vars: <!['0', '1', '2']!>
     configs:
       - name: codel_on
-        params: [ 2, $codel_budget, $codel_inc ]
+        params: [ 20, $codel_budget, $codel_inc ]
       - name: mclock
         params: [ ]
       - name: sharding_off
@@ -298,11 +298,11 @@ benchmarks:
         params: [ ]
       - name: recovery_size
         params: [ 300Ki ]
-  - name: codel_2_64k_64_burst_recov_300k_${var}
+  - name: codel_20_64k_64_burst_recov_300k_${var}
     vars: <!['0', '1', '2']!>
     configs:
       - name: codel_on
-        params: [ 2, $codel_budget, $codel_inc ]
+        params: [ 20, $codel_budget, $codel_inc ]
       - name: mclock
         params: [ ]
       - name: sharding_off
