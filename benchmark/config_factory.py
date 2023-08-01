@@ -146,6 +146,7 @@ def read_benchmarks(config_path, configs=None, variables=None):
             variables['var'] = var
             bench_name = benchmark['name']
             bench_name = evaluate_vars_str(bench_name, variables)
+            bench_name = bench_name.replace('/', '_')
             dependencies[bench_name] = []
             config_files = {}
             for bench_conf in bench_configs:
