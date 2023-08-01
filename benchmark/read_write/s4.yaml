@@ -153,7 +153,7 @@ benchmarks:
       - name: throttle_off
         params: [ ]
       - name: fio_rw
-        params: [ $var, 64, 75 ]
+        params: [ $var, 64, 25 ]
       - name: fio_burst
         params: [ $burst_time, 64 ]
       - name: recovery_on
@@ -176,7 +176,7 @@ benchmarks:
       - name: throttle_off
         params: [ ]
       - name: fio_rw
-        params: [ $var, 64, 75 ]
+        params: [ $var, 64, 25 ]
       - name: fio_burst
         params: [ $burst_time, 64 ]
       - name: recovery_on
@@ -199,7 +199,7 @@ benchmarks:
       - name: throttle_off
         params: [ ]
       - name: fio_rw
-        params: [ $var, 64, 75 ]
+        params: [ $var, 64, 25 ]
       - name: fio_burst
         params: [ $burst_time, 64 ]
       - name: recovery_on
@@ -222,7 +222,7 @@ benchmarks:
       - name: throttle_off
         params: [ ]
       - name: fio_rw
-        params: [ $var, 64, 75 ]
+        params: [ $var, 64, 25 ]
       - name: fio_burst
         params: [ $burst_time, 64 ]
       - name: recovery_on
@@ -245,7 +245,7 @@ benchmarks:
       - name: throttle_off
         params: [ ]
       - name: fio_rw
-        params: [ $var, 64, 75 ]
+        params: [ $var, 64, 25 ]
       - name: fio_burst
         params: [ $burst_time, 64 ]
       - name: recovery_on
@@ -268,7 +268,7 @@ benchmarks:
       - name: throttle_off
         params: [ ]
       - name: fio_rw
-        params: [ $var, 64, 75 ]
+        params: [ $var, 64, 25 ]
       - name: fio_burst
         params: [ $burst_time, 64 ]
       - name: recovery_on
@@ -429,7 +429,7 @@ benchmarks:
       - name: throttle_off
         params: [ ]
       - name: fio_rw
-        params: [ $var, 64, 25 ]
+        params: [ $var, 64, 75 ]
       - name: fio_burst
         params: [ $burst_time, 64 ]
       - name: recovery_on
@@ -452,7 +452,7 @@ benchmarks:
       - name: throttle_off
         params: [ ]
       - name: fio_rw
-        params: [ $var, 64, 25 ]
+        params: [ $var, 64, 75 ]
       - name: fio_burst
         params: [ $burst_time, 64 ]
       - name: recovery_on
@@ -475,7 +475,7 @@ benchmarks:
       - name: throttle_off
         params: [ ]
       - name: fio_rw
-        params: [ $var, 64, 25 ]
+        params: [ $var, 64, 75 ]
       - name: fio_burst
         params: [ $burst_time, 64 ]
       - name: recovery_on
@@ -498,7 +498,7 @@ benchmarks:
       - name: throttle_off
         params: [ ]
       - name: fio_rw
-        params: [ $var, 64, 25 ]
+        params: [ $var, 64, 75 ]
       - name: fio_burst
         params: [ $burst_time, 64 ]
       - name: recovery_on
@@ -521,7 +521,7 @@ benchmarks:
       - name: throttle_off
         params: [ ]
       - name: fio_rw
-        params: [ $var, 64, 25 ]
+        params: [ $var, 64, 75 ]
       - name: fio_burst
         params: [ $burst_time, 64 ]
       - name: recovery_on
@@ -544,7 +544,7 @@ benchmarks:
       - name: throttle_off
         params: [ ]
       - name: fio_rw
-        params: [ $var, 64, 25 ]
+        params: [ $var, 64, 75 ]
       - name: fio_burst
         params: [ $burst_time, 64 ]
       - name: recovery_on
