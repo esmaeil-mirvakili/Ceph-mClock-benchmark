@@ -1,0 +1,70 @@
+benchmarks:
+  - name: static_ac_${var}_4k_128_burst_recov_300k
+    vars: <!['8Ki', '64Ki', '128Ki', '256Ki', '384Ki', '512Ki', '640Ki', '768Ki', '896Ki', '1024Ki', '1152Ki', '1280Ki', '1408Ki', '1536Ki', '1664Ki', '1792Ki', '1920Ki', '2048Ki', '4096Ki', '8192Ki', '65536Ki']!>
+    configs:
+      - name: codel_off
+        params: [ ]
+      - name: mclock
+        params: [ ]
+      - name: sharding_off
+        params: [ ]
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_on
+        params: [ $var ]
+      - name: fio
+        params: [ 4Ki, 128 ]
+      - name: fio_burst
+        params: [ $burst_time, 128]
+      - name: recovery_on
+        params: [ ]
+      - name: recovery_size
+        params: [ 300Ki ]
+  - name: static_ac_${var}_4k_256_burst_recov_300k
+    vars: <!['8Ki', '64Ki', '128Ki', '256Ki', '384Ki', '512Ki', '640Ki', '768Ki', '896Ki', '1024Ki', '1152Ki', '1280Ki', '1408Ki', '1536Ki', '1664Ki', '1792Ki', '1920Ki', '2048Ki', '4096Ki', '8192Ki', '65536Ki']!>
+    configs:
+      - name: codel_off
+        params: [ ]
+      - name: mclock
+        params: [ ]
+      - name: sharding_off
+        params: [ ]
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_on
+        params: [ $var ]
+      - name: fio
+        params: [ 4Ki, 256 ]
+      - name: fio_burst
+        params: [ $burst_time, 256]
+      - name: recovery_on
+        params: [ ]
+      - name: recovery_size
+        params: [ 300Ki ]
+  - name: static_ac_${var}_4k_512_burst_recov_300k
+    vars: <!['8Ki', '64Ki', '128Ki', '256Ki', '384Ki', '512Ki', '640Ki', '768Ki', '896Ki', '1024Ki', '1152Ki', '1280Ki', '1408Ki', '1536Ki', '1664Ki', '1792Ki', '1920Ki', '2048Ki', '4096Ki', '8192Ki', '65536Ki']!>
+    configs:
+      - name: codel_off
+        params: [ ]
+      - name: mclock
+        params: [ ]
+      - name: sharding_off
+        params: [ ]
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_on
+        params: [ $var ]
+      - name: fio
+        params: [ 4Ki, 512 ]
+      - name: fio_burst
+        params: [ $burst_time, 512]
+      - name: recovery_on
+        params: [ ]
+      - name: recovery_size
+        params: [ 300Ki ]
