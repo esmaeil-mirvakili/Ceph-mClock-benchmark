@@ -15,6 +15,10 @@ fi
 arch="$HOME_LOC/arch"
 
 find "$BENCH_PATH" -maxdepth 1 -mindepth 1 -type d | while read bench; do
+  if [[ -d "$bench/arch" ]]; then
+    echo "### $bench/arch exists"
+    continue
+  fi
   echo ">>> Experiment for $bench ..."
   echo ""
   echo ""
