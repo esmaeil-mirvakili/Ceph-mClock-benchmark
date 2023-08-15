@@ -172,4 +172,4 @@ configs:
     file: cbt.yaml
     section: [ benchmarks, fio, extra_config ]
     values:
-      rate_process: {poisson}
+      rate_process: poisson
