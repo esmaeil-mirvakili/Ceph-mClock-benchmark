@@ -1,5 +1,5 @@
 benchmarks:
-  - name: static_ac_${var}_4k_1_burst_recov_300k
+  - name: static_ac_${var}_4k_16_burst_recov_300k
     vars: <!['8Ki', '64Ki', '128Ki', '256Ki', '384Ki', '512Ki', '640Ki', '768Ki', '896Ki', '1024Ki', '1152Ki', '1280Ki', '1408Ki', '1536Ki', '1664Ki', '1792Ki', '1920Ki', '2048Ki', '4096Ki', '8192Ki', '65536Ki']!>
     configs:
       - name: codel_off
@@ -15,9 +15,9 @@ benchmarks:
       - name: throttle_on
         params: [ $var ]
       - name: fio
-        params: [ 4Ki, 1 ]
+        params: [ 4Ki, 16 ]
       - name: fio_burst
-        params: [ $burst_time, 1]
+        params: [ $burst_time, 16]
       - name: recovery_on
         params: [ ]
       - name: recovery_size
@@ -137,7 +137,7 @@ benchmarks:
         params: [ ]
       - name: recovery_size
         params: [ 300Ki ]
-  - name: static_ac_${var}_32k_1_burst_recov_300k
+  - name: static_ac_${var}_32k_16_burst_recov_300k
     vars: <!['8Ki', '64Ki', '128Ki', '256Ki', '384Ki', '512Ki', '640Ki', '768Ki', '896Ki', '1024Ki', '1152Ki', '1280Ki', '1408Ki', '1536Ki', '1664Ki', '1792Ki', '1920Ki', '2048Ki', '4096Ki', '8192Ki', '65536Ki']!>
     configs:
       - name: codel_off
@@ -153,9 +153,9 @@ benchmarks:
       - name: throttle_on
         params: [ $var ]
       - name: fio
-        params: [ 32Ki, 1 ]
+        params: [ 32Ki, 16 ]
       - name: fio_burst
-        params: [ $burst_time, 1]
+        params: [ $burst_time, 16]
       - name: recovery_on
         params: [ ]
       - name: recovery_size
@@ -271,6 +271,52 @@ benchmarks:
         params: [ 32Ki, 512 ]
       - name: fio_burst
         params: [ $burst_time, 512]
+      - name: recovery_on
+        params: [ ]
+      - name: recovery_size
+        params: [ 300Ki ]
+  - name: static_ac_${var}_32k_poisson_burst_recov_300k
+    vars: <!['8Ki', '64Ki', '128Ki', '256Ki', '384Ki', '512Ki', '640Ki', '768Ki', '896Ki', '1024Ki', '1152Ki', '1280Ki', '1408Ki', '1536Ki', '1664Ki', '1792Ki', '1920Ki', '2048Ki', '4096Ki', '8192Ki', '65536Ki']!>
+    configs:
+      - name: codel_off
+        params: [ ]
+      - name: mclock
+        params: [ ]
+      - name: sharding_off
+        params: [ ]
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_on
+        params: [ $var ]
+      - name: fio
+        params: [ 32Ki, 64 ]
+      - name: poisson_rate
+        params: [ ]
+      - name: recovery_on
+        params: [ ]
+      - name: recovery_size
+        params: [ 300Ki ]
+  - name: static_ac_${var}_4k_poisson_burst_recov_300k
+    vars: <!['8Ki', '64Ki', '128Ki', '256Ki', '384Ki', '512Ki', '640Ki', '768Ki', '896Ki', '1024Ki', '1152Ki', '1280Ki', '1408Ki', '1536Ki', '1664Ki', '1792Ki', '1920Ki', '2048Ki', '4096Ki', '8192Ki', '65536Ki']!>
+    configs:
+      - name: codel_off
+        params: [ ]
+      - name: mclock
+        params: [ ]
+      - name: sharding_off
+        params: [ ]
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_on
+        params: [ $var ]
+      - name: fio
+        params: [ 4Ki, 64 ]
+      - name: poisson_rate
+        params: [ ]
       - name: recovery_on
         params: [ ]
       - name: recovery_size

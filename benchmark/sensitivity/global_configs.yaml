@@ -167,3 +167,9 @@ configs:
       mode: randread
       op_size: { 0 }
       iodepth: { 1 }
+  poisson_rate:
+    dependencies: [ ]
+    file: cbt.yaml
+    section: [ benchmarks, fio, extra_config ]
+    values:
+      rate_process: {poisson}
