@@ -206,7 +206,7 @@ benchmarks:
         params: [ ]
       - name: recovery_size
         params: [ 300Ki ]
-  - name: static_ac_${var}_4k_64_100w_burst_recov_300k
+  - name: static_ac_${var}_4k_64_100w_mixed_burst_recov_300k
     vars: <!['8Ki', '64Ki', '128Ki', '256Ki', '384Ki', '512Ki', '640Ki', '768Ki', '896Ki', '1024Ki', '1152Ki', '1280Ki', '1408Ki', '1536Ki', '1664Ki', '1792Ki', '1920Ki', '2048Ki', '4096Ki', '8192Ki', '65536Ki']!>
     configs:
       - name: codel_off
