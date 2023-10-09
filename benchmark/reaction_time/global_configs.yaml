@@ -9,6 +9,8 @@ variables:
   codel_param: 0.1,
   codel_budget: 256Ki
   codel_inc: 10Ki
+  recover_size1: 300Ki
+  recover_size2: 16Ki
 
 
 configs:
@@ -55,6 +57,12 @@ configs:
       osd mclock scheduler client res: { 0 }
       osd mclock scheduler client wgt: { 1 }
       osd mclock scheduler client lim: { 2 }
+  mclock_profile:
+    dependencies: [ ]
+    file: ceph.conf
+    section: [ global ]
+    values:
+      osd mclock profile: { 0 }
   mclock_recov_profile:
     dependencies: [ ]
     file: ceph.conf
@@ -133,6 +141,13 @@ configs:
     section: [ benchmarks, fio ]
     values:
       fio_conf: ~/Ceph-mClock-benchmark/benchmark/dynamic_iodepth.fio
+  fio_file:
+    dependencies: [  ]
+    file: cbt_dynamic.yaml
+    out: cbt.yaml
+    section: [ benchmarks, fio ]
+    values:
+      fio_conf: { 0 }
   fio_rw:
     dependencies: [ ]
     file: cbt.yaml
@@ -159,3 +174,9 @@ configs:
       mode: randread
       op_size: { 0 }
       iodepth: { 1 }
+  poisson_rate:
+    dependencies: [ ]
+    file: cbt.yaml
+    section: [ benchmarks, fio, extra_config ]
+    values:
+      rate_process: poisson

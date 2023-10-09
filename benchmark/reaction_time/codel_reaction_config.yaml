@@ -1,0 +1,69 @@
+benchmarks:
+  - name: codel_reaction_bs_4k_32k
+    configs:
+      - name: codel_on
+        params: [ $codel_param, $codel_budget, $codel_inc ]
+      - name: mclock
+        params: [ ]
+      - name: sharding_off
+        params: [ ]
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_off
+        params: [ ]
+      - name: fio_file
+        params: [ /users/esmaeil/Ceph-mClock-benchmark/benchmark/fio_confs/dynamic_bs_4k_32k.fio ]
+  - name: codel_reaction_bs_4k_64k
+    configs:
+      - name: codel_on
+        params: [ $codel_param, $codel_budget, $codel_inc ]
+      - name: mclock
+        params: [ ]
+      - name: sharding_off
+        params: [ ]
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_off
+        params: [ ]
+      - name: fio_file
+        params: [ /users/esmaeil/Ceph-mClock-benchmark/benchmark/fio_confs/dynamic_bs_4k_64k.fio ]
+  - name: fio_dynamic_iodepth_4k_64_1024
+    configs:
+      - name: codel_on
+        params: [ $codel_param, $codel_budget, $codel_inc ]
+      - name: mclock
+        params: [ ]
+      - name: sharding_off
+        params: [ ]
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_off
+        params: [ ]
+      - name: fio_file
+        params: [ /users/esmaeil/Ceph-mClock-benchmark/benchmark/fio_confs/dynamic_iodepth_4k_64_1024.fio ]
+  - name: fio_dynamic_iodepth_32k_64_1024
+    configs:
+      - name: codel_on
+        params: [ $codel_param, $codel_budget, $codel_inc ]
+      - name: mclock
+        params: [ ]
+      - name: sharding_off
+        params: [ ]
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_off
+        params: [ ]
+      - name: fio_file
+        params: [ /users/esmaeil/Ceph-mClock-benchmark/benchmark/fio_confs/dynamic_iodepth_32k_64_1024.fio ]
+  
+
+
+  

@@ -11,4 +11,4 @@ bs=4k
 
 [job2]
 startdelay=300
-bs=32k
+bs=64k
