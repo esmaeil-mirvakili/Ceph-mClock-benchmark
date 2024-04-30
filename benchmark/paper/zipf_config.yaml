@@ -248,7 +248,7 @@ benchmarks:
         params: [ 300Ki ]
       - name: zipf_dist
         params: [ zipf:0.9 ]
-  - name: static_ac_${var}_32k_64_zipf_99_recov_300k
+  - name: codel_32k_64_zipf_99_recov_300k
     configs:
       - name: codel_on
         params: [ $codel_param, $codel_budget, $codel_inc ]
