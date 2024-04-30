@@ -1,0 +1,91 @@
+benchmarks:
+  - name: static_ac_${var}_4k_64_poisson_recov_300k
+    vars: <!['8Ki', '64Ki', '128Ki', '256Ki', '512Ki', '768Ki', '1024Ki', '2048Ki', '4096Ki', '8192Ki', '65536Ki']!>
+    configs:
+      - name: codel_off
+        params: [ ]
+      - name: mclock
+        params: [ ]
+      - name: sharding_off
+        params: [ ]
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_on
+        params: [ $var ]
+      - name: fio
+        params: [ 4Ki, 64 ]
+      - name: recovery_on
+        params: [ ]
+      - name: recovery_size
+        params: [ 300Ki ]
+      - name: poisson_rate
+        params: [ ]
+  - name: static_ac_${var}_32k_64_poisson_recov_300k
+    vars: <!['8Ki', '64Ki', '128Ki', '256Ki', '512Ki', '768Ki', '1024Ki', '2048Ki', '4096Ki', '8192Ki', '65536Ki']!>
+    configs:
+      - name: codel_off
+        params: [ ]
+      - name: mclock
+        params: [ ]
+      - name: sharding_off
+        params: [ ]
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_on
+        params: [ $var ]
+      - name: fio
+        params: [ 32Ki, 64 ]
+      - name: recovery_on
+        params: [ ]
+      - name: recovery_size
+        params: [ 300Ki ]
+      - name: poisson_rate
+        params: [ ]
+  - name: codel_4k_64_poisson_recov_300k
+    configs:
+      - name: codel_on
+        params: [ $codel_param, $codel_budget, $codel_inc ]
+      - name: mclock
+        params: [ ]
+      - name: sharding_off
+        params: [ ]
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_off
+        params: [ ]
+      - name: fio
+        params: [ 4Ki, 64 ]
+      - name: recovery_on
+        params: [ ]
+      - name: recovery_size
+        params: [ 300Ki ]
+      - name: poisson_rate
+        params: [ ]
+  - name: codel_32k_64_poisson_recov_300k
+    configs:
+      - name: codel_on
+        params: [ $codel_param, $codel_budget, $codel_inc ]
+      - name: mclock
+        params: [ ]
+      - name: sharding_off
+        params: [ ]
+      - name: mclock_client_profile
+        params: [ $client_iops, $client_wgt, $client_limit ]
+      - name: mclock_recov_profile
+        params: [ $recovery_iops, $recovery_wgt, $recovery_limit ]
+      - name: throttle_off
+        params: [ ]
+      - name: fio
+        params: [ 32Ki, 64 ]
+      - name: recovery_on
+        params: [ ]
+      - name: recovery_size
+        params: [ 300Ki ]
+      - name: poisson_rate
+        params: [ ]
