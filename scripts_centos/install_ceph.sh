@@ -22,12 +22,13 @@ cd "$HOME_LOC"
 git clone https://github.com/esmaeil-mirvakili/ceph.git
 cd ceph
 git checkout bluestore-bufferbloat-mitigation-old
-git submodule update --init
+git submodule update --init --recursive --progress
 
 CEPH_HOME="$HOME_LOC/ceph" bash install-deps.sh
 CEPH_HOME="$HOME_LOC/ceph" bash do_cmake.sh
 cd build
-ninja
+ninja -j3
+ninja install
 
 #../src/stop.sh && rm -rf out dev && MON=1 OSD=1 MGR=1 MDS=0 RGW=0 ../src/vstart.sh -n -x
 #./bin/ceph osd pool create rados
