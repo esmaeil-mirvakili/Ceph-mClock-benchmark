@@ -13,7 +13,7 @@ def spc_parse(line):
         res['operation'] = "write"
     else:
         return None
-    res['time_offset'] = parts[4]  # Timestamp
+    res['time_offset'] = float(parts[4])  # Timestamp
     res['lba'] = parts[1]  # Logical Block Address (Offset)
     res['size'] = parts[2]  # Size in bytes
     return res
@@ -31,13 +31,14 @@ def meta_parse(line):
         res['operation'] = "write"
     else:
         return None
-    res['time_offset'] = parts[3]  # Timestamp
+    res['time_offset'] = float(parts[3])/1000  # Timestamp
     res['lba'] = parts[1]  # Logical Block Address (Offset)
     res['size'] = parts[2]  # Size in bytes
     return res
 
 
 def main(args):
+    first_timestamp = None
     with open(args.input, "r") as f, open(args.output, "w") as fout:
         for line in f:
             parsed = None
@@ -47,6 +48,10 @@ def main(args):
                 parsed = meta_parse(line)
             if parsed is None:
                 continue
+            if args.type == 'meta':
+                if first_timestamp is None:
+                    first_timestamp = parsed['time_offset']
+                parsed['time_offset'] = parsed['time_offset'] - first_timestamp
             # Write in FIO format
             fout.write(f"{parsed['time_offset']} {parsed['operation']} {parsed['lba']} {parsed['size']}\n")
 
