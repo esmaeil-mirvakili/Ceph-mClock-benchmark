@@ -2,12 +2,21 @@
 
 # script to install CBT dependencies and tools for active benchmarking
 
-sudo yum -y install deltarpm
+#sudo yum -y install deltarpm
 sudo yum check-update
 sudo yum -y update
+sudo tee /etc/yum.repos.d/centos7.repo > /dev/null << 'EOF'
+[centos7]
+name=CentOS 7 Repository
+baseurl=http://vault.centos.org/7.9.2009/os/x86_64/
+enabled=1
+gpgcheck=1
+gpgkey=http://vault.centos.org/7.9.2009/os/x86_64/RPM-GPG-KEY-CentOS-7
+EOF
 sudo yum install -y psmisc util-linux coreutils xfsprogs e2fsprogs findutils \
   git wget bzip2 make automake gcc gcc-c++ kernel-devel perf blktrace lsof \
-  redhat-lsb sysstat screen python3-yaml ipmitool dstat zlib-devel ntp
+  redhat-lsb sysstat screen python3-yaml ipmitool dstat zlib-devel
+sudo dnf install -y ntp
 
 MIRROR="http://mirror.math.princeton.edu/pub/fedora-archive/fedora/linux/releases/22/Everything/x86_64/os/Packages"
 
@@ -44,7 +53,7 @@ LDFLAGS=-I"$CEPH_HOME"/src/include LIBRARY_PATH="$CEPH_HOME"/build/lib:$LIBRARY_
 EXTFLAGS=-I"$CEPH_HOME"/src/include LIBRARY_PATH="$CEPH_HOME"/build/lib:$LIBRARY_PATH make -j `nproc`
 echo "FIO installed"
 
-printf 'export LD_LIBRARY_PATH="$CEPH_HOME"/build/lib:$LD_LIBRARY_PATH"\n' >> .bashrc
+printf 'export LD_LIBRARY_PATH="$CEPH_HOME"/build/lib:$LD_LIBRARY_PATH"\n' >> "${HOME_LOC}/.bashrc"
 
 # wget < Red Hat Ceph Storage ISO URL >
 # sudo mount -o loop Ceph-*-dvd.iso /mnt

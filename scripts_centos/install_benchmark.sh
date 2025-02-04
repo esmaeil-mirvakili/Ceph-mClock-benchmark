@@ -13,7 +13,7 @@ sudo yum install -y librbd1
 
 sudo rpm --import 'https://download.ceph.com/keys/release.asc' && \
 	ulimit -n 1024 && \
-	sudo yum install -y python3-rbd python3-rados
+  sudo yum install -y python3-rbd python3-rados
 
 sudo groupadd esmaeil
 sudo usermod -a -G esmaeil esmaeil
@@ -26,8 +26,8 @@ fi
 
 bash mkpartition.sh sdb
 bash install_ceph.sh
-printf 'export PATH="%s:$PATH"\n' "${HOME_LOC}/ceph/build/bin" >> .bashrc
-printf 'export PATH="%s:$PATH"\n' "${HOME_LOC}/fio" >> .bashrc
+printf 'export PATH="%s:$PATH"\n' "${HOME_LOC}/ceph/build/bin" >> "${HOME_LOC}/.bashrc"
+printf 'export PATH="%s:$PATH"\n' "${HOME_LOC}/fio" >> "${HOME_LOC}/.bashrc"
 cp cbt_setup.sh "${HOME_LOC}"
 cp preconditioning.sh "${HOME_LOC}"
 cp discard_sectors.sh "${HOME_LOC}"

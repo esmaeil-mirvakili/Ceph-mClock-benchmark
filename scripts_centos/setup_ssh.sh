@@ -1,17 +1,31 @@
 #!/bin/bash
 
-user="esmaeil"
-osds="c220g2-010808.wisc.cloudlab.us c220g2-010804.wisc.cloudlab.us c220g2-010805.wisc.cloudlab.us c220g2-010810.wisc.cloudlab.us "
-client="c220g2-010802.wisc.cloudlab.us"
+set -a && source .env && set +a
 
-ssh "$user@$client" 'ssh-keygen -t rsa -q -N '' -f ~/.ssh/id_rsa'
+setup_server() {
+  server=$1
+  server_name=$2
+  key=$3
+  echo "Setting up $server_name..."
+  ssh "$user@$server" "echo '$key' >> ~/.ssh/authorized_keys"
+  ssh "$user@$client" "ssh-keyscan -H $server_name >> ~/.ssh/known_hosts"
+  authorized_keys=$(ssh "$user@$server" 'cat ~/.ssh/authorized_keys')
+  if [[ $authorized_keys == *"$key"* ]]; then
+    echo "$server_name is done."
+  else
+    echo "$server_name setup failed."
+    exit 1
+  fi
+}
+
+ssh "$user@$client" "rm -f ~/.ssh/id_rsa*"
+ssh "$user@$client" "ssh-keygen -t rsa -q -N '' -f ~/.ssh/id_rsa"
 rsa_key=$(ssh "$user@$client" 'cat ~/.ssh/id_rsa.pub')
-ssh "$user@$client" "echo '$rsa_key' >> ~/.ssh/authorized_keys"
-ssh "$user@$client" 'ssh -o StrictHostKeyChecking=no client0'
+
+setup_server "$client" "client0" "$rsa_key"
 
 num=0
 for osd in $osds; do
-  ssh "$user@$osd" "echo '$rsa_key' >> ~/.ssh/authorized_keys"
-  ssh "$user@$client" "ssh -o StrictHostKeyChecking=no osd$num"
+  setup_server "$osd" "osd$num" "$rsa_key"
   (( num++ ))
 done
