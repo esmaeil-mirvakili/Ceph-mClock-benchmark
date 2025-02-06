@@ -27,7 +27,7 @@ fi
 cd "$HOME_LOC"
 git clone https://github.com/esmaeil-mirvakili/ceph.git
 cd ceph
-git checkout bluestore-bufferbloat-mitigation-old
+git checkout data_collection
 git submodule update --init --recursive --progress
 
 CEPH_HOME="$HOME_LOC/ceph" bash install-deps.sh

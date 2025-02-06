@@ -24,7 +24,7 @@ else
   HOME_LOC=$1
 fi
 
-bash mkpartition.sh sdb
+bash mkpartition.sh sdc sdb
 bash install_ceph.sh
 printf 'export PATH="%s:$PATH"\n' "${HOME_LOC}/ceph/build/bin" >> "${HOME_LOC}/.bashrc"
 printf 'export PATH="%s:$PATH"\n' "${HOME_LOC}/fio" >> "${HOME_LOC}/.bashrc"

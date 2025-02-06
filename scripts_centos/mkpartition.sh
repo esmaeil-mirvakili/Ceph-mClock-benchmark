@@ -1,17 +1,17 @@
 #!/bin/bash
 
-arg=$1
-IFS=', ' read -r -a partitions <<< "$arg"
+fast_storage=$1
+slow_storage=$2
 
-i=0
-for part in "${partitions[@]}"
-do
-  echo "Creating osd device data label on $part"
-  sudo parted -s -a optimal /dev/$part mklabel gpt
-  sudo parted -s -a optimal /dev/$part mkpart osd-device-$i-journal 0% 1000M
-  sudo parted -s -a optimal /dev/$part mkpart osd-device-$i-data 1000M 100%
-  (( i++ )) || true
-done
+
+sudo parted -s -a optimal /dev/$slow_storage mklabel gpt || failed "mklabel $slow_storage"
+echo "Creating osd device data label on $slow_storage"
+sudo parted -s -a optimal /dev/$slow_storage mkpart osd-device-0-data 0G 20% || failed "mkpart 0-data"
+sudo parted -s -a optimal /dev/$slow_storage mkpart osd-device-0-block 20% 100% || failed "mkpart 0-block"
+
+echo "Creating osd device journal label on $fast_storage"
+sudo parted -s -a optimal /dev/$fast_storage mkpart osd-device-0-wal 0G 20% || failed "mkpart 0-wal"
+sudo parted -s -a optimal /dev/$fast_storage mkpart osd-device-0-db 20% 100% || failed "mkpart 0-db"
 
 echo "partitions by labels:"
 sudo ls -l /dev/disk/by-partlabel/
