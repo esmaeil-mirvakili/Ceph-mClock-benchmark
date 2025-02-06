@@ -3,13 +3,7 @@
 sudo yum check-update
 sudo yum update -y
 sudo yum groupinstall -y "Development Tools"
-sudo yum install -y libffi-devel
-sudo yum install -y python36-devel
-sudo yum install -y python3-pip
-sudo yum install -y git
-sudo yum install targetcli -y
-sudo yum install -y librados2
-sudo yum install -y librbd1
+sudo yum install -y libffi-devel python36-devel python3-pip targetcli librados2 librbd1
 
 sudo rpm --import 'https://download.ceph.com/keys/release.asc' && \
 	ulimit -n 1024 && \
@@ -49,6 +43,7 @@ sudo ./cephadm install ceph-common
 sudo ./cephadm install python3-rados
 #sudo mkdir -p /usr/local/lib/ceph/erasure-code
 #sudo cp -r "${HOME}/ceph/build/lib/*" "/usr/local/lib/ceph/erasure-code"
+
 
 cd "${HOME_LOC}" || exit
 bash register_commands.sh "$HOME_LOC"

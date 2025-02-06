@@ -3,12 +3,14 @@
 sudo yum check-update
 sudo yum update -y
 sudo yum install -y python3-routes
+
 #sudo yum install -y ninja-build
 git clone https://github.com/ninja-build/ninja.git
 cd ninja
 git checkout release
 python3 configure.py --bootstrap
 sudo mv ninja /usr/local/bin/
+
 sudo yum install epel-release -y
 sudo yum install dnf -y
 #wget https://download-ib01.fedoraproject.org/pub/fedora/linux/updates/34/Everything/x86_64/Packages/d/dnf-utils-4.0.24-1.fc34.noarch.rpm

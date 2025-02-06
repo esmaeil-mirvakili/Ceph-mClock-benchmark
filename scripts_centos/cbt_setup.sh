@@ -67,7 +67,7 @@ sudo mv /tmp/x /etc/selinux/config
 rpm -qa firewalld | grep firewalld && sudo systemctl stop firewalld && sudo systemctl disable firewalld
 sudo systemctl stop irqbalance
 sudo systemctl disable irqbalance
-#sudo systemctl start ntpd.service
-#sudo systemctl enable ntpd.service
+sudo systemctl start ntpd.service
+sudo systemctl enable ntpd.service
 sudo systemctl start chronyd.service
 sudo systemctl enable chronyd.service
