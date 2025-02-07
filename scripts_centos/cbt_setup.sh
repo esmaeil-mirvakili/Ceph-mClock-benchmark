@@ -2,9 +2,22 @@
 
 # script to install CBT dependencies and tools for active benchmarking
 
+if [ -z "$HOME_LOC" ]; then
+  HOME_LOC="${HOME}"
+fi
+
 #sudo yum -y install deltarpm
 sudo yum check-update
 sudo yum -y update
+
+cd "${HOME_LOC}" || exit
+
+git clone https://github.com/esmaeil-mirvakili/cbt.git
+
+cd "${HOME_LOC}/cbt" || exit
+
+pip3 install -r requirements.txt
+
 sudo tee /etc/yum.repos.d/centos7.repo > /dev/null << 'EOF'
 [centos7]
 name=CentOS 7 Repository
@@ -32,25 +45,20 @@ sudo yum localinstall -y *.rpm
 sudo yum install -y pdsh
 sudo yum install -y pdsh-rcmd-ssh.x86_64
 
-if [ -z "$1" ]; then
-  HOME_LOC="${HOME}"
-else
-  HOME_LOC=$1
-fi
-
-cd ${HOME_LOC}
+cd "${HOME_LOC}" || exit
 
 git clone https://github.com/axboe/fio.git
 git clone https://github.com/andikleen/pmu-tools.git
 git clone https://github.com/brendangregg/FlameGraph
 
-cd ${HOME_LOC}/fio
+cd "${HOME_LOC}/fio" || exit
 #./configure
 #make
 export CEPH_HOME="${HOME_LOC}"/ceph
 export FIO_HOME="$(pwd)"
 LDFLAGS=-I"$CEPH_HOME"/src/include LIBRARY_PATH="$CEPH_HOME"/build/lib:$LIBRARY_PATH ./configure
 EXTFLAGS=-I"$CEPH_HOME"/src/include LIBRARY_PATH="$CEPH_HOME"/build/lib:$LIBRARY_PATH make -j `nproc`
+printf 'export PATH="%s:$PATH"\n' "${HOME_LOC}/fio" >> "${HOME_LOC}/.bashrc"
 echo "FIO installed"
 
 printf 'export LD_LIBRARY_PATH="$CEPH_HOME"/build/lib:$LD_LIBRARY_PATH"\n' >> "${HOME_LOC}/.bashrc"
