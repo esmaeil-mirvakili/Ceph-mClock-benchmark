@@ -179,3 +179,9 @@ configs:
     section: [ benchmarks, fio, extra_config ]
     values:
       random_distribution: { 0 }
+  fio_replay:
+    dependencies: [ ]
+      file: cbt.yaml
+      section: [ benchmarks, fio, extra_config ]
+      values:
+        read_iolog: { 0 }

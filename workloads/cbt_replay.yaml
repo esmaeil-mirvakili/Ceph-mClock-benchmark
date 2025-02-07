@@ -52,6 +52,8 @@ cluster:
       prefill_object_size: 4194304
       prefill_objects: 5000
       prefill_time: 10
+  recovery_test:
+    osds: [ 1 ]
 
 client_endpoints:
   client0:
@@ -61,17 +63,19 @@ client_endpoints:
     endpoint_size: 40960
 benchmarks:
   fio:
-    time: 300
-    time_based: True
+#    time: 300
+#    time_based: True
     ioengine: 'rbd'
     direct: 1
     prefill: True
-    mode: 'randwrite'
-    op_size: 4096
+    mode: 'readwrite'
+#    op_size: 4096
     procs_per_volume: 1
-    iodepth: 1024
+#    iodepth: 1024
     osd_ra: 4096
     cmd_path: '/users/esmaeil/fio/fio'
     volumes_per_client: 1
     client_endpoints: 'client0'
     recov_test_type: 'background'
+    extra_config:
+      read_iolog: ''
