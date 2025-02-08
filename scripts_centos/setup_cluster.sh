@@ -35,6 +35,12 @@ run_on_all() {
   done
 }
 
+run_on_all_screen() {
+  command=$1
+  session_name=$2
+  run_on_all "screen -dmS ${session_name} bash -c '${command}; exec bash'"
+}
+
 wait_for_node_reboot() {
   node=$1
   name=$2
@@ -55,17 +61,33 @@ wait_for_node_reboot() {
   echo "$name is fully back online with SSH access!"
 }
 
+scp_to_all() {
+  file=$1
+  echo "Sending $file to client..."
+  scp "$file" "$user@$client:~"
+  num=0
+  for osd in $osds; do
+    echo "Sending $file to osd$num..."
+    scp "$file" "$user@$osd:~"
+    (( num++ ))
+  done
+}
+
+echo "Check the disks..."
+run_on_all "lsblk -o NAME,ROTA"
+
+echo "Installing screen on nodes..."
+run_on_all "sudo yum install screen -y"
+
 echo "Setting up ssh keys in the cluster..."
 bash setup_ssh.sh
 
-echo "Sending scripts to client..."
-scp *.sh "$user@$client:~"
-num=0
-for osd in $osds; do
-  echo "Sending scripts to osd$num..."
-  scp *.sh "$user@$osd:~"
-  (( num++ ))
-done
+echo "Preparing scripts on all nodes..."
+run_on_all "git clone https://github.com/esmaeil-mirvakili/Ceph-mClock-benchmark.git"
+run_on_all "cp Ceph-mClock-benchmark/scripts_centos/*.sh ."
+run_on_all "cp Ceph-mClock-benchmark/workloads/cbt.yaml ."
+run_on_all "cp Ceph-mClock-benchmark/workloads/ceph.conf ."
+
 
 echo "Resting the disks..."
 run_on_all "bash reset_disk.sh /dev/sda"
@@ -83,5 +105,6 @@ echo "Resizing the /dev/sda1..."
 run_on_all "sudo resize2fs /dev/sda1"
 
 echo "Nodes setup started..."
-run_on_all "USER_NAME=$user bash setup_node.sh"
+run_on_all_screen "USER_NAME=$user bash setup_node.sh" "install_node"
 
+echo "Installation is running on nodes in screen named 'install_node'."

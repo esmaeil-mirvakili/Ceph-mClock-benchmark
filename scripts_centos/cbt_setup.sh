@@ -61,7 +61,7 @@ EXTFLAGS=-I"$CEPH_HOME"/src/include LIBRARY_PATH="$CEPH_HOME"/build/lib:$LIBRARY
 printf 'export PATH="%s:$PATH"\n' "${HOME_LOC}/fio" >> "${HOME_LOC}/.bashrc"
 echo "FIO installed"
 
-printf 'export LD_LIBRARY_PATH="$CEPH_HOME"/build/lib:$LD_LIBRARY_PATH"\n' >> "${HOME_LOC}/.bashrc"
+printf 'export LD_LIBRARY_PATH="%s/build/lib:%s"\n' "$CEPH_HOME" "$LD_LIBRARY_PATH" >> "${HOME_LOC}/.bashrc"
 
 # wget < Red Hat Ceph Storage ISO URL >
 # sudo mount -o loop Ceph-*-dvd.iso /mnt
