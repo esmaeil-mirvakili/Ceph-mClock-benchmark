@@ -10,20 +10,17 @@ for disk in /sys/block/sd*; do
     disk_name=$(basename "$disk")
     device="/dev/$disk_name"
 
-    # Get disk model (if available)
-    model=$(lsblk -dn -o MODEL "$device" | sed 's/^[ \t]*//')
-    
     # Check if the disk is an SSD (ROTA=0) or HDD (ROTA=1)
     rota=$(cat "$disk/queue/rotational")
     if [ "$rota" -eq 0 ]; then
         echo "$device is an SSD device"
-        ssd_disk=device
+        ssd_disk=$device
     else
          if [[ "$device" == "$root_disk" ]]; then
             echo "$device is the root HDD device"
         else
             echo "$device is an HDD device"
-            hdd_disk=device
+            hdd_disk=$device
         fi
     fi
 done

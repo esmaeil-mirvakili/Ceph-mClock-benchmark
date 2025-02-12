@@ -24,6 +24,8 @@ sudo yum install -y psmisc util-linux coreutils xfsprogs e2fsprogs findutils \
   sysstat screen python3-yaml ipmitool dstat zlib-devel
 sudo dnf install -y ethtool hostname iproute NetworkManager-initscripts-updown tar
 
+sudo yum install targetcli -y
+
 sudo tee /etc/yum.repos.d/centos7.repo > /dev/null << 'EOF'
 [centos7]
 name=CentOS 7 Repository
