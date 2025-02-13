@@ -22,7 +22,7 @@ pip3 install -r requirements.txt
 sudo yum install -y psmisc util-linux coreutils xfsprogs e2fsprogs findutils \
   git wget bzip2 make automake gcc gcc-c++ kernel-devel perf blktrace lsof \
   sysstat screen python3-yaml ipmitool dstat zlib-devel
-sudo dnf install -y ethtool hostname iproute NetworkManager-initscripts-updown tar
+#sudo dnf install -y ethtool hostname iproute NetworkManager-initscripts-updown tar
 
 sudo yum install targetcli -y
 
