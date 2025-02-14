@@ -23,27 +23,44 @@ if [[ ${#MISSING_VARS[@]} -gt 0 ]]; then
     exit 1
 fi
 
+declare -A IPS
+IPS["client0"]="10.10.1.2"
+IPS["osd0"]="10.10.1.1"
+IPS["osd1"]="10.10.1.3"
+IPS["osd2"]="10.10.1.4"
+IPS["osd3"]="10.10.1.5"
+
+
+ssh_to_node() {
+  local node=$1
+  local command=$2
+  local name=$3
+  local ip=${IPS[$name]}
+  ssh "$user@$node" "IP_ADDRESS=$ip $command"
+}
+
+
 run_on_all() {
-  command=$1
+  local command=$1
   echo "Running $command on client..."
-  ssh "$user@$client" "$command"
+  ssh_to_node "$client" "$command" "client0"
   num=0
   for osd in $osds; do
     echo "Running $command on ods$num..."
-    ssh "$user@$osd" "$command"
+    ssh_to_node "$osd" "$command" "ods$num"
     (( num++ ))
   done
 }
 
 run_on_all_screen() {
-  command=$1
-  session_name=$2
+  local command=$1
+  local session_name=$2
   run_on_all "screen -dmS ${session_name} bash -c '${command}; exec bash'"
 }
 
 wait_for_node_reboot() {
-  node=$1
-  name=$2
+  local node=$1
+  local name=$2
   echo "Waiting for $name it to come back online..."
 
   # Wait for the node to come back online
@@ -62,7 +79,7 @@ wait_for_node_reboot() {
 }
 
 scp_to_all() {
-  file=$1
+  local file=$1
   echo "Sending $file to client..."
   scp "$file" "$user@$client:~"
   num=0
@@ -89,6 +106,6 @@ run_on_all "cp Ceph-mClock-benchmark/workloads/cbt.yaml ."
 run_on_all "cp Ceph-mClock-benchmark/workloads/ceph.conf ."
 
 echo "Nodes setup started..."
-run_on_all_screen "USER_NAME=$user bash setup_node.sh" "install_node"
+run_on_all_screen "USER_NAME=$user bash setup_node.sh > install.log" "install_node"
 
 echo "Installation is running on nodes in screen named 'install_node'."

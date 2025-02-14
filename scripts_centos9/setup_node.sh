@@ -4,23 +4,7 @@ if [ -z "$HOME_LOC" ]; then
   HOME_LOC="${HOME}"
 fi
 
-device_list=$(nmcli --terse --fields DEVICE device status)
-
-# Initialize an associative array for storing IPs
-declare -A device_ips
-
-# Loop through each device and get its IP address
-for device in $device_list; do
-    ip_address=$(nmcli -g IP4.ADDRESS device show "$device" | awk -F'/' '{print $1}')
-
-    # Store in associative array
-    device_ips["$device"]=$ip_address
-done
 nmcli d
-echo "Network Devices and their IP Addresses:"
-for device in "${!device_ips[@]}"; do
-    echo "$device -> ${device_ips[$device]:-No IP Assigned}"
-done
 
 sudo yum check-update
 sudo yum update -y
@@ -35,10 +19,8 @@ else
     echo "Disconnected Network Devices:"
     echo "$disconnected_devices"
     echo "Restoring the network"
-    sudo nmcli con add type ethernet ifname "$disconnected_devices" con-name "$disconnected_devices"
-    sudo nmcli con up enp6s0f1
-    sudo nmcli con modify "$disconnected_devices" ipv4.method manual ipv4.addresses "${device_ips[$device]:-No IP Assigned}"/24 ipv4.gateway 10.10.1.1 ipv4.dns 8.8.8.8
-    sudo nmcli con up enp6s0f1
+    sudo nmcli con up "$disconnected_devices"
+    sudo nmcli con modify "$disconnected_devices" ipv4.method manual ipv4.addresses "$IP_ADDRESS"/24 ipv4.gateway 10.10.1.1 ipv4.dns 8.8.8.8
     nmcli d
 fi
 
