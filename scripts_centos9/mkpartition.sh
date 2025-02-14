@@ -30,6 +30,8 @@ if [ -z "$ssd_disk" ] || [ -z "$hdd_disk" ]; then
   exit 1;
 fi
 
+echo -e "ssd:$ssd_disk\nhdd:$hdd_disk" > disks.txt
+
 sudo parted -s -a optimal "$hdd_disk" mklabel gpt || failed "mklabel $hdd_disk"
 echo "Creating osd device data label on $hdd_disk"
 sudo parted -s -a optimal "$hdd_disk" mkpart osd-device-0-data 0G 20% || failed "mkpart 0-data"
