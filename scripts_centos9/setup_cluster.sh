@@ -23,20 +23,12 @@ if [[ ${#MISSING_VARS[@]} -gt 0 ]]; then
     exit 1
 fi
 
-declare -A IPS
-IPS["client0"]="10.10.1.2"
-IPS["osd0"]="10.10.1.1"
-IPS["osd1"]="10.10.1.3"
-IPS["osd2"]="10.10.1.4"
-IPS["osd3"]="10.10.1.5"
-
 
 ssh_to_node() {
   local node=$1
   local command=$2
   local name=$3
-  local ip=${IPS[$name]}
-  ssh "$user@$node" "IP_ADDRESS=$ip $command"
+  ssh "$user@$node" "$command"
 }
 
 
@@ -104,6 +96,28 @@ run_on_all "git clone https://github.com/esmaeil-mirvakili/Ceph-mClock-benchmark
 run_on_all "cp Ceph-mClock-benchmark/scripts_centos9/*.sh ."
 run_on_all "cp Ceph-mClock-benchmark/workloads/cbt.yaml ."
 run_on_all "cp Ceph-mClock-benchmark/workloads/ceph.conf ."
+
+declare -A IPS
+IPS["client0"]="10.10.1.2"
+IPS["osd0"]="10.10.1.1"
+IPS["osd1"]="10.10.1.3"
+IPS["osd2"]="10.10.1.4"
+IPS["osd3"]="10.10.1.5"
+
+echo "Creating .env files on nodes..."
+name="client0"
+ip=${IPS[$name]}
+cmd="echo IP_ADDRESS=$ip | sudo tee .env"
+ssh_to_node "$client" "$cmd" "$name"
+num=0
+for osd in $osds; do
+  name="osd$num"
+  ip=${IPS[$name]}
+  cmd="echo IP_ADDRESS=$ip | sudo tee .env"
+  echo "Running $command on $name..."
+  ssh_to_node "$osd" "$cmd" "$name"
+  (( num++ ))
+done
 
 echo "Nodes setup started..."
 run_on_all_screen "USER_NAME=$ceph_user bash setup_node.sh > install.log" "install_node"

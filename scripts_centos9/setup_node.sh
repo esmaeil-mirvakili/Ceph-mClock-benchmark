@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -a && source .env && set +a
+
 if [ -z "$HOME_LOC" ]; then
   HOME_LOC="${HOME}"
 fi
