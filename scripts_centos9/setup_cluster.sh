@@ -106,6 +106,6 @@ run_on_all "cp Ceph-mClock-benchmark/workloads/cbt.yaml ."
 run_on_all "cp Ceph-mClock-benchmark/workloads/ceph.conf ."
 
 echo "Nodes setup started..."
-run_on_all_screen "USER_NAME=$user bash setup_node.sh > install.log" "install_node"
+run_on_all_screen "USER_NAME=$ceph_user bash setup_node.sh > install.log" "install_node"
 
 echo "Installation is running on nodes in screen named 'install_node'."

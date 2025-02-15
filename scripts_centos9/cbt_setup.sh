@@ -15,7 +15,7 @@ cd "${HOME_LOC}" || exit
 git clone https://github.com/esmaeil-mirvakili/cbt.git
 
 cd "${HOME_LOC}/cbt" || exit
-
+git checkout dev
 pip3 install -r requirements.txt
 
 

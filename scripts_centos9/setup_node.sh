@@ -19,8 +19,10 @@ else
     echo "Disconnected Network Devices:"
     echo "$disconnected_devices"
     echo "Restoring the network"
+    sudo nmcli con add type ethernet ifname "$disconnected_devices" con-name "$disconnected_devices"
     sudo nmcli con up "$disconnected_devices"
     sudo nmcli con modify "$disconnected_devices" ipv4.method manual ipv4.addresses "$IP_ADDRESS"/24 ipv4.gateway 10.10.1.1 ipv4.dns 8.8.8.8
+    sudo nmcli con up "$disconnected_devices"
     nmcli d
 fi
 
@@ -34,8 +36,15 @@ sudo dnf install -y centos-release-ceph-quincy
 sudo dnf install -y python3-rados python3-rbd
 
 
+#sudo groupadd "$USER_NAME"
+#sudo usermod -a -G "$USER_NAME" "$USER_NAME"
+
 sudo groupadd "$USER_NAME"
-sudo usermod -a -G "$USER_NAME" "$USER_NAME"
+sudo useradd -m -g "$USER_NAME" "$USER_NAME"
+sudo usermod -aG "$USER_NAME" "$USER_NAME"
+echo "$USER_NAME ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/$USER_NAME
+sudo chmod 440 /etc/sudoers.d/$USER_NAME
+
 
 if [ -z "$HOME_LOC" ]; then
   HOME_LOC="${HOME}"
@@ -53,13 +62,13 @@ printf 'export PATH="%s:$PATH"\n' "${HOME_LOC}/ceph/build/bin" >> "${HOME_LOC}/.
 
 bash cbt_setup.sh
 
-#curl --silent --remote-name --location https://github.com/ceph/ceph/raw/pacific/src/cephadm/cephadm
-#chmod +x cephadm
-#sudo ./cephadm add-repo --release quincy
-#sudo ./cephadm install ceph-common
-#sudo ./cephadm install python3-rados
-#sudo mkdir -p /usr/local/lib/ceph/erasure-code
-#sudo cp -r "${HOME}/ceph/build/lib/*" "/usr/local/lib/ceph/erasure-code"
+curl --silent --remote-name --location https://github.com/ceph/ceph/raw/pacific/src/cephadm/cephadm
+chmod +x cephadm
+sudo ./cephadm add-repo --release quincy
+sudo ./cephadm install ceph-common
+sudo ./cephadm install python3-rados
+sudo mkdir -p /usr/local/lib/ceph/erasure-code
+sudo cp -r "${HOME}/ceph/build/lib/*" "/usr/local/lib/ceph/erasure-code"
 
 
 cd "${HOME_LOC}" || exit
