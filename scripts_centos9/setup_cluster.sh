@@ -119,6 +119,8 @@ for osd in $osds; do
   (( num++ ))
 done
 
+run_on_all "cat .env"
+
 echo "Nodes setup started..."
 run_on_all_screen "USER_NAME=$ceph_user bash setup_node.sh > install.log" "install_node"
 
