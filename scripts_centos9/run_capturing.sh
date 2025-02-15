@@ -81,41 +81,9 @@ scp_to_all() {
   done
 }
 
-echo "Check the disks..."
-run_on_all "lsblk -o NAME,ROTA"
+interval=5
 
-echo "Installing screen on nodes..."
-run_on_all "sudo yum install screen -y"
-
-echo "Setting up ssh keys in the cluster..."
-bash setup_ssh.sh
-
-echo "Preparing scripts on all nodes..."
-run_on_all "git clone https://github.com/esmaeil-mirvakili/Ceph-mClock-benchmark.git"
-run_on_all "cp Ceph-mClock-benchmark/scripts_centos9/*.sh ."
-run_on_all "cp Ceph-mClock-benchmark/workloads/cbt.yaml ."
-run_on_all "cp Ceph-mClock-benchmark/workloads/ceph.conf ."
-run_on_all "cp Ceph-mClock-benchmark/system_state/capture.py ."
-
-IPS_VALUES=("10.10.1.1" "10.10.1.3" "10.10.1.4" "10.10.1.5")
-
-echo "Creating .env files on nodes..."
-name="client0"
-cmd="echo IP_ADDRESS=10.10.1.2 | sudo tee .env"
-ssh_to_node "$client" "$cmd" "$name"
-num=0
-for osd in $osds; do
-  name="osd$num"
-  ip=${IPS_VALUES[$num]}
-  cmd="echo IP_ADDRESS=$ip | sudo tee .env"
-  echo "Running $command on $name..."
-  ssh_to_node "$osd" "$cmd" "$name"
-  (( num++ ))
-done
-
-run_on_all "cat .env"
-
-echo "Nodes setup started..."
-run_on_all_screen "USER_NAME=$ceph_user bash setup_node.sh > install.log" "install_node"
+echo "Run the scripts on nodes..."
+run_on_all_screen "python3 capture.py -p data/system_stats.txt -d disks.txt -i $interval" "capture"
 
 echo "Installation is running on nodes in screen named 'install_node'."
