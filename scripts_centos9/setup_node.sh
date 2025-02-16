@@ -41,11 +41,14 @@ sudo dnf install -y python3-rados python3-rbd
 #sudo groupadd "$USER_NAME"
 #sudo usermod -a -G "$USER_NAME" "$USER_NAME"
 
-sudo groupadd "$USER_NAME"
-sudo useradd -m -g "$USER_NAME" "$USER_NAME"
-sudo usermod -aG "$USER_NAME" "$USER_NAME"
-echo "$USER_NAME ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/$USER_NAME
-sudo chmod 440 /etc/sudoers.d/$USER_NAME
+#sudo groupadd "$USER_NAME"
+#sudo useradd -m -g "$USER_NAME" "$USER_NAME"
+#sudo usermod -aG "$USER_NAME" "$USER_NAME"
+#echo "$USER_NAME ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/$USER_NAME
+#sudo chmod 440 /etc/sudoers.d/$USER_NAME
+
+sudo groupadd esmaeil
+sudo usermod -a -G esmaeil esmaeil
 
 
 if [ -z "$HOME_LOC" ]; then

@@ -13,9 +13,9 @@ cluster:
     osd0:
       a: ~
   osds_per_node: 1
-  fs: 'xfs'
-  mkfs_opts: '-f -i size=2048'
-  mount_opts: '-o inode64,noatime,logbsize=256k'
+  fs: 'bluestore'
+  mkfs_opts: ''
+  mount_opts: ''
   conf_file: '/users/esmaeil/ceph.conf'
   iterations: 1
   use_existing: False
