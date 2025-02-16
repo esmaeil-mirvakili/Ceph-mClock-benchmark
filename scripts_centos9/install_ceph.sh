@@ -29,7 +29,7 @@ fi
 cd "$HOME_LOC"
 git clone https://github.com/esmaeil-mirvakili/ceph.git
 cd ceph
-git checkout data_collection_dev
+#git checkout data_collection_dev
 git submodule update --init --recursive --progress
 
 CEPH_HOME="$HOME_LOC/ceph" bash install-deps.sh
