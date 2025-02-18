@@ -2,7 +2,10 @@ cluster:
   user: 'esmaeil'
   head: "client0"
   clients: ["client0"]
-  osds: ["osd0", "osd1", "osd2", "osd3"]
+  osds: ["osd0", "osd1", "osd2"]
+  osd_data_path: "/users/esmaeil/data"
+  pre_bench_command: "sudo /users/esmaeil/ceph/build/bin/ceph daemon osd.%d start data collection"
+  post_bench_command: "sudo /users/esmaeil/ceph/build/bin/ceph daemon osd.%d stop data collection"
   mons:
     osd0:
       a: "10.10.1.1:6789"
