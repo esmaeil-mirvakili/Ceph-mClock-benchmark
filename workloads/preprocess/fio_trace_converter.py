@@ -1,4 +1,7 @@
 import argparse
+import os.path
+from pathlib import Path
+import yaml
 
 
 def spc_parse(line):
@@ -37,10 +40,43 @@ def meta_parse(line):
     return res
 
 
+def store(entries, output_path):
+    with open(output_path, "w") as out_file:
+        for entry in entries:
+            out_file.write(f"{entry['time_offset']:.6f} {entry['operation']} {entry['lba']} {entry['size']}\n")
+
+
+def store_configs(output_path, cbt_cnf_path, trace_paths):
+    cbt_conf = {}
+    with open(cbt_cnf_path, "r") as stream:
+        try:
+            cbt_conf = yaml.safe_load(stream)
+        except yaml.YAMLError as e:
+            raise e
+    bench_config = cbt_conf['benchmarks']['fio']
+    benchmarks = {}
+    for i, trace_path in enumerate(trace_paths):
+        conf = {}
+        conf.update(bench_config)
+        conf['extra_config'] = {'read_iolog': trace_path}
+        conf['order'] = i
+        benchmarks[f'fio_{i}'] = conf
+    cbt_conf['benchmarks'] = benchmarks
+    cnf_out_path = os.path.join(output_path, 'cbt.yaml')
+    with open(cnf_out_path, 'w') as fp:
+        yaml.dump(cbt_conf, fp)
+
+
 def main(args):
+    input_filename = Path(args.input).stem
+    if not os.path.exists(args.output):
+        os.makedirs(args.output)
+    index = 0
     first_timestamp = None
-    with open(args.input, "r") as f, open(args.output, "w") as fout:
-        for line in f:
+    entries = []
+    trace_paths = []
+    with open(args.input, "r") as in_file:
+        for line in in_file:
             parsed = None
             if args.type == 'spc':
                 parsed = spc_parse(line)
@@ -48,12 +84,23 @@ def main(args):
                 parsed = meta_parse(line)
             if parsed is None:
                 continue
-            if args.type == 'meta':
-                if first_timestamp is None:
-                    first_timestamp = parsed['time_offset']
-                parsed['time_offset'] = parsed['time_offset'] - first_timestamp
-            # Write in FIO format
-            fout.write(f"{parsed['time_offset']} {parsed['operation']} {parsed['lba']} {parsed['size']}\n")
+            if first_timestamp is None:
+                first_timestamp = parsed['time_offset']
+            if args.chunked and parsed['time_offset'] - first_timestamp > args.duration:
+                trace_output = os.path.join(args.output, f'{input_filename}_{index}.txt')
+                store(entries, trace_output)
+                trace_paths.append(trace_output)
+                first_timestamp = parsed['time_offset']
+                index += 1
+                if index >= args.limit - 1:
+                    break
+            parsed['time_offset'] = parsed['time_offset'] - first_timestamp
+            entries.append(parsed)
+    if len(entries) > 0:
+        trace_output = os.path.join(args.output, f'{input_filename}_{index}.txt')
+        store(entries, trace_output)
+        trace_paths.append(trace_output)
+    store_configs(args.output, args.yaml_cbt, trace_paths)
 
 
 if __name__ == "__main__":
@@ -68,4 +115,15 @@ if __name__ == "__main__":
     parser.add_argument('-o', '--output', metavar='output',
                         required=True, dest='output',
                         help='FIO trace output file')
+    parser.add_argument('-c', '--chunked', action="store_true", dest='chunked',
+                        help='If enabled, it break the workload to chunks with size of `duration`.')
+    parser.add_argument('-d', '--duration', metavar='duration', type=int,
+                        required=False, default=600, dest='duration',
+                        help='Chunk duration.')
+    parser.add_argument('-l', '--limit', metavar='limit', type=int,
+                        required=False, default=30, dest='limit',
+                        help='Chunk number limit.')
+    parser.add_argument('-y', '--yam_cbt', metavar='yaml_cbt',
+                        required=False, default='cbt_template.yaml', dest='yaml_cbt',
+                        help='CBT config path.')
     main(parser.parse_args())

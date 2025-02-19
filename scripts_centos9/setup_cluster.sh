@@ -93,8 +93,9 @@ bash setup_ssh.sh
 echo "Preparing scripts on all nodes..."
 run_on_all "git clone https://github.com/esmaeil-mirvakili/Ceph-mClock-benchmark.git"
 run_on_all "cp Ceph-mClock-benchmark/scripts_centos9/*.sh ."
-run_on_all "cp Ceph-mClock-benchmark/workloads/$exp_dir/cbt.yaml ."
-run_on_all "cp Ceph-mClock-benchmark/workloads/$exp_dir/ceph.conf ."
+run_on_all "cp Ceph-mClock-benchmark/workloads/preprocess/*.py ."
+run_on_all "cp Ceph-mClock-benchmark/workloads/*.yaml ."
+run_on_all "cp Ceph-mClock-benchmark/workloads/*.conf ."
 run_on_all "cp Ceph-mClock-benchmark/system_state/capture.py ."
 
 IPS_VALUES=("10.10.1.1" "10.10.1.3" "10.10.1.4" "10.10.1.5")
