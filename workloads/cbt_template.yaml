@@ -67,6 +67,7 @@ client_endpoints:
     endpoint_size: 40960
 benchmarks:
   fio:
+    type: fio
     ioengine: 'rbd'
     direct: 1
     prefill: False
