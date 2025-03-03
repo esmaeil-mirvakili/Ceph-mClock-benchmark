@@ -40,10 +40,11 @@ def meta_parse(line):
     return res
 
 
-def store(entries, output_path):
+def store(entries, output_path, rbd_image):
     with open(output_path, "w") as out_file:
+        out_file.write("fio version 3 iolog\n")
         for entry in entries:
-            out_file.write(f"{entry['time_offset']:.6f} {entry['operation']} {entry['lba']} {entry['size']}\n")
+            out_file.write(f"{entry['time_offset']:.6f} {entry['operation']} {rbd_image} {entry['lba']} {entry['size']}\n")
 
 
 def store_configs(output_path, cbt_cnf_path, trace_paths):
@@ -67,8 +68,19 @@ def store_configs(output_path, cbt_cnf_path, trace_paths):
         yaml.dump(cbt_conf, fp)
 
 
+def get_rbd_image(cbt_cnf_path):
+    with open(cbt_cnf_path, "r") as stream:
+        try:
+            cbt_conf = yaml.safe_load(stream)
+            return cbt_conf['client_endpoints']['pool_profile']
+        except Exception as e:
+            raise e
+    return None
+
+
 def main(args):
     input_filename = Path(args.input).stem
+    rbd_image = get_rbd_image(args.yaml_cbt)
     if not os.path.exists(args.output):
         os.makedirs(args.output)
     index = 0
@@ -98,7 +110,7 @@ def main(args):
             entries.append(parsed)
     if len(entries) > 0:
         trace_output = os.path.join(args.output, f'{input_filename}_{index}.txt')
-        store(entries, trace_output)
+        store(entries, trace_output, rbd_image)
         trace_paths.append(trace_output)
     store_configs(args.output, args.yaml_cbt, trace_paths)
 
