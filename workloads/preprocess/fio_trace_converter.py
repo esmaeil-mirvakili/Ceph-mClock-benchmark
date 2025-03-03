@@ -72,7 +72,7 @@ def get_rbd_image(cbt_cnf_path):
     with open(cbt_cnf_path, "r") as stream:
         try:
             cbt_conf = yaml.safe_load(stream)
-            return cbt_conf['client_endpoints']['pool_profile']
+            return cbt_conf['client_endpoints']['client0']['pool_profile']
         except Exception as e:
             raise e
     return None
