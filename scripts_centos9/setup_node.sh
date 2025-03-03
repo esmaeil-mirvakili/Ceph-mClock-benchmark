@@ -73,7 +73,7 @@ sudo ./cephadm add-repo --release quincy
 sudo ./cephadm install ceph-common
 sudo ./cephadm install python3-rados
 sudo mkdir -p /usr/local/lib/ceph/erasure-code
-sudo cp -r "${HOME}/ceph/build/lib/*" "/usr/local/lib/ceph/erasure-code"
+sudo cp -r "${HOME}/ceph/build/lib/"* "/usr/local/lib/ceph/erasure-code"
 
 
 cd "${HOME_LOC}" || exit

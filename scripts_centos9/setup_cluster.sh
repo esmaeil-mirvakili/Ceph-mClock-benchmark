@@ -109,7 +109,7 @@ for osd in $osds; do
   name="osd$num"
   ip=${IPS_VALUES[$num]}
   cmd="echo IP_ADDRESS=$ip | sudo tee .env"
-  echo "Running $command on $name..."
+  echo "Running $cmd on $name..."
   ssh_to_node "$osd" "$cmd" "$name"
   (( num++ ))
 done

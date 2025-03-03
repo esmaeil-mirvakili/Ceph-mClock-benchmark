@@ -16,7 +16,7 @@ def spc_parse(line):
         res['operation'] = "write"
     else:
         return None
-    res['time_offset'] = float(parts[4])  # Timestamp
+    res['time_offset'] = int(float(parts[4]) * 1000_000)  # Timestamp
     res['lba'] = parts[1]  # Logical Block Address (Offset)
     res['size'] = parts[2]  # Size in bytes
     return res
@@ -34,7 +34,7 @@ def meta_parse(line):
         res['operation'] = "write"
     else:
         return None
-    res['time_offset'] = float(parts[3])/1000  # Timestamp
+    res['time_offset'] = int(float(parts[3]) * 1000)  # Timestamp
     res['lba'] = parts[1]  # Logical Block Address (Offset)
     res['size'] = parts[2]  # Size in bytes
     return res
@@ -100,7 +100,7 @@ def main(args):
                 first_timestamp = parsed['time_offset']
             if args.chunked and parsed['time_offset'] - first_timestamp > args.duration:
                 trace_output = os.path.join(args.output, f'{input_filename}_{index}.txt')
-                store(entries, trace_output)
+                store(entries, trace_output, rbd_image)
                 trace_paths.append(trace_output)
                 first_timestamp = parsed['time_offset']
                 index += 1
