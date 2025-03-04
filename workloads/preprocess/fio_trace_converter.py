@@ -44,7 +44,7 @@ def store(entries, output_path, rbd_image):
     with open(output_path, "w") as out_file:
         out_file.write("fio version 3 iolog\n")
         for entry in entries:
-            out_file.write(f"{entry['time_offset']:.6f} {entry['operation']} {rbd_image} {entry['lba']} {entry['size']}\n")
+            out_file.write(f"{entry['time_offset']} {entry['operation']} {rbd_image} {entry['lba']} {entry['size']}\n")
 
 
 def store_configs(output_path, cbt_cnf_path, trace_paths):
