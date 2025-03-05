@@ -59,6 +59,8 @@ cluster:
       prefill_object_size: 4194304
       prefill_objects: 5000
       prefill_time: 10
+  recovery_test:
+    osds: [ 1 ]
 
 client_endpoints:
   client0:
@@ -69,7 +71,10 @@ client_endpoints:
 benchmarks:
   fio:
     type: fio
-    ioengine: 'rbd'
+    ioengine: 'libaio'
+    iodepth: 1
+    filename: /dev/rbd0
+    replay_redirect: /dev/rbd0
     direct: 1
     mode: 'readwrite'
     procs_per_volume: 1
@@ -77,3 +82,4 @@ benchmarks:
     cmd_path: '/users/esmaeil/fio/fio'
     volumes_per_client: 1
     client_endpoints: 'client0'
+    recov_test_type: 'background'

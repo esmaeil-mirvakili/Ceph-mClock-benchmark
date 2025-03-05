@@ -69,7 +69,10 @@ client_endpoints:
 benchmarks:
   fio:
     type: fio
-    ioengine: 'rbd'
+    ioengine: 'libaio'
+    iodepth: 1
+    filename: /dev/rbd0
+    replay_redirect: /dev/rbd0
     direct: 1
     mode: 'readwrite'
     procs_per_volume: 1
