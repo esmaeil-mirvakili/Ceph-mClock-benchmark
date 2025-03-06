@@ -59,7 +59,9 @@ def store_configs(output_path, cbt_cnf_path, trace_paths):
     for i, trace_path in enumerate(trace_paths):
         conf = {}
         conf.update(bench_config)
-        conf['extra_config'] = {'read_iolog': trace_path}
+        if 'extra_config' not in conf:
+            conf['extra_config'] = {}
+        conf['extra_config']['read_iolog'] = trace_path
         conf['order'] = i
         benchmarks[f'fio_{i}'] = conf
     cbt_conf['benchmarks'] = benchmarks
