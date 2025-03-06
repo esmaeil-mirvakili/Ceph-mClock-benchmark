@@ -5,10 +5,10 @@ cluster:
   osds: ["osd0", "osd1", "osd2", "osd3"]
   osd_data_path: "/users/esmaeil/data"
   pre_bench_commands:
-    - "sudo /users/esmaeil/ceph/build/bin/ceph daemon osd.%d start data collection"
+    - "sudo /users/esmaeil/ceph/build/bin/ceph daemon osd.{osd_id} start data collection"
     - "ls -l /dev/disk/by-partlabel/ > /users/esmaeil/data/disks_labels.txt"
   post_bench_commands:
-    - "sudo /users/esmaeil/ceph/build/bin/ceph daemon osd.%d stop data collection"
+    - "sudo /users/esmaeil/ceph/build/bin/ceph daemon osd.{osd_id} stop data collection"
   mons:
     osd0:
       a: "10.10.1.1:6789"
@@ -71,8 +71,6 @@ benchmarks:
     type: fio
     ioengine: 'libaio'
     iodepth: 1
-    filename: /dev/rbd0
-    replay_redirect: /dev/rbd0
     direct: 1
     mode: 'readwrite'
     procs_per_volume: 1
@@ -80,3 +78,6 @@ benchmarks:
     cmd_path: '/users/esmaeil/fio/fio'
     volumes_per_client: 1
     client_endpoints: 'client0'
+    extra_config:
+      filename: /dev/rbd0
+      replay_redirect: /dev/rbd0

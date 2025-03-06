@@ -5,10 +5,10 @@ cluster:
   osds: ["osd0", "osd1", "osd2", "osd3"]
   osd_data_path: "/users/esmaeil/data"
   pre_bench_commands:
-    - "sudo /users/esmaeil/ceph/build/bin/ceph daemon osd.%d start data collection"
+    - "sudo /users/esmaeil/ceph/build/bin/ceph daemon osd.{osd_id} start data collection"
     - "ls -l /dev/disk/by-partlabel/ > /users/esmaeil/data/disks_labels.txt"
   post_bench_commands:
-    - "sudo /users/esmaeil/ceph/build/bin/ceph daemon osd.%d stop data collection"
+    - "sudo /users/esmaeil/ceph/build/bin/ceph daemon osd.{osd_id} stop data collection"
   mons:
     osd0:
       a: "10.10.1.1:6789"
