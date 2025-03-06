@@ -4,7 +4,7 @@ from pathlib import Path
 import yaml
 
 
-def spc_parse(line):
+def spc_parse(line, block_size=512):
     parts = line.strip().split(",")
     if len(parts) < 5:
         return None
@@ -17,7 +17,7 @@ def spc_parse(line):
     else:
         return None
     res['time_offset'] = int(float(parts[4]) * 1000_000)  # Timestamp
-    res['lba'] = parts[1]  # Logical Block Address (Offset)
+    res['lba'] = int(parts[1]) * block_size  # Logical Block Address (Offset)
     res['size'] = parts[2]  # Size in bytes
     return res
 
