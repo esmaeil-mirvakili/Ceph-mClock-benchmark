@@ -30,6 +30,7 @@ fi
 
 sudo yum groupinstall -y "Development Tools"
 sudo yum install -y libffi-devel python-devel python3-pip targetcli librados2 librbd1 sysstat
+sudo yum install vim -y
 
 #sudo rpm --import 'https://download.ceph.com/keys/release.asc' && \
 #	ulimit -n 1024 && \
