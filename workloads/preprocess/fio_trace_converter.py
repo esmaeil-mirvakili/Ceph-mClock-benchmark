@@ -71,13 +71,7 @@ def store_configs(output_path, cbt_cnf_path, trace_paths):
 
 
 def get_rbd_image(cbt_cnf_path):
-    with open(cbt_cnf_path, "r") as stream:
-        try:
-            cbt_conf = yaml.safe_load(stream)
-            return cbt_conf['client_endpoints']['client0']['pool_profile']
-        except Exception as e:
-            raise e
-    return None
+    return '/dev/rbd0'
 
 
 def main(args):
@@ -103,6 +97,7 @@ def main(args):
             if args.chunked and parsed['time_offset'] - first_timestamp > args.duration:
                 trace_output = os.path.join(args.output, f'{input_filename}_{index}.txt')
                 store(entries, trace_output, rbd_image)
+                entries = []
                 trace_paths.append(trace_output)
                 first_timestamp = parsed['time_offset']
                 index += 1
