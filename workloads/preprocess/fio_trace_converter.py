@@ -43,6 +43,8 @@ def meta_parse(line):
 def store(entries, output_path, rbd_image):
     with open(output_path, "w") as out_file:
         out_file.write("fio version 3 iolog\n")
+        out_file.write(f"0 {rbd_image} add\n")
+        out_file.write(f"0 {rbd_image} open\n")
         for entry in entries:
             out_file.write(f"{entry['time_offset']} {rbd_image} {entry['operation']} {entry['lba']} {entry['size']}\n")
 
