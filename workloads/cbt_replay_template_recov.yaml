@@ -82,5 +82,4 @@ benchmarks:
     client_endpoints: 'client0'
     recov_test_type: 'background'
     extra_config:
-      filename: /dev/rbd0
       replay_redirect: /dev/rbd0

@@ -79,5 +79,4 @@ benchmarks:
     volumes_per_client: 1
     client_endpoints: 'client0'
     extra_config:
-      filename: /dev/rbd0
       replay_redirect: /dev/rbd0
