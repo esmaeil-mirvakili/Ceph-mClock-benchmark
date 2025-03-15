@@ -49,7 +49,7 @@ def store(entries, output_path, rbd_image):
             out_file.write(f"{entry['time_offset']} {rbd_image} {entry['operation']} {entry['lba']} {entry['size']}\n")
 
 
-def store_configs(output_path, cbt_cnf_path, trace_paths):
+def store_configs(output_path, cbt_cnf_path, trace_paths, duration):
     cbt_conf = {}
     with open(cbt_cnf_path, "r") as stream:
         try:
@@ -67,6 +67,7 @@ def store_configs(output_path, cbt_cnf_path, trace_paths):
         conf['order'] = i
         benchmarks[f'fio_{i}'] = conf
     cbt_conf['benchmarks'] = benchmarks
+    cbt_conf['cluster']['pool_profiles']['rbdrecov']['prefill_recov_time'] = duration
     cnf_out_path = os.path.join(output_path, 'cbt.yaml')
     with open(cnf_out_path, 'w') as fp:
         yaml.dump(cbt_conf, fp)
@@ -96,7 +97,7 @@ def main(args):
                 continue
             if first_timestamp is None:
                 first_timestamp = parsed['time_offset']
-            if args.chunked and parsed['time_offset'] - first_timestamp > args.duration:
+            if args.chunked and parsed['time_offset'] - first_timestamp > args.duration * 1_000_000:
                 trace_output = os.path.join(args.output, f'{input_filename}_{index}.txt')
                 store(entries, trace_output, rbd_image)
                 entries = []
@@ -111,7 +112,7 @@ def main(args):
         trace_output = os.path.join(args.output, f'{input_filename}_{index}.txt')
         store(entries, trace_output, rbd_image)
         trace_paths.append(trace_output)
-    store_configs(args.output, args.yaml_cbt, trace_paths)
+    store_configs(args.output, args.yaml_cbt, trace_paths, args.duration)
 
 
 if __name__ == "__main__":
