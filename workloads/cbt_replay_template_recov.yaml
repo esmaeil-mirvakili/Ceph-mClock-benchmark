@@ -59,6 +59,7 @@ cluster:
       prefill_object_size: 4194304
       prefill_objects: 5000
       prefill_time: 10
+  exclude_recovery: False
   recovery_test:
     osds: [ 1 ]
 
